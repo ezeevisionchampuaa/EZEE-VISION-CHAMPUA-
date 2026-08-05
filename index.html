@@ -4,78 +4,185 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>EZEE VISION CHAMPUA</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+EZEE VISION ERP v4.0
+
+</title>
 
 <link rel="stylesheet" href="style.css">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
 </head>
 
 <body>
 
+<!-- Background -->
+
+<div class="bg"></div>
+
+<!-- Header -->
+
 <header class="header">
 
-<h1>EZEE VISION CHAMPUA</h1>
+<div>
 
-<p>Attendance Management System</p>
+<h1>
+
+EZEE VISION CHAMPUA
+
+</h1>
+
+<p>
+
+Coaching Management System
+
+</p>
+
+</div>
+
+<div class="profile">
+
+👨‍🏫
+
+</div>
 
 </header>
+
+<!-- Dashboard -->
 
 <section class="dashboard">
 
 <div class="card">
-<h2 id="totalStudents">0</h2>
-<span>Total Students</span>
+
+<h2 id="totalStudents">
+
+0
+
+</h2>
+
+<p>
+
+Students
+
+</p>
+
 </div>
 
 <div class="card">
-<h2 id="presentToday">0</h2>
-<span>Present Today</span>
+
+<h2 id="presentToday">
+
+0
+
+</h2>
+
+<p>
+
+Present
+
+</p>
+
 </div>
 
 <div class="card">
-<h2 id="absentToday">0</h2>
-<span>Absent Today</span>
+
+<h2 id="absentToday">
+
+0
+
+</h2>
+
+<p>
+
+Absent
+
+</p>
+
 </div>
 
 <div class="card">
-<h2 id="attendancePercent">0%</h2>
-<span>Attendance</span>
+
+<h2 id="attendancePercent">
+
+0%
+
+</h2>
+
+<p>
+
+Attendance
+
+</p>
+
 </div>
 
 </section>
 
-<section class="search-area">
+<!-- Search -->
+
+<section class="search-box">
 
 <input
-type="text"
+
+type="search"
+
 id="searchInput"
-placeholder="🔍 Search Student">
+
+placeholder="Search Student...">
 
 </section>
 
-<section class="menu">
+<!-- Quick Actions -->
 
-<button onclick="addStudent()">
+<section class="actions">
+
+<button onclick="location.href='students.html'">
+
 ➕ Add Student
+
 </button>
 
 <button onclick="location.href='attendance.html'">
-📅 Daily Attendance
+
+📅 Attendance
+
 </button>
 
 <button onclick="location.href='report.html'">
-📊 Monthly Report
+
+📊 Report
+
+</button>
+
+<button onclick="location.href='fees.html'">
+
+💰 Fees
+
 </button>
 
 </section>
 
+<!-- Student List -->
+
 <section>
 
-<h2 class="title">
+<h2 class="heading">
 
-Student List
+Students
 
 </h2>
 
@@ -83,13 +190,72 @@ Student List
 
 <p class="empty">
 
-No Students Added Yet
+No Students Found
 
 </p>
 
 </div>
 
 </section>
+<!-- Bottom Navigation -->
+
+<nav class="bottom-nav">
+
+<button onclick="location.href='index.html'">
+
+🏠
+
+<span>Home</span>
+
+</button>
+
+<button onclick="location.href='attendance.html'">
+
+📅
+
+<span>Attendance</span>
+
+</button>
+
+<button onclick="location.href='report.html'">
+
+📊
+
+<span>Report</span>
+
+</button>
+
+<button onclick="location.href='fees.html'">
+
+💰
+
+<span>Fees</span>
+
+</button>
+
+<button onclick="location.href='settings.html'">
+
+⚙️
+
+<span>Settings</span>
+
+</button>
+
+</nav>
+
+<!-- Floating Button -->
+
+<button
+
+class="fab"
+
+onclick="location.href='students.html'">
+
++
+
+</button>
+
+<!-- JavaScript -->
 
 <script src="script.js"></script>
 
