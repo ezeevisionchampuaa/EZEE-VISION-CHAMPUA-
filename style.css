@@ -611,3 +611,24 @@ cursor:pointer;
 background:#dc2626;
 
 }
+label{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:6px;
+
+margin-right:18px;
+
+margin-top:10px;
+
+font-size:15px;
+
+}
+
+label input{
+
+transform:scale(1.2);
+
+}
