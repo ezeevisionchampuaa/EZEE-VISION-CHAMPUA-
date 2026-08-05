@@ -130,3 +130,29 @@ location.href="students.html";
 );
 
 render();
+function deleteStudent(id){
+
+if(!confirm("Delete Student?")) return;
+
+students=students.filter(s=>s.id!==id);
+
+saveStudents(students);
+
+render(searchInput.value);
+
+}
+
+function editStudent(id){
+
+let student=students.find(s=>s.id===id);
+
+if(!student) return;
+
+localStorage.setItem(
+"editStudent",
+JSON.stringify(student)
+);
+
+location.href="students.html?id="+id;
+
+}
