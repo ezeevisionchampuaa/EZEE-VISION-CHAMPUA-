@@ -1,22 +1,17 @@
-// =====================================
-// EZEE VISION CHAMPUA
-// Dashboard Script v3.0
-// =====================================
+/* ===================================
+   EZEE VISION ERP v4.0
+=================================== */
 
 let students = JSON.parse(localStorage.getItem("students")) || [];
 
 const studentContainer = document.getElementById("studentContainer");
 const searchInput = document.getElementById("searchInput");
 
-// ----------------------
-// Dashboard
-// ----------------------
+/* ---------------- Dashboard ---------------- */
 
 function updateDashboard(){
 
     const total = students.length;
-
-    document.getElementById("totalStudents").innerText = total;
 
     let present = 0;
     let absent = 0;
@@ -27,66 +22,38 @@ function updateDashboard(){
 
         if(student.attendance){
 
-            if(student.attendance[today]=="P")
-                present++;
+            if(student.attendance[today]=="P") present++;
 
-            if(student.attendance[today]=="A")
-                absent++;
+            if(student.attendance[today]=="A") absent++;
 
         }
 
     });
 
-    document.getElementById("presentToday").innerText = present;
+    document.getElementById("totalStudents").textContent = total;
 
-    document.getElementById("absentToday").innerText = absent;
+    document.getElementById("presentToday").textContent = present;
+
+    document.getElementById("absentToday").textContent = absent;
 
     let percentage = 0;
 
-    if(present + absent > 0){
+    if((present+absent)>0){
 
-        percentage =
-        ((present/(present+absent))*100).toFixed(1);
+        percentage = ((present/(present+absent))*100).toFixed(1);
 
     }
 
-    document.getElementById("attendancePercent").innerText =
+    document.getElementById("attendancePercent").textContent =
     percentage + "%";
 
 }
 
-// ----------------------
-// Student List
-// ----------------------
+/* ---------------- Student Card ---------------- */
 
-function renderStudents(search=""){
+function createStudentCard(student){
 
-    studentContainer.innerHTML="";
-
-    const list = students.filter(student=>
-
-        student.name
-        .toLowerCase()
-        .includes(search.toLowerCase())
-
-    );
-
-    if(list.length===0){
-
-        studentContainer.innerHTML=
-        `<p class="empty">
-        No Students Found
-        </p>`;
-
-        updateDashboard();
-
-        return;
-
-    }
-
-    list.forEach(student=>{
-
-        studentContainer.innerHTML += `
+return `
 
 <div class="student">
 
@@ -102,48 +69,98 @@ function renderStudents(search=""){
 
 <h3>${student.name}</h3>
 
-<p><b>Roll :</b> ${student.roll}</p>
+<p>Roll : ${student.roll}</p>
 
-<p><b>Class :</b> ${student.className}</p>
-
-</div>
+<p>Class : ${student.className}</p>
 
 </div>
 
-<p><b>Parent :</b> ${student.parent}</p>
+</div>
 
-<p><b>Mobile :</b> ${student.mobile}</p>
+<p><b>Parent :</b> ${student.parent || "-"}</p>
+
+<p><b>Mobile :</b> ${student.mobile || "-"}</p>
 
 </div>
 
 `;
 
-    });
-
-    updateDashboard();
-
 }
 
-// ----------------------
-// Search
-// ----------------------
+/* ---------------- Student List ---------------- */
 
-searchInput.addEventListener("input",function(){
+function renderStudents(keyword=""){
 
-    renderStudents(this.value);
+studentContainer.innerHTML="";
+
+const list = students.filter(student=>{
+
+return student.name.toLowerCase()
+
+.includes(keyword.toLowerCase());
 
 });
 
-// ----------------------
-// Add Student
-// ----------------------
+if(list.length===0){
 
-function addStudent(){
+studentContainer.innerHTML=
 
-    window.location.href="students.html";
+'<p class="empty">No Students Found</p>';
+
+updateDashboard();
+
+return;
 
 }
 
-// ----------------------
+list.forEach(student=>{
+
+studentContainer.innerHTML += createStudentCard(student);
+
+});
+
+updateDashboard();
+
+}
+
+/* ---------------- Search ---------------- */
+
+if(searchInput){
+
+searchInput.addEventListener("input",function(){
+
+renderStudents(this.value);
+
+});
+
+}
+
+/* ---------------- Navigation ---------------- */
+
+function openAttendance(){
+
+location.href="attendance.html";
+
+}
+
+function openReport(){
+
+location.href="report.html";
+
+}
+
+function openStudents(){
+
+location.href="students.html";
+
+}
+
+function openFees(){
+
+location.href="fees.html";
+
+}
+
+/* ---------------- Start ---------------- */
 
 renderStudents();
