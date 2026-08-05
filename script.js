@@ -61,6 +61,13 @@ ${student.attendance[today()] || "Not Marked"}
 
     document.getElementById("studentList").innerHTML = html;
 
+    document.getElementById("studentList").innerHTML = html;
+
+document.getElementById("totalStudents").innerHTML = students.length;
+
+document.getElementById("presentToday").innerHTML = presentToday;
+
+document.getElementById("absentToday").innerHTML = absentToday;
 }
 
 function addStudent() {
