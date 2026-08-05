@@ -7,16 +7,43 @@ let students = getStudents();
 const container = document.getElementById("studentContainer");
 const searchInput = document.getElementById("searchInput");
 
-function dashboard() {
+function dashboard(){
 
-    document.getElementById("totalStudents").innerText =
-        students.length;
+const today=new Date().toISOString().split("T")[0];
 
-    document.getElementById("presentToday").innerText = 0;
+let present=0;
 
-    document.getElementById("absentToday").innerText = 0;
+let absent=0;
 
-    document.getElementById("attendancePercent").innerText = "0%";
+students.forEach(student=>{
+
+if(student.attendance){
+
+if(student.attendance[today]=="P") present++;
+
+if(student.attendance[today]=="A") absent++;
+
+}
+
+});
+
+document.getElementById("totalStudents").innerText=students.length;
+
+document.getElementById("presentToday").innerText=present;
+
+document.getElementById("absentToday").innerText=absent;
+
+const total=present+absent;
+
+document.getElementById("attendancePercent").innerText=
+
+total==0
+
+?"0%"
+
+:((present/total)*100).toFixed(1)+"%";
+
+}
 
 }
 function render(search = "") {
