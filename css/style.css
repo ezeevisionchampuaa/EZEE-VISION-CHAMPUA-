@@ -1,0 +1,254 @@
+/* =====================================
+   EZEE VISION CHAMPUA
+   Attendance System v2.0
+===================================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:#f4f7fb;
+color:#222;
+
+}
+
+/* Header */
+
+.header{
+
+background:#2563eb;
+color:#fff;
+text-align:center;
+padding:25px 15px;
+
+}
+
+.header h1{
+
+font-size:30px;
+font-weight:bold;
+
+}
+
+.header p{
+
+margin-top:8px;
+font-size:16px;
+opacity:.9;
+
+}
+
+/* Dashboard */
+
+.dashboard{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+
+padding:20px;
+
+}
+
+.card{
+
+background:#fff;
+
+padding:20px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+text-align:center;
+
+transition:.25s;
+
+}
+
+.card:hover{
+
+transform:translateY(-4px);
+
+}
+
+.card h2{
+
+font-size:32px;
+
+color:#2563eb;
+
+margin-bottom:8px;
+
+}
+
+.card span{
+
+font-size:15px;
+
+color:#666;
+
+}
+
+/* Search */
+
+.search-area{
+
+padding:0 20px 20px;
+
+}
+
+#searchInput{
+
+width:100%;
+
+padding:14px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+font-size:16px;
+
+outline:none;
+
+}
+
+#searchInput:focus{
+
+border-color:#2563eb;
+
+}
+
+/* Buttons */
+
+.menu{
+
+padding:0 20px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+.menu button{
+
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:#2563eb;
+
+color:white;
+
+font-size:17px;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.menu button:hover{
+
+background:#1d4ed8;
+
+}
+
+/* Student List */
+
+.title{
+
+padding:20px;
+
+font-size:22px;
+
+}
+
+#studentContainer{
+
+padding:0 20px 30px;
+
+}
+
+.student{
+
+background:#fff;
+
+padding:18px;
+
+border-radius:12px;
+
+margin-bottom:15px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.student h3{
+
+color:#2563eb;
+
+margin-bottom:10px;
+
+}
+
+.student p{
+
+margin:4px 0;
+
+font-size:15px;
+
+}
+
+.empty{
+
+text-align:center;
+
+padding:50px;
+
+color:#888;
+
+font-size:18px;
+
+}
+
+/* Mobile */
+
+@media(max-width:600px){
+
+.header h1{
+
+font-size:24px;
+
+}
+
+.card h2{
+
+font-size:28px;
+
+}
+
+.menu button{
+
+font-size:16px;
+
+}
+
+.title{
+
+font-size:20px;
+
+}
+
+}
