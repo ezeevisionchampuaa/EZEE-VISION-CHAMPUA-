@@ -60,3 +60,26 @@ margin-top:10px;
 border-radius:10px;
 
 }
+.student button{
+
+margin:5px;
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+
+}
+
+.student button:first-of-type{
+
+background:#2563eb;
+color:white;
+
+}
+
+.student button:last-of-type{
+
+background:#dc2626;
+color:white;
+
+}
