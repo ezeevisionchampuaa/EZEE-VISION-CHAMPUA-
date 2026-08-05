@@ -1,121 +1,68 @@
-const editData=
-JSON.parse(localStorage.getItem("editStudent"));
+/* ===================================
+   EZEE VISION ERP v4.0
+   Student Module
+=================================== */
 
-if(editData){
-
-document.getElementById("name").value=editData.name;
-
-document.getElementById("roll").value=editData.roll;
-
-document.getElementById("className").value=editData.className;
-
-document.getElementById("parent").value=editData.parent;
-
-document.getElementById("mobile").value=editData.mobile;
-
-}
-
-
-let students = getStudents();
+let students = JSON.parse(localStorage.getItem("students")) || [];
 
 function saveStudent(){
 
-const name=document.getElementById("name").value.trim();
-
-const roll=document.getElementById("roll").value.trim();
-
-const className=document.getElementById("className").value.trim();
-
-const parent=document.getElementById("parent").value.trim();
-
-const mobile=document.getElementById("mobile").value.trim();
+const name = document.getElementById("studentName").value.trim();
+const roll = document.getElementById("rollNumber").value.trim();
+const className = document.getElementById("className").value;
+const parent = document.getElementById("parentName").value.trim();
+const mobile = document.getElementById("mobileNumber").value.trim();
 
 if(name=="" || roll=="" || className==""){
 
-alert("Please fill all required fields");
+alert("Please fill all required fields.");
 
 return;
 
 }
 
-students.push({
+const student={
 
 id:Date.now(),
 
-name,
+name:name,
 
-roll,
+roll:roll,
 
-className,
+className:className,
 
-parent,
+parent:parent,
 
-mobile,
+mobile:mobile,
 
-attendance:{}
+attendance:{},
 
-});
+tests:[],
 
-function saveStudent(){
+fees:{
 
-const name=document.getElementById("name").value.trim();
+paid:0,
 
-const roll=document.getElementById("roll").value.trim();
+due:0
 
-const className=document.getElementById("className").value.trim();
+},
 
-const parent=document.getElementById("parent").value.trim();
-
-const mobile=document.getElementById("mobile").value.trim();
-
-if(name==""||roll==""||className==""){
-
-alert("Fill required fields");
-
-return;
-
-}
-
-if(editData){
-
-let index=students.findIndex(
-s=>s.id===editData.id
-);
-
-students[index]={
-
-...students[index],
-
-name,
-roll,
-className,
-parent,
-mobile
+homework:[]
 
 };
 
-localStorage.removeItem("editStudent");
+students.push(student);
 
-}else{
+localStorage.setItem(
 
-students.push({
+"students",
 
-id:Date.now(),
+JSON.stringify(students)
 
-name,
-roll,
-className,
-parent,
-mobile,
+);
 
-attendance:{}
+alert("Student Added Successfully ✅");
 
-});
-
-}
-
-saveStudents(students);
-
-location.href="index.html";
+window.location.href="index.html";
 
 }
