@@ -343,3 +343,24 @@ margin-top:15px;
 flex:1;
 
 }
+label{
+
+margin-right:20px;
+
+font-size:17px;
+
+}
+
+label input{
+
+margin-right:6px;
+
+transform:scale(1.2);
+
+}
+
+#attendanceDate{
+
+margin-bottom:20px;
+
+}
