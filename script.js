@@ -52,13 +52,15 @@ function addStudent() {
 
     students.push({
 
-        name,
-        roll,
-        className,
-        parent,
-        mobile
+    name,
+    roll,
+    className,
+    parent,
+    mobile,
 
-    });
+    attendance:{}
+
+});
 
     saveData();
     render();
