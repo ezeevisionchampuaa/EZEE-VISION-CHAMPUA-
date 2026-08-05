@@ -4,11 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Daily Attendance</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -16,17 +16,65 @@
 
 <header class="header">
 
+<div>
+
 <h1>Daily Attendance</h1>
 
 <p>EZEE VISION CHAMPUA</p>
+
+</div>
+
+<div class="profile">
+
+📅
+
+</div>
 
 </header>
 
 <div class="form-container">
 
-<input type="date" id="attendanceDate">
+<label>Select Date</label>
 
-<div id="attendanceList"></div>
+<input
+type="date"
+id="attendanceDate">
+
+<label>Select Class</label>
+
+<select id="classFilter">
+
+<option value="All">All Classes</option>
+
+<option value="Class 6">Class 6</option>
+<option value="Class 7">Class 7</option>
+<option value="Class 8">Class 8</option>
+<option value="Class 9">Class 9</option>
+<option value="Class 10">Class 10</option>
+
+</select>
+
+<button onclick="markAllPresent()">
+
+✅ Present All
+
+</button>
+
+<button onclick="markAllAbsent()">
+
+❌ Absent All
+
+</button>
+
+<div id="attendanceList">
+
+<p class="empty">
+
+No Students
+
+</p>
+
+</div>
 
 <button onclick="saveAttendance()">
 
@@ -42,9 +90,7 @@
 
 </div>
 
-<script src="js/storage.js"></script>
-
-<script src="js/attendance.js"></script>
+<script src="attendance.js"></script>
 
 </body>
 
