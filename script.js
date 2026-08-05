@@ -180,3 +180,35 @@ location.href="fees.html";
 /* ---------------- Start ---------------- */
 
 renderStudents();
+
+/* ===========================
+   Edit Student
+=========================== */
+
+function editStudent(id){
+
+alert("Edit Module Phase 2C me banega.");
+
+}
+
+/* ===========================
+   Delete Student
+=========================== */
+
+function deleteStudent(id){
+
+if(!confirm("Delete this student?")) return;
+
+students = students.filter(student=>student.id!==id);
+
+localStorage.setItem(
+
+"students",
+
+JSON.stringify(students)
+
+);
+
+renderStudents(searchInput.value);
+
+}
