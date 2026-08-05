@@ -22,10 +22,20 @@ text-align:center;
 
 .container{
 
-width:90%;
+width:95%;
 max-width:900px;
 margin:auto;
-padding:20px;
+
+}
+
+#searchBox{
+
+width:100%;
+padding:14px;
+margin:15px 0;
+border-radius:10px;
+font-size:16px;
+box-sizing:border-box;
 
 }
 
