@@ -13,27 +13,25 @@ function render() {
     students.forEach((student, index) => {
 
         html += `
-        <div class="student">
+<div class="student">
 
-            <h3>${student.name}</h3>
+<h3>${student.name}</h3>
 
-            <p><b>Roll :</b> ${student.roll}</p>
+<p><b>Roll:</b> ${student.roll}</p>
+<p><b>Class:</b> ${student.className}</p>
 
-            <p><b>Class :</b> ${student.className}</p>
+<button onclick="markAttendance(${index},'P')">✅ Present</button>
 
-            <p><b>Parent :</b> ${student.parent}</p>
+<button onclick="markAttendance(${index},'A')">❌ Absent</button>
 
-            <p><b>Mobile :</b> ${student.mobile}</p>
+<p><b>This Month:</b> ${attendancePercentage(student)}%</p>
 
-            <br>
+<button onclick="editStudent(${index})">Edit</button>
 
-            <button onclick="editStudent(${index})">Edit</button>
+<button onclick="deleteStudent(${index})">Delete</button>
 
-            <button onclick="deleteStudent(${index})">Delete</button>
-
-        </div>
-        `;
-
+</div>
+`;
     });
 
     document.getElementById("studentList").innerHTML = html;
