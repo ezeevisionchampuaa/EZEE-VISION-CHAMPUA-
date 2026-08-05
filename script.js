@@ -187,7 +187,12 @@ renderStudents();
 
 function editStudent(id){
 
-alert("Edit Module Phase 2C me banega.");
+localStorage.setItem(
+"editStudentId",
+id
+);
+
+location.href="students.html";
 
 }
 
