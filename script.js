@@ -4,6 +4,8 @@ function saveData() {
     localStorage.setItem("students", JSON.stringify(students));
 }
 
+
+function render() {
 const search =
 document.getElementById("searchBox")?.value.toLowerCase() || "";
 
@@ -11,9 +13,7 @@ let presentToday = 0;
 let absentToday = 0;
 
 const today = new Date().toISOString().split("T")[0];
-
-function render() {
-
+    
     document.getElementById("students").innerText = students.length;
 
     let html = "";
