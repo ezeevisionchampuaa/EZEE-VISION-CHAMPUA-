@@ -1,3 +1,21 @@
+const editData=
+JSON.parse(localStorage.getItem("editStudent"));
+
+if(editData){
+
+document.getElementById("name").value=editData.name;
+
+document.getElementById("roll").value=editData.roll;
+
+document.getElementById("className").value=editData.className;
+
+document.getElementById("parent").value=editData.parent;
+
+document.getElementById("mobile").value=editData.mobile;
+
+}
+
+
 let students = getStudents();
 
 function saveStudent(){
