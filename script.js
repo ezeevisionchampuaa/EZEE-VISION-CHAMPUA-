@@ -1,40 +1,94 @@
-let students=[];
+let students = JSON.parse(localStorage.getItem("students")) || [];
 
-function render(){
+function saveData() {
+    localStorage.setItem("students", JSON.stringify(students));
+}
 
-document.getElementById("students").innerText=students.length;
+function render() {
 
-let html="";
+    document.getElementById("students").innerText = students.length;
 
-students.forEach(student=>{
+    let html = "";
 
-html+=`
-<div class="student">
+    students.forEach((student, index) => {
 
-<b>${student.name}</b>
+        html += `
+        <div class="student">
 
-</div>
-`;
+            <h3>${student.name}</h3>
 
-});
+            <p><b>Roll :</b> ${student.roll}</p>
 
-document.getElementById("studentList").innerHTML=html;
+            <p><b>Class :</b> ${student.className}</p>
+
+            <p><b>Parent :</b> ${student.parent}</p>
+
+            <p><b>Mobile :</b> ${student.mobile}</p>
+
+            <br>
+
+            <button onclick="editStudent(${index})">Edit</button>
+
+            <button onclick="deleteStudent(${index})">Delete</button>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById("studentList").innerHTML = html;
 
 }
 
-function addStudent(){
+function addStudent() {
 
-let name=prompt("Student Name");
+    let name = prompt("Student Name");
+    if (!name) return;
 
-if(!name)return;
+    let roll = prompt("Roll Number");
+    let className = prompt("Class");
+    let parent = prompt("Parent Name");
+    let mobile = prompt("Mobile Number");
 
-students.push({
+    students.push({
 
-name:name
+        name,
+        roll,
+        className,
+        parent,
+        mobile
 
-});
+    });
 
-render();
+    saveData();
+    render();
+
+}
+
+function editStudent(index) {
+
+    students[index].name = prompt("Student Name", students[index].name);
+    students[index].roll = prompt("Roll Number", students[index].roll);
+    students[index].className = prompt("Class", students[index].className);
+    students[index].parent = prompt("Parent Name", students[index].parent);
+    students[index].mobile = prompt("Mobile Number", students[index].mobile);
+
+    saveData();
+    render();
+
+}
+
+function deleteStudent(index) {
+
+    if (confirm("Delete this student?")) {
+
+        students.splice(index, 1);
+
+        saveData();
+
+        render();
+
+    }
 
 }
 
