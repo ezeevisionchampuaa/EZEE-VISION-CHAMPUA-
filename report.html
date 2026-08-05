@@ -1,49 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Monthly Report</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
 
-<header>
+<header class="header">
 
 <h1>Monthly Attendance Report</h1>
 
+<p>EZEE VISION CHAMPUA</p>
+
 </header>
 
-<div class="container">
+<div class="form-container">
 
-<table>
+<input type="month" id="reportMonth">
 
-<thead>
+<button onclick="loadReport()">
 
-<tr>
+Generate Report
 
-<th>Roll</th>
+</button>
 
-<th>Name</th>
+<button onclick="exportCSV()">
 
-<th>Attendance %</th>
+📥 Export CSV
 
-</tr>
+</button>
 
-</thead>
-
-<tbody id="reportTable">
-
-</tbody>
-
-</table>
+<div id="reportContainer"></div>
 
 </div>
 
-<script src="report.js"></script>
+<script src="js/storage.js"></script>
+
+<script src="js/report.js"></script>
 
 </body>
 
