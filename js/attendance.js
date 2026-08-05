@@ -1,84 +1,134 @@
-let students = getStudents();
+// =====================================
+// EZEE VISION CHAMPUA
+// Attendance System v3.0
+// =====================================
 
-const list = document.getElementById("attendanceList");
+let students = JSON.parse(localStorage.getItem("students")) || [];
 
-const dateInput = document.getElementById("attendanceDate");
+const attendanceList = document.getElementById("attendanceList");
+const attendanceDate = document.getElementById("attendanceDate");
+const saveBtn = document.getElementById("saveAttendanceBtn");
 
-dateInput.value = new Date().toISOString().split("T")[0];
+// Today's Date
+const today = new Date().toISOString().split("T")[0];
+attendanceDate.value = today;
 
-renderAttendance();
+// ------------------------------
+// Render Students
+// ------------------------------
 
-function renderAttendance(){
+function loadStudents(){
 
-list.innerHTML="";
+    attendanceList.innerHTML = "";
 
-students.forEach(student=>{
+    if(students.length === 0){
 
-const status =
-student.attendance?.[dateInput.value] || "P";
+        attendanceList.innerHTML = `
+        <p class="empty">
+        No Students Added
+        </p>
+        `;
 
-list.innerHTML += `
+        return;
 
-<div class="student">
+    }
 
-<h3>${student.name}</h3>
+    students.forEach(student=>{
 
-<p>Class : ${student.className}</p>
+        const status =
+        student.attendance?.[attendanceDate.value] || "P";
 
-<label>
+        attendanceList.innerHTML += `
 
-<input
-type="radio"
-name="${student.id}"
-value="P"
-${status=="P"?"checked":""}>
+        <div class="student">
 
-Present
+            <h3>${student.name}</h3>
 
-</label>
+            <p>
+            Roll : ${student.roll}
+            </p>
 
-<label>
+            <p>
+            Class : ${student.className}
+            </p>
 
-<input
-type="radio"
-name="${student.id}"
-value="A"
-${status=="A"?"checked":""}>
+            <br>
 
-Absent
+            <label>
 
-</label>
+            <input
+            type="radio"
+            name="student${student.id}"
+            value="P"
+            ${status==="P" ? "checked" : ""}>
 
-</div>
+            Present
 
-`;
+            </label>
 
-});
+            <label>
+
+            <input
+            type="radio"
+            name="student${student.id}"
+            value="A"
+            ${status==="A" ? "checked" : ""}>
+
+            Absent
+
+            </label>
+
+        </div>
+
+        `;
+
+    });
 
 }
 
-dateInput.addEventListener("change",renderAttendance);
+// ------------------------------
+// Change Date
+// ------------------------------
 
-function saveAttendance(){
+attendanceDate.addEventListener("change",loadStudents);
 
-students.forEach(student=>{
+// ------------------------------
+// Save Attendance
+// ------------------------------
 
-const status=document.querySelector(
+saveBtn.addEventListener("click",()=>{
 
-`input[name="${student.id}"]:checked`
+    students.forEach(student=>{
 
-).value;
+        const selected = document.querySelector(
 
-if(!student.attendance)
+        `input[name="student${student.id}"]:checked`
 
-student.attendance={};
+        );
 
-student.attendance[dateInput.value]=status;
+        if(!student.attendance){
+
+            student.attendance = {};
+
+        }
+
+        student.attendance[attendanceDate.value] =
+        selected.value;
+
+    });
+
+    localStorage.setItem(
+
+        "students",
+
+        JSON.stringify(students)
+
+    );
+
+    alert("Attendance Saved Successfully ✅");
 
 });
 
-saveStudents(students);
+// ------------------------------
 
-alert("Attendance Saved Successfully");
-
-}
+loadStudents();
