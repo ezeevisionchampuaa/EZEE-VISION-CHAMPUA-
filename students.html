@@ -4,11 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add Student</title>
+<title>Add Student | EZEE VISION ERP</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -16,23 +16,55 @@
 
 <header class="header">
 
+<div>
+
 <h1>Add Student</h1>
 
 <p>EZEE VISION CHAMPUA</p>
+
+</div>
+
+<div class="profile">
+
+👨‍🎓
+
+</div>
 
 </header>
 
 <div class="form-container">
 
-<input type="text" id="name" placeholder="Student Name">
+<input
+type="text"
+id="studentName"
+placeholder="Student Name">
 
-<input type="text" id="roll" placeholder="Roll Number">
+<input
+type="text"
+id="rollNumber"
+placeholder="Roll Number">
 
-<input type="text" id="className" placeholder="Class">
+<select id="className">
 
-<input type="text" id="parent" placeholder="Parent Name">
+<option value="">Select Class</option>
 
-<input type="tel" id="mobile" placeholder="Mobile Number">
+<option>Class 6</option>
+<option>Class 7</option>
+<option>Class 8</option>
+<option>Class 9</option>
+<option>Class 10</option>
+
+</select>
+
+<input
+type="text"
+id="parentName"
+placeholder="Parent Name">
+
+<input
+type="tel"
+id="mobileNumber"
+placeholder="Mobile Number">
 
 <button onclick="saveStudent()">
 
@@ -48,9 +80,7 @@
 
 </div>
 
-<script src="js/storage.js"></script>
-
-<script src="js/students.js"></script>
+<script src="students.js"></script>
 
 </body>
 
