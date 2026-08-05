@@ -19,42 +19,55 @@ function dashboard() {
     document.getElementById("attendancePercent").innerText = "0%";
 
 }
-
 function render(search = "") {
 
-    container.innerHTML = "";
+container.innerHTML = "";
 
-    let filtered = students.filter(student =>
+let filtered = students.filter(student =>
+student.name.toLowerCase().includes(search.toLowerCase())
+);
 
-        student.name
-        .toLowerCase()
-        .includes(search.toLowerCase())
+dashboard();
 
-    );
+if(filtered.length==0){
 
-    if (filtered.length == 0) {
+container.innerHTML=`
+<p class="empty">
+No students found.
+</p>
+`;
 
-        container.innerHTML =
+return;
 
-        `<p class="empty">
-        No students found.
-        </p>`;
+}
 
-        dashboard();
+filtered.forEach(student=>{
 
-        return;
-
-    }
-
-    filtered.forEach(student => {
-
-        container.innerHTML += `
+container.innerHTML+=`
 
 <div class="student">
 
+<div class="student-top">
+
+<div class="avatar">
+
+👨‍🎓
+
+</div>
+
+<div>
+
 <h3>${student.name}</h3>
 
-<p><b>Roll :</b> ${student.roll}</p>
+<p>ID : ${student.id}</p>
+
+<p>Roll : ${student.roll}</p>
+
+</div>
+
+</div>
+
+<hr>
 
 <p><b>Class :</b> ${student.className}</p>
 
@@ -62,11 +75,29 @@ function render(search = "") {
 
 <p><b>Mobile :</b> ${student.mobile}</p>
 
+<div class="actions">
+
+<button onclick="editStudent(${student.id})">
+
+✏ Edit
+
+</button>
+
+<button onclick="deleteStudent(${student.id})">
+
+🗑 Delete
+
+</button>
+
+</div>
+
 </div>
 
 `;
 
-    });
+});
+
+}
 
     dashboard();
 
