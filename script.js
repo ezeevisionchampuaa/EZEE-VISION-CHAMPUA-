@@ -18,8 +18,17 @@ const today = new Date().toISOString().split("T")[0];
 
     let html = "";
 
-    students.forEach((student, index) => {
+    students.forEach((student,index)=>{
 
+if(!student.name.toLowerCase().includes(search)) return;
+
+if(student.attendance){
+
+if(student.attendance[today]=="P") presentToday++;
+
+if(student.attendance[today]=="A") absentToday++;
+
+}
         html += `
 <div class="student">
 
