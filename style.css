@@ -118,3 +118,30 @@ input{
 transform:scale(1.3);
 
 }
+.stats{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+gap:15px;
+
+margin:20px 0;
+
+}
+
+#searchBox{
+
+width:100%;
+
+padding:12px;
+
+margin:15px 0;
+
+font-size:16px;
+
+border-radius:8px;
+
+border:1px solid #ccc;
+
+}
