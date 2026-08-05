@@ -56,9 +56,65 @@ attendance:{}
 
 });
 
-saveStudents(students);
+function saveStudent(){
 
-alert("Student Added Successfully");
+const name=document.getElementById("name").value.trim();
+
+const roll=document.getElementById("roll").value.trim();
+
+const className=document.getElementById("className").value.trim();
+
+const parent=document.getElementById("parent").value.trim();
+
+const mobile=document.getElementById("mobile").value.trim();
+
+if(name==""||roll==""||className==""){
+
+alert("Fill required fields");
+
+return;
+
+}
+
+if(editData){
+
+let index=students.findIndex(
+s=>s.id===editData.id
+);
+
+students[index]={
+
+...students[index],
+
+name,
+roll,
+className,
+parent,
+mobile
+
+};
+
+localStorage.removeItem("editStudent");
+
+}else{
+
+students.push({
+
+id:Date.now(),
+
+name,
+roll,
+className,
+parent,
+mobile,
+
+attendance:{}
+
+});
+
+}
+
+saveStudents(students);
 
 location.href="index.html";
 
