@@ -67,13 +67,33 @@ function loadHistory(){
 
 feeHistory.innerHTML="";
 
-let found=false;
+let totalCollection=0;
+
+let totalPayments=0;
+
+let paidStudents=0;
+
+let dueStudents=0;
 
 students.forEach(student=>{
 
-(student.feesHistory || []).forEach(fee=>{
+const history=student.feesHistory || [];
 
-found=true;
+if(history.length>0){
+
+paidStudents++;
+
+}else{
+
+dueStudents++;
+
+}
+
+history.forEach(fee=>{
+
+totalCollection += Number(fee.amount);
+
+totalPayments++;
 
 feeHistory.innerHTML += `
 
@@ -95,11 +115,29 @@ feeHistory.innerHTML += `
 
 });
 
-if(!found){
+if(totalPayments===0){
 
-feeHistory.innerHTML =
+feeHistory.innerHTML=
+
 '<p class="empty">No Payments Found</p>';
 
+}
+
+document.getElementById("totalCollection").textContent=
+
+"₹"+totalCollection;
+
+document.getElementById("paidStudents").textContent=
+
+paidStudents;
+
+document.getElementById("dueStudents").textContent=
+
+dueStudents;
+
+document.getElementById("totalPayments").textContent=
+
+totalPayments;
 }
 
 }
