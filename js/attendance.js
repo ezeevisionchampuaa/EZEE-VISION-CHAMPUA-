@@ -1,134 +1,143 @@
-// =====================================
-// EZEE VISION CHAMPUA
-// Attendance System v3.0
-// =====================================
+/* ===================================
+   EZEE VISION ERP v4.0
+   Attendance Module
+=================================== */
 
 let students = JSON.parse(localStorage.getItem("students")) || [];
 
-const attendanceList = document.getElementById("attendanceList");
 const attendanceDate = document.getElementById("attendanceDate");
-const saveBtn = document.getElementById("saveAttendanceBtn");
+const classFilter = document.getElementById("classFilter");
+const attendanceList = document.getElementById("attendanceList");
 
-// Today's Date
-const today = new Date().toISOString().split("T")[0];
-attendanceDate.value = today;
+attendanceDate.value = new Date().toISOString().split("T")[0];
 
-// ------------------------------
-// Render Students
-// ------------------------------
+classFilter.addEventListener("change", loadAttendance);
+attendanceDate.addEventListener("change", loadAttendance);
 
-function loadStudents(){
+function loadAttendance(){
 
-    attendanceList.innerHTML = "";
+attendanceList.innerHTML="";
 
-    if(students.length === 0){
+let filtered = students;
 
-        attendanceList.innerHTML = `
-        <p class="empty">
-        No Students Added
-        </p>
-        `;
+if(classFilter.value!="All"){
 
-        return;
-
-    }
-
-    students.forEach(student=>{
-
-        const status =
-        student.attendance?.[attendanceDate.value] || "P";
-
-        attendanceList.innerHTML += `
-
-        <div class="student">
-
-            <h3>${student.name}</h3>
-
-            <p>
-            Roll : ${student.roll}
-            </p>
-
-            <p>
-            Class : ${student.className}
-            </p>
-
-            <br>
-
-            <label>
-
-            <input
-            type="radio"
-            name="student${student.id}"
-            value="P"
-            ${status==="P" ? "checked" : ""}>
-
-            Present
-
-            </label>
-
-            <label>
-
-            <input
-            type="radio"
-            name="student${student.id}"
-            value="A"
-            ${status==="A" ? "checked" : ""}>
-
-            Absent
-
-            </label>
-
-        </div>
-
-        `;
-
-    });
+filtered = students.filter(student=>student.className==classFilter.value);
 
 }
 
-// ------------------------------
-// Change Date
-// ------------------------------
+if(filtered.length===0){
 
-attendanceDate.addEventListener("change",loadStudents);
+attendanceList.innerHTML='<p class="empty">No Students Found</p>';
 
-// ------------------------------
-// Save Attendance
-// ------------------------------
+return;
 
-saveBtn.addEventListener("click",()=>{
+}
 
-    students.forEach(student=>{
+filtered.forEach(student=>{
 
-        const selected = document.querySelector(
+let status="P";
 
-        `input[name="student${student.id}"]:checked`
+if(student.attendance){
 
-        );
+status=student.attendance[attendanceDate.value] || "P";
 
-        if(!student.attendance){
+}
 
-            student.attendance = {};
+attendanceList.innerHTML += `
 
-        }
+<div class="student">
 
-        student.attendance[attendanceDate.value] =
-        selected.value;
+<h3>${student.name}</h3>
 
-    });
+<p>${student.className} | Roll : ${student.roll}</p>
 
-    localStorage.setItem(
+<label>
 
-        "students",
+<input
+type="radio"
+name="student${student.id}"
+value="P"
+${status=="P"?"checked":""}>
 
-        JSON.stringify(students)
+Present
 
-    );
+</label>
 
-    alert("Attendance Saved Successfully ✅");
+<label>
+
+<input
+type="radio"
+name="student${student.id}"
+value="A"
+${status=="A"?"checked":""}>
+
+Absent
+
+</label>
+
+</div>
+
+`;
 
 });
 
-// ------------------------------
+}
 
-loadStudents();
+function markAllPresent(){
+
+document.querySelectorAll('input[value="P"]').forEach(r=>{
+
+r.checked=true;
+
+});
+
+}
+
+function markAllAbsent(){
+
+document.querySelectorAll('input[value="A"]').forEach(r=>{
+
+r.checked=true;
+
+});
+
+}
+
+function saveAttendance(){
+
+students.forEach(student=>{
+
+const radio=document.querySelector(
+
+`input[name="student${student.id}"]:checked`
+
+);
+
+if(radio){
+
+if(!student.attendance){
+
+student.attendance={};
+
+}
+
+student.attendance[attendanceDate.value]=radio.value;
+
+}
+
+});
+
+localStorage.setItem(
+
+"students",
+
+JSON.stringify(students)
+
+);
+
+alert("Attendance Saved Successfully ✅");
+
+}
+
+loadAttendance();
