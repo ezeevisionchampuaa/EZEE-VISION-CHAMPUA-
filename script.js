@@ -53,6 +53,66 @@ function updateDashboard(){
 
 function createStudentCard(student){
 
+let present=0;
+
+let absent=0;
+
+const today=new Date();
+
+const year=today.getFullYear();
+
+const month=today.getMonth();
+
+if(student.attendance){
+
+for(let date in student.attendance){
+
+const d=new Date(date);
+
+if(
+
+d.getFullYear()==year &&
+
+d.getMonth()==month
+
+){
+
+if(student.attendance[date]=="P")
+
+present++;
+
+else
+
+absent++;
+
+}
+
+}
+
+}
+
+const total=present+absent;
+
+const percentage=
+
+total==0
+
+?0
+
+:((present/total)*100).toFixed(1);
+
+let color="#ef4444";
+
+if(percentage>=90){
+
+color="#16a34a";
+
+}else if(percentage>=75){
+
+color="#f59e0b";
+
+}
+
 return `
 
 <div class="student">
@@ -69,7 +129,7 @@ return `
 
 <h3>${student.name}</h3>
 
-<p><b>Roll:</b> ${student.roll}</p>
+<p><b>Roll :</b> ${student.roll}</p>
 
 <p><b>${student.className}</b></p>
 
@@ -77,9 +137,21 @@ return `
 
 </div>
 
-<p><b>Parent:</b> ${student.parent || "-"}</p>
+<p><b>Parent :</b> ${student.parent || "-"}</p>
 
-<p><b>Mobile:</b> ${student.mobile || "-"}</p>
+<p><b>Mobile :</b> ${student.mobile || "-"}</p>
+
+<p>
+
+<b>Monthly Attendance :</b>
+
+<span style="color:${color};font-weight:bold;">
+
+${percentage}%
+
+</span>
+
+</p>
 
 <div class="actions">
 
