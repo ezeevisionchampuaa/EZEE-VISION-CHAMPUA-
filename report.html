@@ -4,11 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Monthly Report</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -16,35 +16,61 @@
 
 <header class="header">
 
-<h1>Monthly Attendance Report</h1>
+<h1>EZEE VISION CHAMPUA</h1>
 
-<p>EZEE VISION CHAMPUA</p>
+<p>Monthly Attendance Report</p>
 
 </header>
 
 <div class="form-container">
 
-<input type="month" id="reportMonth">
+<label for="reportMonth">
 
-<button onclick="loadReport()">
+<b>Select Month</b>
 
-Generate Report
+</label>
+
+<input
+type="month"
+id="reportMonth">
+
+<button id="generateReportBtn">
+
+📊 Generate Report
 
 </button>
 
-<button onclick="exportCSV()">
+<button id="downloadCSVBtn">
 
-📥 Export CSV
+📥 Download CSV
 
 </button>
 
-<div id="reportContainer"></div>
+<button onclick="window.print()">
+
+🖨 Print Report
+
+</button>
+
+<button onclick="location.href='index.html'">
+
+🏠 Dashboard
+
+</button>
+
+<div id="reportContainer">
+
+<p class="empty">
+
+No Report Generated
+
+</p>
 
 </div>
 
-<script src="js/storage.js"></script>
+</div>
 
-<script src="js/report.js"></script>
+<script src="report.js"></script>
 
 </body>
 
