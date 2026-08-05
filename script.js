@@ -93,3 +93,50 @@ function deleteStudent(index) {
 }
 
 render();
+function today(){
+
+return new Date().toISOString().split("T")[0];
+
+}
+
+function markAttendance(index,status){
+
+students[index].attendance[today()] = status;
+
+saveData();
+
+render();
+
+}
+
+function attendancePercentage(student){
+
+const now = new Date();
+
+const month = now.getMonth();
+
+const year = now.getFullYear();
+
+let present = 0;
+
+let total = 0;
+
+for(let date in student.attendance){
+
+let d = new Date(date);
+
+if(d.getMonth()==month && d.getFullYear()==year){
+
+total++;
+
+if(student.attendance[date]=="P") present++;
+
+}
+
+}
+
+if(total==0) return 0;
+
+return ((present/total)*100).toFixed(1);
+
+}
