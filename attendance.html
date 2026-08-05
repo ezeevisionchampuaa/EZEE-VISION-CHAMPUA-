@@ -1,63 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Attendance</title>
+<title>Daily Attendance</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
 
-<header>
+<header class="header">
 
 <h1>Daily Attendance</h1>
 
+<p>EZEE VISION CHAMPUA</p>
+
 </header>
 
-<div class="container">
+<div class="form-container">
 
-<h2 id="todayDate"></h2>
+<input type="date" id="attendanceDate">
 
-<table id="attendanceTable">
-
-<thead>
-
-<tr>
-
-<th>Roll</th>
-
-<th>Name</th>
-
-<th>Present</th>
-
-<th>Absent</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-</tbody>
-
-</table>
+<div id="attendanceList"></div>
 
 <button onclick="saveAttendance()">
 
-Save Attendance
+💾 Save Attendance
+
+</button>
+
+<button onclick="location.href='index.html'">
+
+🏠 Dashboard
 
 </button>
 
 </div>
 
-<script src="attendance.js"></script>
+<script src="js/storage.js"></script>
+
+<script src="js/attendance.js"></script>
 
 </body>
 
