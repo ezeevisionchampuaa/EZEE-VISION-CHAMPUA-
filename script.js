@@ -69,17 +69,33 @@ return `
 
 <h3>${student.name}</h3>
 
-<p>Roll : ${student.roll}</p>
+<p><b>Roll:</b> ${student.roll}</p>
 
-<p>Class : ${student.className}</p>
-
-</div>
+<p><b>${student.className}</b></p>
 
 </div>
 
-<p><b>Parent :</b> ${student.parent || "-"}</p>
+</div>
 
-<p><b>Mobile :</b> ${student.mobile || "-"}</p>
+<p><b>Parent:</b> ${student.parent || "-"}</p>
+
+<p><b>Mobile:</b> ${student.mobile || "-"}</p>
+
+<div class="actions">
+
+<button onclick="editStudent(${student.id})">
+
+✏️ Edit
+
+</button>
+
+<button onclick="deleteStudent(${student.id})">
+
+🗑 Delete
+
+</button>
+
+</div>
 
 </div>
 
