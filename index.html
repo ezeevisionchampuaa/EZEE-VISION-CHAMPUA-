@@ -1,71 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EZEE VISION Attendance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EZEE VISION CHAMPUA</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<header>
+<header class="header">
 
 <h1>EZEE VISION CHAMPUA</h1>
+
 <p>Attendance Management System</p>
 
-  <a href="attendance.html">
-
-<button>
-
-Daily Attendance
-
-</button>
-
-  </a>
-  
 </header>
 
-  <div class="stats">
+<section class="dashboard">
 
-  <div class="card">
-      <h2 id="totalStudents">0</h2>
-      <p>Total Students</p>
-  </div>
-
-  <div class="card">
-      <h2 id="presentToday">0</h2>
-      <p>Present Today</p>
-  </div>
-
-  <div class="card">
-      <h2 id="absentToday">0</h2>
-      <p>Absent Today</p>
-  </div>
-
+<div class="card">
+<h2 id="totalStudents">0</h2>
+<span>Total Students</span>
 </div>
+
+<div class="card">
+<h2 id="presentToday">0</h2>
+<span>Present Today</span>
+</div>
+
+<div class="card">
+<h2 id="absentToday">0</h2>
+<span>Absent Today</span>
+</div>
+
+<div class="card">
+<h2 id="attendancePercent">0%</h2>
+<span>Attendance</span>
+</div>
+
+</section>
+
+<section class="search-area">
 
 <input
 type="text"
-id="searchBox"
-placeholder="Search Student..."
-onkeyup="render()">
-  <a href="report.html">
-<button>Monthly Report</button>
-  </a>
-<div class="container">
+id="searchInput"
+placeholder="🔍 Search Student">
 
+</section>
+
+<section class="menu">
 
 <button onclick="addStudent()">
-+ Add Student
+➕ Add Student
 </button>
 
-<div id="studentList"></div>
+<button onclick="location.href='attendance.html'">
+📅 Daily Attendance
+</button>
+
+<button onclick="location.href='report.html'">
+📊 Monthly Report
+</button>
+
+</section>
+
+<section>
+
+<h2 class="title">
+
+Student List
+
+</h2>
+
+<div id="studentContainer">
+
+<p class="empty">
+
+No Students Added Yet
+
+</p>
 
 </div>
+
+</section>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
