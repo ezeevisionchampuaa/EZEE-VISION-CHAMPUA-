@@ -1,174 +1,149 @@
+// =====================================
+// EZEE VISION CHAMPUA
+// Dashboard Script v3.0
+// =====================================
+
 let students = JSON.parse(localStorage.getItem("students")) || [];
 
-function saveData() {
-    localStorage.setItem("students", JSON.stringify(students));
-}
+const studentContainer = document.getElementById("studentContainer");
+const searchInput = document.getElementById("searchInput");
 
+// ----------------------
+// Dashboard
+// ----------------------
 
-function render() {
-const search =
-document.getElementById("searchBox")?.value.toLowerCase() || "";
+function updateDashboard(){
 
-let presentToday = 0;
-let absentToday = 0;
+    const total = students.length;
 
-const today = new Date().toISOString().split("T")[0];
-    
-    document.getElementById("students").innerText = students.length;
+    document.getElementById("totalStudents").innerText = total;
 
-    let html = "";
+    let present = 0;
+    let absent = 0;
 
-    students.forEach((student,index)=>{
+    const today = new Date().toISOString().split("T")[0];
 
-if(!student.name.toLowerCase().includes(search)) return;
+    students.forEach(student=>{
 
-if(student.attendance){
+        if(student.attendance){
 
-if(student.attendance[today]=="P") presentToday++;
+            if(student.attendance[today]=="P")
+                present++;
 
-if(student.attendance[today]=="A") absentToday++;
+            if(student.attendance[today]=="A")
+                absent++;
 
-}
-        html += `
-<div class="student">
+        }
 
-<h3>${student.name}</h3>
-
-<p><b>Roll:</b> ${student.roll}</p>
-<p><b>Class:</b> ${student.className}</p>
-
-<button onclick="markAttendance(${index},'P')">✅ Present</button>
-
-<button onclick="markAttendance(${index},'A')">❌ Absent</button>
-
-<p><b>This Month:</b> ${attendancePercentage(student)}%</p>
-
-<p>
-
-Today's Status :
-
-${student.attendance[today()] || "Not Marked"}
-
-</p>
-
-<button onclick="editStudent(${index})">Edit</button>
-
-<button onclick="deleteStudent(${index})">Delete</button>
-
-</div>
-`;
     });
 
-    document.getElementById("studentList").innerHTML = html;
+    document.getElementById("presentToday").innerText = present;
 
-    document.getElementById("studentList").innerHTML = html;
+    document.getElementById("absentToday").innerText = absent;
 
-document.getElementById("totalStudents").innerHTML = students.length;
+    let percentage = 0;
 
-document.getElementById("presentToday").innerHTML = presentToday;
+    if(present + absent > 0){
 
-document.getElementById("absentToday").innerHTML = absentToday;
-}
-
-function addStudent() {
-
-    let name = prompt("Student Name");
-    if (!name) return;
-
-    let roll = prompt("Roll Number");
-    let className = prompt("Class");
-    let parent = prompt("Parent Name");
-    let mobile = prompt("Mobile Number");
-
-    students.push({
-
-    name,
-    roll,
-    className,
-    parent,
-    mobile,
-
-    attendance:{}
-
-});
-
-    saveData();
-    render();
-
-}
-
-function editStudent(index) {
-
-    students[index].name = prompt("Student Name", students[index].name);
-    students[index].roll = prompt("Roll Number", students[index].roll);
-    students[index].className = prompt("Class", students[index].className);
-    students[index].parent = prompt("Parent Name", students[index].parent);
-    students[index].mobile = prompt("Mobile Number", students[index].mobile);
-
-    saveData();
-    render();
-
-}
-
-function deleteStudent(index) {
-
-    if (confirm("Delete this student?")) {
-
-        students.splice(index, 1);
-
-        saveData();
-
-        render();
+        percentage =
+        ((present/(present+absent))*100).toFixed(1);
 
     }
 
-}
-
-render();
-function today(){
-
-return new Date().toISOString().split("T")[0];
+    document.getElementById("attendancePercent").innerText =
+    percentage + "%";
 
 }
 
-function markAttendance(index,status){
+// ----------------------
+// Student List
+// ----------------------
 
-students[index].attendance[today()] = status;
+function renderStudents(search=""){
 
-saveData();
+    studentContainer.innerHTML="";
 
-render();
+    const list = students.filter(student=>
+
+        student.name
+        .toLowerCase()
+        .includes(search.toLowerCase())
+
+    );
+
+    if(list.length===0){
+
+        studentContainer.innerHTML=
+        `<p class="empty">
+        No Students Found
+        </p>`;
+
+        updateDashboard();
+
+        return;
+
+    }
+
+    list.forEach(student=>{
+
+        studentContainer.innerHTML += `
+
+<div class="student">
+
+<div class="student-top">
+
+<div class="avatar">
+
+👨‍🎓
+
+</div>
+
+<div>
+
+<h3>${student.name}</h3>
+
+<p><b>Roll :</b> ${student.roll}</p>
+
+<p><b>Class :</b> ${student.className}</p>
+
+</div>
+
+</div>
+
+<p><b>Parent :</b> ${student.parent}</p>
+
+<p><b>Mobile :</b> ${student.mobile}</p>
+
+</div>
+
+`;
+
+    });
+
+    updateDashboard();
 
 }
 
-function attendancePercentage(student){
+// ----------------------
+// Search
+// ----------------------
 
-const now = new Date();
+searchInput.addEventListener("input",function(){
 
-const month = now.getMonth();
+    renderStudents(this.value);
 
-const year = now.getFullYear();
+});
 
-let present = 0;
+// ----------------------
+// Add Student
+// ----------------------
 
-let total = 0;
+function addStudent(){
 
-for(let date in student.attendance){
-
-let d = new Date(date);
-
-if(d.getMonth()==month && d.getFullYear()==year){
-
-total++;
-
-if(student.attendance[date]=="P") present++;
+    window.location.href="students.html";
 
 }
 
-}
+// ----------------------
 
-if(total==0) return 0;
-
-return ((present/total)*100).toFixed(1);
-
-}
+renderStudents();
