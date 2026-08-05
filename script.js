@@ -26,6 +26,14 @@ function render() {
 
 <p><b>This Month:</b> ${attendancePercentage(student)}%</p>
 
+<p>
+
+Today's Status :
+
+${student.attendance[today()] || "Not Marked"}
+
+</p>
+
 <button onclick="editStudent(${index})">Edit</button>
 
 <button onclick="deleteStudent(${index})">Delete</button>
