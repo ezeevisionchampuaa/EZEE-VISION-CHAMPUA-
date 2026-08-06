@@ -384,153 +384,106 @@ class="student-list">
 
             <div class="form-grid">
 
-                <div class="form-group">
+<!-- Student ID -->
+<div class="form-group">
+    <label>Student ID</label>
+    <input type="text" id="studentId" readonly>
+</div>
 
-                    <label>
+<!-- Admission No -->
+<div class="form-group">
+    <label>Admission No.</label>
+    <input type="text" id="admissionNo" readonly>
+</div>
 
-                        Admission No.
+<!-- Roll No -->
+<div class="form-group">
+    <label>Roll Number</label>
+    <input type="text" id="rollNo" required>
+</div>
 
-                    </label>
+<!-- Student Name -->
+<div class="form-group">
+    <label>Student Name</label>
+    <input type="text" id="studentName" required>
+</div>
 
-                    <input
-                        type="text"
-                        id="admissionNo"
-                        readonly>
+<!-- Father Name -->
+<div class="form-group">
+    <label>Father's Name</label>
+    <input type="text" id="fatherName" required>
+</div>
 
-                </div>
+<!-- Mother Name -->
+<div class="form-group">
+    <label>Mother's Name</label>
+    <input type="text" id="motherName">
+</div>
 
-                <div class="form-group">
+<!-- Mobile -->
+<div class="form-group">
+    <label>Mobile Number</label>
+    <input type="tel" id="mobile" required>
+</div>
 
-                    <label>
+<!-- Alternate Mobile -->
+<div class="form-group">
+    <label>Alternate Mobile</label>
+    <input type="tel" id="alternateMobile">
+</div>
 
-                        Roll Number
+<!-- Date of Birth -->
+<div class="form-group">
+    <label>Date of Birth</label>
+    <input type="date" id="dob">
+</div>
 
-                    </label>
+<!-- Address -->
+<div class="form-group">
+    <label>Address</label>
+    <textarea id="address" rows="3"></textarea>
+</div>
 
-                    <input
-                        type="text"
-                        id="rollNo"
-                        required>
+<!-- Class -->
+<div class="form-group">
+    <label>Class</label>
+    <select id="studentClass" required>
+        <option value="">Select Class</option>
+        <option>Class 6</option>
+        <option>Class 7</option>
+        <option>Class 8</option>
+        <option>Class 9</option>
+        <option>Class 10</option>
+    </select>
+</div>
 
-                </div>
+<!-- Monthly Fees -->
+<div class="form-group">
+    <label>Monthly Fees (₹)</label>
+    <input type="number" id="monthlyFees" required>
+</div>
 
-                <div class="form-group">
+<!-- Admission Date -->
+<div class="form-group">
+    <label>Admission Date</label>
+    <input type="date" id="admissionDate">
+</div>
 
-                    <label>
+<!-- Status -->
+<div class="form-group">
+    <label>Status</label>
+    <select id="studentStatus">
+        <option>Active</option>
+        <option>Inactive</option>
+    </select>
+</div>
 
-                        Student Name
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="studentName"
-                        placeholder="Enter full name"
-                        required>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-
-                        Father's / Guardian Name
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="guardianName"
-                        placeholder="Guardian name"
-                        required>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-
-                        Mobile Number
-
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="mobile">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-
-                        Class
-
-                    </label>
-
-                    <select
-                        id="studentClass"
-                        required>
-
-                        <option value="">
-
-                            Select Class
-
-                        </option>
-
-                        <option>Class 6</option>
-                        <option>Class 7</option>
-                        <option>Class 8</option>
-                        <option>Class 9</option>
-                        <option>Class 10</option>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-
-                        Monthly Fees (₹)
-
-                    </label>
-
-                    <input
-                        type="number"
-                        id="monthlyFees">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-
-                        Status
-
-                    </label>
-
-                    <select
-                        id="studentStatus">
-
-                        <option>
-
-                            Active
-
-                        </option>
-
-                        <option>
-
-                            Inactive
-
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
+<!-- Student Photo -->
+<div class="form-group">
+    <label>Student Photo</label>
+    <input type="file" id="studentPhoto" accept="image/*">
+</div>
+                
             <div class="modal-actions">
 
                 <button
