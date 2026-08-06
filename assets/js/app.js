@@ -1,297 +1,392 @@
 /* ==========================================================
    EZEE VISION CHAMPUA
-   Premium Coaching Management System
-   Phase 1C-1
+   Coaching Management System
+   Global App Engine v1.0
 ==========================================================*/
 
 "use strict";
 
-/* ---------- DOM ---------- */
-
-const liveTime = document.getElementById("liveTime");
-const liveDate = document.getElementById("liveDate");
-const greeting = document.getElementById("greeting");
-
-const studentCount = document.getElementById("studentCount");
-const attendanceCount = document.getElementById("attendanceCount");
-const feesToday = document.getElementById("feesToday");
-const pendingFees = document.getElementById("pendingFees");
-
-/* ---------- Greeting ---------- */
-
-function updateGreeting(){
-
-const hour = new Date().getHours();
-
-let text = "Good Evening,";
-
-if(hour >= 5 && hour < 12){
-
-text = "Good Morning,";
-
-}
-
-else if(hour >= 12 && hour < 17){
-
-text = "Good Afternoon,";
-
-}
-
-else if(hour >= 17 && hour < 21){
-
-text = "Good Evening,";
-
-}
-
-else{
-
-text = "Good Night,";
-
-}
-
-if(greeting){
-
-greeting.textContent = text;
-
-}
-
-}
-
-/* ---------- Live Time ---------- */
-
-function updateTime(){
-
-const now = new Date();
-
-if(liveTime){
-
-liveTime.textContent = now.toLocaleTimeString("en-IN",{
-
-hour:"2-digit",
-
-minute:"2-digit",
-
-second:"2-digit",
-
-hour12:true
-
-});
-
-}
-
-if(liveDate){
-
-liveDate.textContent = now.toLocaleDateString("en-IN",{
-
-weekday:"long",
-
-day:"numeric",
-
-month:"long",
-
-year:"numeric"
-
-});
-
-}
-
-}
-
-/* ---------- Dashboard Placeholder ---------- */
-
-function loadDashboard(){
-
-studentCount.textContent = "0";
-
-attendanceCount.textContent = "0";
-
-feesToday.textContent = "₹0";
-
-pendingFees.textContent = "₹0";
-
-}
-
-/* ---------- Start ---------- */
-
-updateGreeting();
-
-updateTime();
-
-loadDashboard();
-
-setInterval(updateTime,1000);
-
-
 /* ==========================================================
-   Phase 1C-2B
-   Navigation + Notification + Future Ready Events
+   APP
 ==========================================================*/
 
-/* ---------- Elements ---------- */
+const App = {
 
-const notificationBtn = document.getElementById("notificationBtn");
-const notificationPanel = document.getElementById("notificationPanel");
+    version: "1.0.0",
 
-const quickButtons = document.querySelectorAll(".quick-card");
+    coachingName: "EZEE VISION CHAMPUA",
 
-const navButtons = document.querySelectorAll(".nav-item");
+    developer: "Shahid Sir",
 
-/* ---------- Notification Panel ---------- */
+    startedAt: new Date(),
 
-if(notificationBtn && notificationPanel){
+    elements: {},
 
-notificationBtn.addEventListener("click",()=>{
+    init(){
 
-const hidden = notificationPanel.hasAttribute("hidden");
+        this.cacheDOM();
 
-if(hidden){
+        this.bindEvents();
 
-notificationPanel.removeAttribute("hidden");
+        this.updateGreeting();
 
-}
+        this.updateClock();
 
-else{
+        this.updateYear();
 
-notificationPanel.setAttribute("hidden","");
+        this.loadDashboard();
 
-}
+        setInterval(()=>{
 
-});
+            this.updateClock();
 
-document.addEventListener("click",(e)=>{
+        },1000);
 
-if(
+        console.log(
 
-!notificationPanel.contains(e.target)
+            `${this.coachingName} Loaded`
 
-&&
+        );
 
-!notificationBtn.contains(e.target)
+    },
 
-){
+/* ==========================================================
+   CACHE DOM
+==========================================================*/
 
-notificationPanel.setAttribute("hidden","");
+    cacheDOM(){
 
-}
+        this.elements = {
 
-});
+            greeting:
 
-}
+            document.getElementById("greeting"),
 
-/* ---------- Bottom Navigation ---------- */
+            liveTime:
 
-navButtons.forEach(button=>{
+            document.getElementById("liveTime"),
 
-button.addEventListener("click",()=>{
+            liveDate:
 
-navButtons.forEach(item=>{
+            document.getElementById("liveDate"),
 
-item.classList.remove("active");
+            studentCount:
 
-});
+            document.getElementById("studentCount"),
 
-button.classList.add("active");
+            attendanceCount:
 
-const page = button.dataset.page;
+            document.getElementById("attendanceCount"),
 
-console.log("Navigate :",page);
+            feesToday:
 
-/*
+            document.getElementById("feesToday"),
 
-Future
+            pendingFees:
 
-dashboard.html
+            document.getElementById("pendingFees"),
 
-students.html
+            attendancePercent:
 
-attendance.html
+            document.getElementById("attendancePercent"),
 
-fees.html
+            feesPercent:
 
-reports.html
+            document.getElementById("feesPercent"),
 
-*/
+            attendanceBar:
 
-});
+            document.querySelector(".attendance-progress"),
 
-});
+            feesBar:
 
-/* ---------- Quick Actions ---------- */
+            document.querySelector(".fees-progress"),
 
-quickButtons.forEach(button=>{
+            currentYear:
 
-button.addEventListener("click",()=>{
+            document.getElementById("currentYear"),
 
-button.style.transform="scale(.96)";
+            notificationBtn:
 
-setTimeout(()=>{
+            document.getElementById("notificationBtn"),
 
-button.style.transform="";
+            notificationPanel:
 
-},150);
+            document.getElementById("notificationPanel"),
 
-const action = button.dataset.action;
+            fab:
 
-console.log("Action :",action);
+            document.getElementById("fabAddStudent")
 
-/*
+        };
 
-Future Routing
+    },
 
-add-student
+/* ==========================================================
+   EVENTS
+==========================================================*/
 
-attendance
+    bindEvents(){
 
-fees
+        const e = this.elements;
 
-reports
+        if(e.notificationBtn){
 
-students
+            e.notificationBtn.addEventListener(
 
-settings
+                "click",
 
-*/
+                ()=>{
 
-});
+                    this.toggleNotifications();
 
-});
+                }
 
-/* ---------- Placeholder Functions ---------- */
+            );
 
-function openStudents(){
+        }
 
-console.log("Students Module");
+        if(e.fab){
 
-}
+            e.fab.addEventListener(
 
-function openAttendance(){
+                "click",
 
-console.log("Attendance Module");
+                ()=>{
 
-}
+                    this.openStudentPage();
 
-function openFees(){
+                }
 
-console.log("Fees Module");
+            );
 
-}
+        }
 
-function openReports(){
+        document.addEventListener(
 
-console.log("Reports Module");
+            "click",
 
-}
+            (event)=>{
 
-function openSettings(){
+                this.closeNotificationOutside(event);
 
-console.log("Settings Module");
+            }
 
-}
+        );
 
-/* ---------- App Loaded ---------- */
+    },
+   /* ==========================================================
+   CLOCK & DATE
+==========================================================*/
 
-window.addEventListener("load",()=>{
+    updateClock(){
 
-console.log("EZEE VISION CHAMPUA Loaded Successfully");
+        const now = new Date();
 
-});
+        const time = now.toLocaleTimeString("en-IN",{
+            hour:"2-digit",
+            minute:"2-digit",
+            second:"2-digit",
+            hour12:true
+        });
+
+        const date = now.toLocaleDateString("en-IN",{
+            weekday:"long",
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        });
+
+        if(this.elements.liveTime){
+
+            this.elements.liveTime.textContent = time;
+
+        }
+
+        if(this.elements.liveDate){
+
+            this.elements.liveDate.textContent = date;
+
+        }
+
+    },
+
+/* ==========================================================
+   GREETING
+==========================================================*/
+
+    updateGreeting(){
+
+        if(!this.elements.greeting) return;
+
+        const hour = new Date().getHours();
+
+        let text = "Good Evening,";
+
+        if(hour>=5 && hour<12){
+
+            text = "Good Morning,";
+
+        }else if(hour>=12 && hour<17){
+
+            text = "Good Afternoon,";
+
+        }else if(hour>=17 && hour<21){
+
+            text = "Good Evening,";
+
+        }else{
+
+            text = "Good Night,";
+
+        }
+
+        this.elements.greeting.textContent = text;
+
+    },
+
+/* ==========================================================
+   YEAR
+==========================================================*/
+
+    updateYear(){
+
+        if(this.elements.currentYear){
+
+            this.elements.currentYear.textContent =
+            new Date().getFullYear();
+
+        }
+
+    },
+
+/* ==========================================================
+   DASHBOARD PLACEHOLDER
+==========================================================*/
+
+    loadDashboard(){
+
+        const e = this.elements;
+
+        if(e.studentCount) e.studentCount.textContent = "0";
+
+        if(e.attendanceCount) e.attendanceCount.textContent = "0";
+
+        if(e.feesToday) e.feesToday.textContent = "₹0";
+
+        if(e.pendingFees) e.pendingFees.textContent = "₹0";
+
+        if(e.attendancePercent)
+            e.attendancePercent.textContent = "0%";
+
+        if(e.feesPercent)
+            e.feesPercent.textContent = "0%";
+
+        if(e.attendanceBar)
+            e.attendanceBar.style.width = "0%";
+
+        if(e.feesBar)
+            e.feesBar.style.width = "0%";
+
+    },
+
+/* ==========================================================
+   NOTIFICATION PANEL
+==========================================================*/
+
+    toggleNotifications(){
+
+        const panel = this.elements.notificationPanel;
+
+        if(!panel) return;
+
+        panel.toggleAttribute("hidden");
+
+    },
+
+    closeNotificationOutside(event){
+
+        const btn = this.elements.notificationBtn;
+
+        const panel = this.elements.notificationPanel;
+
+        if(!btn || !panel || panel.hasAttribute("hidden")){
+
+            return;
+
+        }
+
+        if(
+            !panel.contains(event.target) &&
+            !btn.contains(event.target)
+        ){
+
+            panel.setAttribute("hidden","");
+
+        }
+
+    },
+
+/* ==========================================================
+   FAB
+==========================================================*/
+
+    openStudentPage(){
+
+        window.location.href = "students.html";
+
+    },
+   
+/* ==========================================================
+   SAFE QUERY
+==========================================================*/
+
+    get(id){
+
+        return document.getElementById(id);
+
+    },
+
+    query(selector){
+
+        return document.querySelector(selector);
+
+    },
+
+    queryAll(selector){
+
+        return document.querySelectorAll(selector);
+
+    },
+
+/* ==========================================================
+   LOG
+==========================================================*/
+
+    log(message){
+
+        console.log(
+
+            `[EZEE] ${message}`
+
+        );
+
+    }
+
+};
+
+/* ==========================================================
+   APP START
+==========================================================*/
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        App.init();
+
+    }
+
+);
