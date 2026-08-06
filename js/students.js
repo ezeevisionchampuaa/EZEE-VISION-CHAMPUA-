@@ -126,3 +126,4 @@ alert("Student Updated Successfully ✅");
 location.href="index.html";
 
 }
+window.saveStudent = saveStudent;
