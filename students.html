@@ -3,62 +3,95 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color"
-content="#0F172A">
+    <meta name="theme-color"
+          content="#0F172A">
 
-<title>Students • EZEE VISION CHAMPUA</title>
+    <meta name="description"
+          content="Student Management - EZEE VISION CHAMPUA">
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
+    <title>
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+        Students • EZEE VISION CHAMPUA
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
+    </title>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Google Font -->
 
-<link rel="stylesheet"
-href="assets/css/style.css">
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-<link rel="stylesheet"
-href="assets/css/students.css">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="assets/css/students.css">
 
 </head>
 
 <body>
 
-<div class="bg-blur blur1"></div>
+<!-- Background -->
 
-<div class="bg-blur blur2"></div>
+<div class="bg-gradient"></div>
+
+<div class="bg-circle circle-1"></div>
+
+<div class="bg-circle circle-2"></div>
+
+<div class="bg-circle circle-3"></div>
 
 <div class="app">
 
-<header class="top-header">
+<!-- ===========================
+     HEADER
+============================ -->
 
-<div class="header-left">
+<header class="header">
 
-<div class="logo">
+<div class="brand">
 
-<i class="fa-solid fa-user-graduate"></i>
+<div class="brand-logo">
+
+<i class="fa-solid fa-graduation-cap"></i>
 
 </div>
 
 <div>
 
-<h1>Students</h1>
+<h1>
 
-<p class="tagline">
+EZEE VISION
 
-EZEE VISION CHAMPUA
+<span>
+
+CHAMPUA
+
+</span>
+
+</h1>
+
+<p>
+
+Student Management
 
 </p>
 
@@ -66,95 +99,182 @@ EZEE VISION CHAMPUA
 
 </div>
 
+<div class="header-actions">
+
 <button
-class="notification-btn"
+class="icon-btn"
 onclick="location.href='index.html'">
 
-<i class="fa-solid fa-arrow-left"></i>
+<i class="fa-solid fa-house"></i>
 
 </button>
 
+</div>
+
 </header>
 
-<section class="glass">
+<!-- ===========================
+     PAGE TITLE
+============================ -->
 
-<div class="search-box">
+<section class="page-title">
+
+<h2>
+
+Students
+
+</h2>
+
+<p>
+
+Manage admissions, records and student details
+
+</p>
+
+</section>
+
+<!-- ===========================
+     SEARCH
+============================ -->
+
+<section class="glass search-box">
+
+<div class="search-input">
 
 <i class="fa-solid fa-magnifying-glass"></i>
 
 <input
-type="text"
-id="studentSearch"
-placeholder="Search student...">
+type="search"
+id="searchStudent"
+placeholder="Search student by name, roll or admission no...">
 
 </div>
 
 </section>
 
-<section class="stats-grid">
+<!-- ===========================
+     FILTERS
+============================ -->
 
-<div class="glass stat-card">
+<section class="filter-grid">
 
-<div class="stat-icon blue">
+<select
+id="classFilter"
+class="glass">
 
-<i class="fa-solid fa-users"></i>
+<option value="">
 
-</div>
+All Classes
 
-<div class="stat-info">
+</option>
 
-<p>Total Students</p>
+<option>
 
-<h2 id="totalStudents">
+Class 6
 
-0
+</option>
 
-</h2>
+<option>
 
-</div>
+Class 7
 
-</div>
+</option>
 
-<div class="glass stat-card">
+<option>
 
-<div class="stat-icon green">
+Class 8
 
-<i class="fa-solid fa-user-check"></i>
+</option>
 
-</div>
+<option>
 
-<div class="stat-info">
+Class 9
 
-<p>Active</p>
+</option>
 
-<h2 id="activeStudents">
+<option>
 
-0
+Class 10
 
-</h2>
+</option>
 
-</div>
+</select>
 
-</div>
+<select
+id="statusFilter"
+class="glass">
+
+<option value="">
+
+All Status
+
+</option>
+
+<option>
+
+Active
+
+</option>
+
+<option>
+
+Inactive
+
+</option>
+
+</select>
 
 </section>
 
-<section
-id="studentList">
+<!-- ===========================
+     SUMMARY
+============================ -->
 
-<div class="glass empty-state">
+<section class="students-summary">
 
-<i class="fa-solid fa-user-graduate"></i>
+<div class="glass summary-item">
 
-<h3>
+<h3 id="totalStudents">
 
-No Students Yet
+0
 
 </h3>
 
 <p>
 
-Tap the + button below to add your first student.
+Total Students
+
+</p>
+
+</div>
+
+<div class="glass summary-item">
+
+<h3 id="activeStudents">
+
+0
+
+</h3>
+
+<p>
+
+Active
+
+</p>
+
+</div>
+
+<div class="glass summary-item">
+
+<h3 id="inactiveStudents">
+
+0
+
+</h3>
+
+<p>
+
+Inactive
 
 </p>
 
@@ -162,72 +282,375 @@ Tap the + button below to add your first student.
 
 </section>
 
-<button
-id="fabAddStudent"
-class="fab">
+<!-- ===========================
+     STUDENT LIST START
+============================ -->
 
-<i class="fa-solid fa-plus"></i>
+<section
+id="studentList"
+class="student-list">
+
+<!-- ==========================================
+     EMPTY STATE
+========================================== -->
+
+<div id="emptyState" class="glass empty-state">
+
+    <i class="fa-solid fa-user-graduate"></i>
+
+    <h3>
+
+        No Students Found
+
+    </h3>
+
+    <p>
+
+        Start by adding your first student.
+
+    </p>
+
+    <button
+        id="firstStudentBtn"
+        class="primary-btn">
+
+        <i class="fa-solid fa-user-plus"></i>
+
+        Add Student
+
+    </button>
+
+</div>
+
+<!-- ==========================================
+     STUDENT CARD CONTAINER
+========================================== -->
+
+<div
+    id="studentCards"
+    class="student-cards">
+
+    <!-- Students will be loaded dynamically -->
+
+</div>
+
+</section>
+
+<!-- ==========================================
+     FLOATING ADD BUTTON
+========================================== -->
+
+<button
+    id="addStudentFab"
+    class="fab"
+    aria-label="Add Student">
+
+    <i class="fa-solid fa-plus"></i>
 
 </button>
+
+<!-- ==========================================
+     ADD / EDIT STUDENT MODAL
+========================================== -->
+
+<div
+    id="studentModal"
+    class="modal"
+    hidden>
+
+    <div class="modal-content glass">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+
+                New Admission
+
+            </h2>
+
+            <button
+                id="closeModal"
+                class="icon-btn">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <form
+            id="studentForm"
+            autocomplete="off">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+
+                        Admission No.
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="admissionNo"
+                        readonly>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Roll Number
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="rollNo"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Student Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentName"
+                        placeholder="Enter full name"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Father's / Guardian Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="guardianName"
+                        placeholder="Guardian name"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Mobile Number
+
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="mobile">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Class
+
+                    </label>
+
+                    <select
+                        id="studentClass"
+                        required>
+
+                        <option value="">
+
+                            Select Class
+
+                        </option>
+
+                        <option>Class 6</option>
+                        <option>Class 7</option>
+                        <option>Class 8</option>
+                        <option>Class 9</option>
+                        <option>Class 10</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Monthly Fees (₹)
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="monthlyFees">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Status
+
+                    </label>
+
+                    <select
+                        id="studentStatus">
+
+                        <option>
+
+                            Active
+
+                        </option>
+
+                        <option>
+
+                            Inactive
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelStudent"
+                    class="secondary-btn">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    id="saveStudent"
+                    class="primary-btn">
+
+                    Save Student
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+  <!-- ==========================================
+     BOTTOM NAVIGATION
+========================================== -->
 
 <nav class="bottom-nav">
 
-<button
-class="nav-item"
-onclick="location.href='index.html'">
+    <button
+        class="nav-item"
+        data-page="dashboard">
 
-<i class="fa-solid fa-house"></i>
+        <i class="fa-solid fa-house"></i>
 
-<span>Home</span>
+        <span>Home</span>
 
-</button>
+    </button>
 
-<button
-class="nav-item active">
+    <button
+        class="nav-item active"
+        data-page="students">
 
-<i class="fa-solid fa-users"></i>
+        <i class="fa-solid fa-user-graduate"></i>
 
-<span>Students</span>
+        <span>Students</span>
 
-</button>
+    </button>
 
-<button
-class="nav-item">
+    <button
+        class="nav-item"
+        data-page="attendance">
 
-<i class="fa-solid fa-calendar-check"></i>
+        <i class="fa-solid fa-calendar-check"></i>
 
-<span>Attendance</span>
+        <span>Attendance</span>
 
-</button>
+    </button>
 
-<button
-class="nav-item">
+    <button
+        class="nav-item"
+        data-page="fees">
 
-<i class="fa-solid fa-wallet"></i>
+        <i class="fa-solid fa-wallet"></i>
 
-<span>Fees</span>
+        <span>Fees</span>
 
-</button>
+    </button>
 
-<button
-class="nav-item">
+    <button
+        class="nav-item"
+        data-page="reports">
 
-<i class="fa-solid fa-chart-column"></i>
+        <i class="fa-solid fa-chart-column"></i>
 
-<span>Reports</span>
+        <span>Reports</span>
 
-</button>
+    </button>
 
 </nav>
 
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
 <footer class="footer">
 
-Made With ❤️ By <strong>Shahid Sir</strong>
+    <p>
+
+        © <span id="currentYear"></span>
+
+        EZEE VISION CHAMPUA
+
+    </p>
+
+    <p>
+
+        Made With ❤️ By <strong>Shahid Sir</strong>
+
+    </p>
 
 </footer>
 
-<script src="assets/js/students.js"></script>
+</div>
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="assets/js/app.js"></script>
+
 <script src="assets/js/ui.js"></script>
+
+<script src="assets/js/students.js"></script>
+
 </body>
 
 </html>
