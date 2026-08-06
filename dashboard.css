@@ -1,0 +1,267 @@
+/* ==========================================================
+   EZEE VISION CHAMPUA
+   Dashboard Specific Styles
+   Version 1.0
+==========================================================*/
+
+/* ==========================
+   WELCOME CARD
+========================== */
+
+.welcome{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:20px;
+
+padding:24px;
+
+margin-bottom:22px;
+
+overflow:hidden;
+
+position:relative;
+
+}
+
+.welcome::before{
+
+content:"";
+
+position:absolute;
+
+top:-40px;
+
+right:-40px;
+
+width:150px;
+
+height:150px;
+
+border-radius:50%;
+
+background:rgba(79,70,229,.15);
+
+filter:blur(20px);
+
+}
+
+.welcome h3{
+
+font-size:1rem;
+
+color:var(--secondary);
+
+margin-bottom:8px;
+
+}
+
+.welcome h2{
+
+font-size:1.65rem;
+
+font-weight:700;
+
+margin-bottom:12px;
+
+}
+
+.welcome p{
+
+font-size:.84rem;
+
+line-height:1.8;
+
+color:var(--text-light);
+
+max-width:260px;
+
+}
+
+.welcome-image{
+
+width:85px;
+
+height:85px;
+
+border-radius:22px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:42px;
+
+background:linear-gradient(
+135deg,
+var(--primary),
+var(--secondary)
+);
+
+color:#fff;
+
+flex-shrink:0;
+
+}
+
+/* ==========================
+   CARD HOVER
+========================== */
+
+@media (hover:hover){
+
+.stat-card:hover{
+
+transform:translateY(-5px);
+
+transition:.3s ease;
+
+}
+
+.quick-card:hover{
+
+transform:translateY(-5px);
+
+transition:.3s ease;
+
+}
+
+.live-card:hover{
+
+transform:translateY(-4px);
+
+transition:.3s ease;
+
+}
+
+}
+
+/* ==========================
+   LIVE CLOCK
+========================== */
+
+#liveTime{
+
+font-variant-numeric:tabular-nums;
+
+letter-spacing:1px;
+
+}
+
+/* ==========================
+   DASHBOARD SPACING
+========================== */
+
+.dashboard-grid{
+
+margin-bottom:26px;
+
+}
+
+.quick-grid{
+
+margin-bottom:28px;
+
+}
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+::-webkit-scrollbar{
+
+width:6px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:transparent;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:rgba(255,255,255,.15);
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:rgba(255,255,255,.30);
+
+}
+
+/* ==========================
+   PAGE LOAD
+========================== */
+
+.header,
+.welcome,
+.live-grid,
+.dashboard-grid,
+.quick-grid,
+.summary-card,
+.activity-card{
+
+animation:dashboardFade .5s ease both;
+
+}
+
+@keyframes dashboardFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(18px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:390px){
+
+.welcome{
+
+padding:18px;
+
+}
+
+.welcome h2{
+
+font-size:1.35rem;
+
+}
+
+.welcome-image{
+
+width:68px;
+
+height:68px;
+
+font-size:34px;
+
+}
+
+}
