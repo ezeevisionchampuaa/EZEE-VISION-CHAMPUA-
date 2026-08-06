@@ -86,7 +86,7 @@ Coaching Management System
 
 <div class="header-right">
 
-<button class="notification-btn">
+<button class="notification-btn" id="notificationBtn" aria-label="Notifications">
 
 <i class="fa-solid fa-bell"></i>
 
@@ -97,6 +97,24 @@ Coaching Management System
 </div>
 
 </header>
+
+<!-- Notification Panel -->
+
+<div class="glass notification-panel" id="notificationPanel" hidden>
+
+    <div class="panel-header">
+
+        <h3>Notifications</h3>
+
+    </div>
+
+    <div class="panel-body">
+
+        <p>No new notifications.</p>
+
+    </div>
+
+</div>
 
 <!-- ================= Greeting ================= -->
 
@@ -300,7 +318,7 @@ Real-time overview of attendance, fees and students.
 
 <section class="quick-grid">
 
-    <button class="glass quick-card" id="addStudentBtn">
+    <button class="glass quick-card" id="addStudentBtn" data-action="add-student">
 
         <i class="fa-solid fa-user-plus"></i>
 
@@ -310,7 +328,7 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="glass quick-card" id="attendanceBtn">
+  <button class="glass quick-card" id="attendanceBtn" data-action="attendance">
 
         <i class="fa-solid fa-calendar-check"></i>
 
@@ -320,7 +338,7 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="glass quick-card" id="feesBtn">
+    <button class="glass quick-card" id="feesBtn" data-action="fees">
 
         <i class="fa-solid fa-money-bill-wave"></i>
 
@@ -330,7 +348,7 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="glass quick-card" id="reportBtn">
+    <button class="glass quick-card" id="reportBtn" data-action="reports">
 
         <i class="fa-solid fa-chart-line"></i>
 
@@ -340,7 +358,7 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="glass quick-card" id="studentsBtn">
+    <button class="glass quick-card" id="studentsBtn" data-action="students">
 
         <i class="fa-solid fa-users"></i>
 
@@ -350,7 +368,7 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="glass quick-card" id="settingsBtn">
+    <button class="glass quick-card" id="settingsBtn" data-action="settings">
 
         <i class="fa-solid fa-gear"></i>
 
@@ -423,7 +441,7 @@ Real-time overview of attendance, fees and students.
 
 <nav class="bottom-nav">
 
-    <button class="nav-item active">
+    <button class="nav-item active" data-page="dashboard">
 
         <i class="fa-solid fa-house"></i>
 
@@ -431,7 +449,7 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="nav-item">
+    <button class="nav-item" data-page="students">
 
         <i class="fa-solid fa-users"></i>
 
@@ -439,7 +457,7 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="nav-item">
+    <button class="nav-item" data-page="attendance">
 
         <i class="fa-solid fa-calendar-check"></i>
 
@@ -447,7 +465,7 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="nav-item">
+    <button class="nav-item" data-page="fees">
 
         <i class="fa-solid fa-wallet"></i>
 
@@ -455,7 +473,7 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="nav-item">
+    <button class="nav-item" data-page="reports">
 
         <i class="fa-solid fa-chart-column"></i>
 
