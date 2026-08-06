@@ -1029,3 +1029,41 @@ bottom:24px;
 }
 
 }
+
+/* ---------- Notification Panel ---------- */
+
+.notification-panel{
+
+position:absolute;
+
+top:85px;
+
+left:18px;
+
+right:18px;
+
+padding:18px;
+
+z-index:1000;
+
+}
+
+.panel-header{
+
+margin-bottom:12px;
+
+}
+
+.panel-header h3{
+
+font-size:1rem;
+
+}
+
+.panel-body p{
+
+font-size:.85rem;
+
+color:var(--text2);
+
+}
