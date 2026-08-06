@@ -1,11 +1,10 @@
-/* ===================================
-   EZEE VISION ERP v8.0
-   Style Part 1
-   Base + Theme + Header
-=================================== */
+/* ==========================================================
+   EZEE VISION CHAMPUA
+   Premium Coaching Management System
+   Phase 1B-1 : Foundation
+========================================================== */
 
 /* Google Font */
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 /* Reset */
@@ -14,45 +13,155 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
 }
 
-:root{
-
---primary:#2563EB;
---primary-dark:#1D4ED8;
-
---success:#16A34A;
---danger:#DC2626;
---warning:#F59E0B;
---purple:#7C3AED;
-
---bg:#F4F7FC;
---card:#FFFFFF;
-
---text:#111827;
---text-light:#6B7280;
-
---border:#E5E7EB;
-
---radius:22px;
-
---shadow:
-
-0 10px 30px rgba(0,0,0,.08);
-
+html{
+scroll-behavior:smooth;
 }
-
-/* Body */
 
 body{
 
 font-family:'Poppins',sans-serif;
 
-background:var(--bg);
+background:#07111F;
 
-color:var(--text);
+color:#fff;
 
-padding-bottom:95px;
+min-height:100vh;
+
+overflow-x:hidden;
+
+}
+
+/* Variables */
+
+:root{
+
+--primary:#4F46E5;
+
+--secondary:#06B6D4;
+
+--success:#10B981;
+
+--warning:#F59E0B;
+
+--danger:#EF4444;
+
+--dark:#07111F;
+
+--card:#101B2F;
+
+--glass:rgba(255,255,255,.08);
+
+--border:rgba(255,255,255,.12);
+
+--text:#ffffff;
+
+--text2:#B8C5E3;
+
+--radius:22px;
+
+--shadow:
+0 12px 40px rgba(0,0,0,.35);
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+width:7px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:var(--primary);
+
+border-radius:20px;
+
+}
+
+/* Main App */
+
+.app{
+
+max-width:430px;
+
+margin:auto;
+
+padding:18px 18px 110px;
+
+position:relative;
+
+z-index:2;
+
+}
+
+/* Glass */
+
+.glass{
+
+background:var(--glass);
+
+backdrop-filter:blur(18px);
+
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid var(--border);
+
+border-radius:var(--radius);
+
+box-shadow:var(--shadow);
+
+}
+
+/* Background Blur */
+
+.bg-blur{
+
+position:fixed;
+
+border-radius:50%;
+
+filter:blur(90px);
+
+z-index:0;
+
+pointer-events:none;
+
+}
+
+.blur1{
+
+width:220px;
+
+height:220px;
+
+background:#4F46E5;
+
+top:-70px;
+
+left:-90px;
+
+opacity:.45;
+
+}
+
+.blur2{
+
+width:240px;
+
+height:240px;
+
+background:#06B6D4;
+
+right:-90px;
+
+bottom:-80px;
+
+opacity:.35;
 
 }
 
@@ -66,6 +175,22 @@ color:inherit;
 
 }
 
+/* Buttons */
+
+button{
+
+font-family:inherit;
+
+border:none;
+
+outline:none;
+
+cursor:pointer;
+
+background:none;
+
+}
+
 /* Images */
 
 img{
@@ -76,139 +201,21 @@ display:block;
 
 }
 
-/* Buttons */
+/* Section */
 
-button{
+section{
 
-font-family:'Poppins',sans-serif;
-
-}
-
-/* ===========================
-Loader
-=========================== */
-
-#loader{
-
-position:fixed;
-
-top:0;
-
-left:0;
-
-width:100%;
-
-height:100vh;
-
-background:#fff;
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-z-index:9999;
+margin-bottom:20px;
 
 }
+/* ==========================================================
+   Phase 1B-2
+   Header + Welcome + Live Section
+==========================================================*/
 
-.loader-logo{
-
-width:90px;
-
-height:90px;
-
-border-radius:25px;
-
-background:linear-gradient(
-
-135deg,
-
-var(--primary),
-
-var(--primary-dark)
-
-);
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:42px;
-
-color:#fff;
-
-margin-bottom:18px;
-
-box-shadow:var(--shadow);
-
-}
-
-#loader h2{
-
-font-size:24px;
-
-font-weight:700;
-
-margin-bottom:8px;
-
-}
-
-#loader p{
-
-font-size:14px;
-
-color:var(--text-light);
-
-}
-
-/* ===========================
-Main App
-=========================== */
-
-#app{
-
-width:100%;
-
-max-width:480px;
-
-margin:auto;
-
-min-height:100vh;
-
-}
-
-/* ===========================
-Header
-=========================== */
+/* ---------- Header ---------- */
 
 .top-header{
-
-padding:80px;
-
-background:linear-gradient(
-
-135deg,
-
-var(--primary),
-
-var(--primary-dark)
-
-);
-
-color:#fff;
-
-border-radius:0 0 28px 28px;
-
-box-shadow:var(--shadow);
-
-}
-
-.brand{
 
 display:flex;
 
@@ -216,19 +223,21 @@ align-items:center;
 
 justify-content:space-between;
 
+margin-bottom:20px;
+
 }
 
-.brand-left{
+.header-left{
 
 display:flex;
 
 align-items:center;
 
-gap:16px;
+gap:14px;
 
 }
 
-.brand-logo{
+.logo{
 
 width:58px;
 
@@ -236,7 +245,7 @@ height:58px;
 
 border-radius:18px;
 
-background:rgba(255,255,255,.18);
+background:linear-gradient(135deg,var(--primary),var(--secondary));
 
 display:flex;
 
@@ -244,69 +253,105 @@ align-items:center;
 
 justify-content:center;
 
-font-size:28px;
+font-size:24px;
 
-backdrop-filter:blur(8px);
+color:#fff;
+
+box-shadow:0 12px 30px rgba(79,70,229,.35);
+
+flex-shrink:0;
 
 }
 
-.brand-text h1{
+.header-left h1{
 
-font-size:20px;
+font-size:1.15rem;
 
 font-weight:700;
 
+line-height:1.2;
+
+letter-spacing:.3px;
+
 }
 
-.brand-text p{
+.header-left h1 span{
 
-font-size:13px;
+color:var(--secondary);
 
-opacity:.9;
+}
+
+.tagline{
 
 margin-top:3px;
 
+font-size:.76rem;
+
+color:var(--text2);
+
 }
 
-.header-btn{
+.notification-btn{
+
+position:relative;
 
 width:50px;
 
 height:50px;
 
-border:none;
-
 border-radius:16px;
 
-background:rgba(255,255,255,.15);
+background:var(--glass);
 
-color:#fff;
+border:1px solid var(--border);
 
 display:flex;
 
-justify-content:center;
-
 align-items:center;
 
-cursor:pointer;
+justify-content:center;
+
+font-size:20px;
+
+color:#fff;
+
+backdrop-filter:blur(16px);
+
+-webkit-backdrop-filter:blur(16px);
+
+transition:.25s;
 
 }
 
-/* ===========================
-Welcome Card
-=========================== */
+.notification-btn:active{
+
+transform:scale(.96);
+
+}
+
+.notify-dot{
+
+position:absolute;
+
+top:11px;
+
+right:11px;
+
+width:9px;
+
+height:9px;
+
+background:#FF3B30;
+
+border-radius:50%;
+
+border:2px solid #07111F;
+
+}
+
+/* ---------- Welcome Card ---------- */
 
 .welcome-card{
-
-margin-top:22px;
-
-background:rgba(255,255,255,.15);
-
-backdrop-filter:blur(15px);
-
-padding:22px;
-
-border-radius:22px;
 
 display:flex;
 
@@ -314,144 +359,188 @@ justify-content:space-between;
 
 align-items:center;
 
-gap:18px;
+padding:22px;
+
+margin-bottom:20px;
 
 }
 
-.welcome-badge{
+.welcome-card h2{
 
-display:inline-block;
+font-size:1rem;
 
-padding:6px 12px;
+font-weight:500;
 
-background:rgba(255,255,255,.2);
+color:var(--text2);
 
-border-radius:999px;
-
-font-size:12px;
-
-margin-bottom:12px;
+margin-bottom:6px;
 
 }
 
-.welcome-text h2{
+.welcome-card h3{
 
-font-size:28px;
+font-size:1.55rem;
+
+font-weight:700;
 
 margin-bottom:8px;
 
 }
 
-.welcome-text p{
+.welcome-card p{
 
-font-size:14px;
+font-size:.88rem;
 
-line-height:1.7;
+line-height:1.6;
 
-opacity:.95;
+color:var(--text2);
+
+max-width:220px;
 
 }
 
-.welcome-date{
+.welcome-icon{
+
+width:74px;
+
+height:74px;
+
+border-radius:22px;
+
+background:linear-gradient(135deg,var(--primary),var(--secondary));
 
 display:flex;
 
-flex-direction:column;
+align-items:center;
 
-gap:12px;
+justify-content:center;
 
-}
+font-size:34px;
 
-.date-box,
+color:#fff;
 
-.time-box{
+box-shadow:0 18px 35px rgba(6,182,212,.30);
 
-background:rgba(255,255,255,.18);
-
-padding:12px;
-
-border-radius:16px;
-
-min-width:120px;
-
-text-align:center;
+flex-shrink:0;
 
 }
 
-.date-box label,
+/* ---------- Live Section ---------- */
 
-.time-box label{
+.live-section{
 
-font-size:11px;
+display:grid;
 
-opacity:.8;
+grid-template-columns:1fr 1fr;
 
-display:block;
+gap:15px;
 
-margin-bottom:5px;
-
-}
-
-#currentDate,
-
-#currentTime{
-
-font-weight:700;
-
-font-size:18px;
+margin-bottom:22px;
 
 }
-/* ===================================
-   EZEE VISION ERP v8.0
-   Style Part 2
-   Dashboard
-=================================== */
 
-/* Section */
+.live-card{
 
-section{
+display:flex;
+
+align-items:center;
+
+gap:14px;
 
 padding:18px;
 
+min-height:92px;
+
 }
 
-/* Heading */
+.live-icon{
 
-.section-title{
+width:48px;
+
+height:48px;
+
+border-radius:14px;
 
 display:flex;
 
-justify-content:space-between;
+align-items:center;
 
-align-items:flex-end;
+justify-content:center;
 
-margin-bottom:18px;
+background:linear-gradient(135deg,var(--primary),var(--secondary));
+
+font-size:20px;
+
+color:#fff;
+
+flex-shrink:0;
+
+}
+
+.small-title{
+
+font-size:.74rem;
+
+color:var(--text2);
+
+margin-bottom:4px;
+
+}
+
+#liveTime{
+
+font-size:1.05rem;
+
+font-weight:700;
+
+letter-spacing:.5px;
+
+}
+
+#liveDate{
+
+font-size:.95rem;
+
+font-weight:700;
+
+line-height:1.35;
+
+}
+
+/* ---------- Section Title ---------- */
+
+.section-title{
+
+margin:10px 0 16px;
 
 }
 
 .section-title h2{
 
-font-size:22px;
+font-size:1.25rem;
 
 font-weight:700;
 
-color:var(--text);
+margin-bottom:5px;
 
 }
 
 .section-title p{
 
-font-size:13px;
+font-size:.83rem;
 
-color:var(--text-light);
+color:var(--text2);
 
-margin-top:4px;
+line-height:1.5;
 
 }
 
-/* ===========================
-Statistics Cards
-=========================== */
+/* ==========================================================
+   Phase 1B-3
+   Statistics Cards + Quick Actions
+==========================================================*/
+
+/* ---------- Statistics Grid ---------- */
 
 .stats-grid{
 
@@ -461,27 +550,23 @@ grid-template-columns:repeat(2,1fr);
 
 gap:16px;
 
-padding:18px;
+margin-bottom:26px;
 
 }
 
 .stat-card{
 
-background:var(--card);
-
-border-radius:22px;
-
-padding:20px;
+padding:18px;
 
 display:flex;
 
-align-items:center;
+flex-direction:column;
 
-gap:16px;
+gap:14px;
 
-box-shadow:var(--shadow);
+transition:.25s ease;
 
-transition:.25s;
+min-height:150px;
 
 }
 
@@ -493,11 +578,11 @@ transform:scale(.98);
 
 .stat-icon{
 
-width:58px;
+width:54px;
 
-height:58px;
+height:54px;
 
-border-radius:18px;
+border-radius:16px;
 
 display:flex;
 
@@ -505,121 +590,65 @@ align-items:center;
 
 justify-content:center;
 
+font-size:22px;
+
 color:#fff;
 
-flex-shrink:0;
+}
+
+.stat-icon.blue{
+
+background:linear-gradient(135deg,#4F46E5,#6366F1);
 
 }
 
-.stat-icon .material-symbols-rounded{
+.stat-icon.green{
 
-font-size:30px;
-
-}
-
-.blue .stat-icon{
-
-background:linear-gradient(135deg,#2563EB,#60A5FA);
+background:linear-gradient(135deg,#10B981,#34D399);
 
 }
 
-.green .stat-icon{
+.stat-icon.gold{
 
-background:linear-gradient(135deg,#16A34A,#4ADE80);
-
-}
-
-.red .stat-icon{
-
-background:linear-gradient(135deg,#DC2626,#F87171);
+background:linear-gradient(135deg,#F59E0B,#FBBF24);
 
 }
 
-.purple .stat-icon{
+.stat-icon.red{
 
-background:linear-gradient(135deg,#7C3AED,#A78BFA);
+background:linear-gradient(135deg,#EF4444,#F87171);
 
 }
 
-.stat-card h2{
+.stat-info p{
 
-font-size:28px;
+font-size:.82rem;
+
+color:var(--text2);
+
+margin-bottom:4px;
+
+}
+
+.stat-info h2{
+
+font-size:1.6rem;
 
 font-weight:700;
 
-margin-bottom:3px;
+margin-bottom:4px;
 
 }
 
-.stat-card p{
+.stat-info span{
 
-font-size:13px;
+font-size:.74rem;
 
-color:var(--text-light);
-
-}
-
-/* ===========================
-Search
-=========================== */
-
-.search-section{
-
-padding-top:8px;
+color:var(--text2);
 
 }
 
-.search-box{
-
-background:var(--card);
-
-border-radius:18px;
-
-display:flex;
-
-align-items:center;
-
-padding:15px 18px;
-
-box-shadow:var(--shadow);
-
-}
-
-.search-box .material-symbols-rounded{
-
-font-size:24px;
-
-color:#9CA3AF;
-
-margin-right:10px;
-
-}
-
-.search-box input{
-
-border:none;
-
-outline:none;
-
-background:none;
-
-width:100%;
-
-font-size:15px;
-
-font-family:'Poppins',sans-serif;
-
-}
-
-/* ===========================
-Quick Actions
-=========================== */
-
-.quick-actions{
-
-padding-top:8px;
-
-}
+/* ---------- Quick Actions ---------- */
 
 .quick-grid{
 
@@ -629,21 +658,25 @@ grid-template-columns:repeat(2,1fr);
 
 gap:16px;
 
+margin-bottom:26px;
+
 }
 
 .quick-card{
 
-background:var(--card);
+padding:20px 16px;
 
-border-radius:22px;
+display:flex;
 
-padding:20px;
+flex-direction:column;
 
-box-shadow:var(--shadow);
+align-items:flex-start;
 
-display:block;
+gap:12px;
 
-transition:.25s;
+transition:.25s ease;
+
+text-align:left;
 
 }
 
@@ -653,191 +686,74 @@ transform:scale(.97);
 
 }
 
-.quick-icon{
+.quick-card i{
 
-width:62px;
+font-size:26px;
 
-height:62px;
-
-border-radius:18px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-margin-bottom:16px;
-
-color:#fff;
-
-}
-
-.quick-icon.blue{
-
-background:#2563EB;
-
-}
-
-.quick-icon.green{
-
-background:#16A34A;
-
-}
-
-.quick-icon.orange{
-
-background:#F59E0B;
-
-}
-
-.quick-icon.purple{
-
-background:#7C3AED;
-
-}
-
-.quick-icon .material-symbols-rounded{
-
-font-size:30px;
+color:var(--secondary);
 
 }
 
 .quick-card h3{
 
-font-size:18px;
+font-size:1rem;
 
 font-weight:600;
-
-margin-bottom:6px;
-
-color:var(--text);
 
 }
 
 .quick-card p{
 
-font-size:13px;
-
-color:var(--text-light);
+font-size:.78rem;
 
 line-height:1.5;
 
+color:var(--text2);
+
 }
 
-/* Mobile */
+/* ---------- Tablet/Desktop ---------- */
 
-@media(max-width:480px){
+@media (min-width:768px){
+
+.app{
+
+max-width:1100px;
+
+padding:30px;
+
+}
 
 .stats-grid{
 
-grid-template-columns:1fr;
+grid-template-columns:repeat(4,1fr);
 
 }
 
 .quick-grid{
 
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.quick-card{
-
-padding:18px;
+grid-template-columns:repeat(3,1fr);
 
 }
 
 }
 
-/* ===================================
-   EZEE VISION ERP v8.0
-   Style Part 3
-   Student + Activity + Navigation
-===================================*/
+/* ==========================================================
+   Phase 1B-4
+   Activity + Bottom Navigation + Footer + Premium Polish
+==========================================================*/
 
-/* ===========================
-Recent Activity
-=========================== */
-
-.activity-section{
-
-padding-top:10px;
-
-}
+/* ---------- Recent Activity ---------- */
 
 .activity-card{
 
-display:flex;
+padding:20px;
 
-align-items:center;
-
-gap:16px;
-
-background:var(--card);
-
-padding:18px;
-
-border-radius:20px;
-
-box-shadow:var(--shadow);
-
-margin-bottom:14px;
+margin-bottom:95px;
 
 }
 
-.activity-icon{
-
-width:54px;
-
-height:54px;
-
-border-radius:16px;
-
-background:#EEF4FF;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-color:var(--primary);
-
-}
-
-.activity-icon .material-symbols-rounded{
-
-font-size:28px;
-
-}
-
-.activity-card h4{
-
-font-size:16px;
-
-margin-bottom:4px;
-
-}
-
-.activity-card p{
-
-font-size:13px;
-
-color:var(--text-light);
-
-}
-
-/* ===========================
-Students
-=========================== */
-
-.students-section{
-
-padding-top:10px;
-
-}
-
-#studentList{
+.activity-list{
 
 display:flex;
 
@@ -847,235 +763,87 @@ gap:16px;
 
 }
 
-.student-card{
-
-background:#fff;
-
-border-radius:20px;
-
-padding:16px;
+.activity-item{
 
 display:flex;
 
-align-items:center;
-
-justify-content:space-between;
-
-box-shadow:var(--shadow);
-
-transition:.25s;
-
-}
-
-.student-card:active{
-
-transform:scale(.98);
-
-}
-
-.student-left{
-
-display:flex;
-
-align-items:center;
+align-items:flex-start;
 
 gap:14px;
 
-}
+padding:14px;
 
-.student-avatar{
+border-radius:16px;
 
-width:56px;
+background:rgba(255,255,255,.04);
 
-height:56px;
+border:1px solid rgba(255,255,255,.06);
 
-border-radius:50%;
-
-background:linear-gradient(135deg,#2563EB,#60A5FA);
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:20px;
-
-font-weight:700;
-
-color:#fff;
+transition:.25s ease;
 
 }
 
-.student-info h3{
+.activity-item:hover{
 
-font-size:17px;
-
-font-weight:600;
-
-margin-bottom:4px;
+background:rgba(255,255,255,.08);
 
 }
 
-.student-info p{
+.activity-icon{
 
-font-size:13px;
+width:44px;
 
-color:var(--text-light);
-
-}
-
-.student-right{
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
-}
-
-.student-status{
-
-padding:6px 12px;
-
-border-radius:50px;
-
-font-size:12px;
-
-font-weight:600;
-
-background:#DCFCE7;
-
-color:#15803D;
-
-}
-
-.empty-card{
-
-background:#fff;
-
-padding:35px 20px;
-
-border-radius:22px;
-
-text-align:center;
-
-box-shadow:var(--shadow);
-
-}
-
-.empty-card .material-symbols-rounded{
-
-font-size:64px;
-
-color:var(--primary);
-
-margin-bottom:12px;
-
-}
-
-.empty-card h3{
-
-font-size:22px;
-
-margin-bottom:8px;
-
-}
-
-.empty-card p{
-
-font-size:14px;
-
-color:var(--text-light);
-
-margin-bottom:20px;
-
-}
-
-.primary-btn{
-
-display:inline-flex;
-
-align-items:center;
-
-gap:8px;
-
-padding:12px 18px;
-
-background:var(--primary);
-
-color:#fff;
+height:44px;
 
 border-radius:14px;
 
-font-weight:600;
-
-}
-
-/* ===========================
-Floating Button
-=========================== */
-
-.fab{
-
-position:fixed;
-
-right:22px;
-
-bottom:92px;
-
-width:62px;
-
-height:62px;
-
-border-radius:50%;
-
-background:linear-gradient(135deg,#2563EB,#1D4ED8);
-
-color:#fff;
-
 display:flex;
 
 align-items:center;
 
 justify-content:center;
 
-box-shadow:
+background:linear-gradient(135deg,var(--primary),var(--secondary));
 
-0 12px 28px rgba(37,99,235,.35);
+color:#fff;
 
-z-index:999;
-
-}
-
-.fab .material-symbols-rounded{
-
-font-size:32px;
+flex-shrink:0;
 
 }
 
-/* ===========================
-Bottom Navigation
-=========================== */
+.activity-content h4{
+
+font-size:.95rem;
+
+margin-bottom:4px;
+
+font-weight:600;
+
+}
+
+.activity-content p{
+
+font-size:.78rem;
+
+color:var(--text2);
+
+line-height:1.5;
+
+}
+
+/* ---------- Bottom Navigation ---------- */
 
 .bottom-nav{
 
 position:fixed;
 
-bottom:0;
-
 left:50%;
+
+bottom:16px;
 
 transform:translateX(-50%);
 
-width:100%;
-
-max-width:480px;
-
-height:74px;
-
-background:#fff;
+width:min(410px,calc(100% - 24px));
 
 display:flex;
 
@@ -1083,17 +851,27 @@ justify-content:space-around;
 
 align-items:center;
 
-box-shadow:
+padding:10px;
 
-0 -8px 24px rgba(0,0,0,.08);
+background:rgba(16,27,47,.88);
 
-border-top:1px solid #E5E7EB;
+backdrop-filter:blur(18px);
 
-z-index:1000;
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:24px;
+
+box-shadow:0 12px 35px rgba(0,0,0,.35);
+
+z-index:999;
 
 }
 
 .nav-item{
+
+flex:1;
 
 display:flex;
 
@@ -1103,65 +881,85 @@ align-items:center;
 
 justify-content:center;
 
-gap:4px;
+gap:5px;
 
-color:#94A3B8;
+padding:10px 4px;
 
-font-size:11px;
+border-radius:16px;
 
-font-weight:500;
-
-flex:1;
-
-height:100%;
+color:var(--text2);
 
 transition:.25s;
 
 }
 
-.nav-item .material-symbols-rounded{
+.nav-item i{
 
-font-size:24px;
+font-size:20px;
+
+}
+
+.nav-item span{
+
+font-size:.68rem;
+
+font-weight:500;
 
 }
 
 .nav-item.active{
 
-color:var(--primary);
+background:linear-gradient(135deg,var(--primary),var(--secondary));
+
+color:#fff;
 
 }
 
-.nav-item.active .material-symbols-rounded{
+.nav-item:active{
 
-font-variation-settings:
-
-'FILL' 1;
+transform:scale(.95);
 
 }
 
-/* ===========================
-Scrollbar
-=========================== */
+/* ---------- Footer ---------- */
 
-::-webkit-scrollbar{
+.footer{
 
-width:6px;
+text-align:center;
 
-}
+padding:16px 0 110px;
 
-::-webkit-scrollbar-thumb{
+color:var(--text2);
 
-background:#CBD5E1;
-
-border-radius:20px;
+font-size:.82rem;
 
 }
 
-/* ===================================
-   EZEE VISION ERP v8.0
-   Style Part 4
-   Final Polish + Responsive
-===================================*/
+.footer strong{
+
+color:#fff;
+
+}
+
+/* ---------- Selection ---------- */
+
+::selection{
+
+background:var(--primary);
+
+color:#fff;
+
+}
+
+/* ---------- Focus ---------- */
+
+button:focus-visible{
+
+outline:2px solid var(--secondary);
+
+outline-offset:3px;
+
+}
 
 /* ---------- Animation ---------- */
 
@@ -1171,7 +969,7 @@ from{
 
 opacity:0;
 
-transform:translateY(20px);
+transform:translateY(18px);
 
 }
 
@@ -1187,203 +985,28 @@ transform:translateY(0);
 
 .top-header,
 .welcome-card,
+.live-card,
 .stat-card,
 .quick-card,
-.activity-card,
-.student-card{
+.activity-card{
 
-animation:fadeUp .5s ease both;
-
-}
-
-/* ---------- Hover ---------- */
-
-.stat-card:hover,
-.quick-card:hover,
-.activity-card:hover,
-.student-card:hover{
-
-transform:translateY(-4px);
-
-box-shadow:0 16px 36px rgba(0,0,0,.12);
-
-transition:.3s;
+animation:fadeUp .45s ease both;
 
 }
 
-.primary-btn:hover{
+/* ---------- Safe Area ---------- */
 
-background:#1D4ED8;
-
-}
-
-.header-btn:hover{
-
-background:rgba(255,255,255,.25);
-
-}
-
-.fab:hover{
-
-transform:scale(1.08);
-
-}
-
-/* ---------- Focus ---------- */
-
-button:focus,
-input:focus,
-a:focus{
-
-outline:2px solid rgba(37,99,235,.25);
-
-outline-offset:3px;
-
-}
-
-/* ---------- Material Icons ---------- */
-
-.material-symbols-rounded{
-
-font-variation-settings:
-
-'FILL' 1,
-
-'wght' 500,
-
-'GRAD' 0,
-
-'opsz' 24;
-
-}
-
-/* ---------- Tablet ---------- */
-
-@media (max-width:768px){
-
-.top-header{
-
-padding:18px;
-
-}
-
-.welcome-card{
-
-flex-direction:column;
-
-align-items:flex-start;
-
-}
-
-.welcome-date{
-
-width:100%;
-
-flex-direction:row;
-
-justify-content:space-between;
-
-}
-
-.date-box,
-
-.time-box{
-
-flex:1;
-
-}
-
-}
-
-/* ---------- Mobile ---------- */
-
-@media (max-width:480px){
-
-body{
-
-font-size:14px;
-
-}
-
-.top-header{
-
-border-radius:0 0 22px 22px;
-
-}
-
-.brand-text h1{
-
-font-size:18px;
-
-}
-
-.brand-text p{
-
-font-size:12px;
-
-}
-
-.welcome-text h2{
-
-font-size:24px;
-
-}
-
-.stats-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.quick-grid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.quick-card{
-
-padding:16px;
-
-}
-
-.quick-card h3{
-
-font-size:16px;
-
-}
-
-.quick-card p{
-
-font-size:12px;
-
-}
-
-.student-card{
-
-padding:14px;
-
-}
-
-.student-avatar{
-
-width:48px;
-
-height:48px;
-
-font-size:18px;
-
-}
+@supports (padding:max(0px)){
 
 .bottom-nav{
 
-height:70px;
+padding-bottom:max(10px,env(safe-area-inset-bottom));
 
 }
 
-.nav-item span:last-child{
+.footer{
 
-font-size:10px;
+padding-bottom:max(110px,calc(110px + env(safe-area-inset-bottom)));
 
 }
 
@@ -1391,76 +1014,18 @@ font-size:10px;
 
 /* ---------- Large Screens ---------- */
 
-@media (min-width:481px){
+@media (min-width:992px){
 
-#app{
+body{
 
-border-radius:28px;
-
-overflow:hidden;
+padding:30px;
 
 }
 
-}
+.bottom-nav{
 
-/* ---------- Selection ---------- */
-
-::selection{
-
-background:#2563EB;
-
-color:#fff;
+bottom:24px;
 
 }
-
-/* ---------- Smooth Scroll ---------- */
-
-html{
-
-scroll-behavior:smooth;
-
-}
-
-/* ---------- Loader Hide ---------- */
-
-body.loaded #loader{
-
-opacity:0;
-
-visibility:hidden;
-
-transition:.35s;
-
-}
-
-/* ---------- Utility ---------- */
-
-.hidden{
-
-display:none!important;
-
-}
-
-.text-center{
-
-text-align:center;
-
-}
-
-.mt-10{
-
-margin-top:10px;
-
-}
-
-.mt-20{
-
-margin-top:20px;
-
-}
-
-.mb-20{
-
-margin-bottom:20px;
 
 }
