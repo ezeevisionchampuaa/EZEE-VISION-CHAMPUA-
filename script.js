@@ -1,99 +1,111 @@
 /* ===================================
-   EZEE VISION ERP v4.0
+   EZEE VISION ERP v5.1
+   Dashboard Module
 =================================== */
+
 import { db } from "./firebase.js";
 
 import {
 collection,
-addDoc,
 getDocs,
 deleteDoc,
-doc,
-updateDoc
+doc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
+/* ===========================
+   Global Variables
+=========================== */
 
 let students = [];
 
-const studentContainer = document.getElementById("studentContainer");
-const searchInput = document.getElementById("searchInput");
+const studentContainer =
+document.getElementById("studentContainer");
 
-/* ---------------- Dashboard ---------------- */
+const searchInput =
+document.getElementById("searchInput");
+
+/* ===========================
+   Dashboard
+=========================== */
 
 function updateDashboard(){
 
-    const total = students.length;
+const total = students.length;
 
-    let present = 0;
-    let absent = 0;
+let present = 0;
 
-    const today = new Date().toISOString().split("T")[0];
+let absent = 0;
 
-    students.forEach(student=>{
+const today =
+new Date().toISOString().split("T")[0];
 
-        if(student.attendance){
-
-            if(student.attendance[today]=="P") present++;
-
-            if(student.attendance[today]=="A") absent++;
-
-        }
-
-    });
-
-    document.getElementById("totalStudents").textContent = total;
-
-    document.getElementById("presentToday").textContent = present;
-
-    document.getElementById("absentToday").textContent = absent;
-
-    let percentage = 0;
-
-    if((present+absent)>0){
-
-        percentage = ((present/(present+absent))*100).toFixed(1);
-
-    }
-
-    document.getElementById("attendancePercent").textContent =
-    percentage + "%";
-
-}
-
-/* ---------------- Student Card ---------------- */
-
-function createStudentCard(student){
-
-let present=0;
-
-let absent=0;
-
-const today=new Date();
-
-const year=today.getFullYear();
-
-const month=today.getMonth();
+students.forEach(student=>{
 
 if(student.attendance){
 
-for(let date in student.attendance){
+if(student.attendance[today]=="P")
+present++;
 
-const d=new Date(date);
+if(student.attendance[today]=="A")
+absent++;
 
-if(
+}
 
-d.getFullYear()==year &&
+});
 
-d.getMonth()==month
+document.getElementById("totalStudents").textContent=total;
 
-){
+document.getElementById("presentToday").textContent=present;
 
-if(student.attendance[date]=="P")
+document.getElementById("absentToday").textContent=absent;
+
+const totalMarked = present + absent;
+
+const percent =
+
+totalMarked===0
+
+?0
+
+:((present/totalMarked)*100).toFixed(1);
+
+const attendanceBox =
+document.getElementById("attendancePercent");
+
+if(attendanceBox){
+
+attendanceBox.textContent =
+percent+"%";
+
+}
+
+}
+/* ===========================
+   Student Card
+=========================== */
+
+function createStudentCard(student){
+
+let present = 0;
+let absent = 0;
+
+const today = new Date();
+const year = today.getFullYear();
+const month = today.getMonth();
+
+if(student.attendance){
+
+for(const date in student.attendance){
+
+const d = new Date(date);
+
+if(d.getFullYear()===year && d.getMonth()===month){
+
+if(student.attendance[date]==="P"){
 
 present++;
 
-else
+}else{
 
 absent++;
 
@@ -103,15 +115,15 @@ absent++;
 
 }
 
-const total=present+absent;
+}
 
-const percentage=
+const total = present + absent;
 
-total==0
+const percentage =
 
-?0
+total===0 ? 0 :
 
-:((present/total)*100).toFixed(1);
+((present/total)*100).toFixed(1);
 
 let color="#ef4444";
 
@@ -131,11 +143,7 @@ return `
 
 <div class="student-top">
 
-<div class="avatar">
-
-👨‍🎓
-
-</div>
+<div class="avatar">👨‍🎓</div>
 
 <div>
 
@@ -155,7 +163,7 @@ return `
 
 <p>
 
-<b>Monthly Attendance :</b>
+<b>Attendance :</b>
 
 <span style="color:${color};font-weight:bold;">
 
@@ -167,13 +175,13 @@ ${percentage}%
 
 <div class="actions">
 
-<button onclick="editStudent(${student.id})">
+<button onclick="editStudent('${student.id}')">
 
 ✏️ Edit
 
 </button>
 
-<button onclick="deleteStudent(${student.id})">
+<button onclick="deleteStudent('${student.id}')">
 
 🗑 Delete
 
@@ -187,21 +195,25 @@ ${percentage}%
 
 }
 
-/* ---------------- Student List ---------------- */
+/* ===========================
+   Render Students
+=========================== */
 
 function renderStudents(keyword=""){
 
+if(!studentContainer) return;
+
 studentContainer.innerHTML="";
 
-const list = students.filter(student=>{
+const filtered = students.filter(student=>
 
-return student.name.toLowerCase()
+student.name.toLowerCase()
 
-.includes(keyword.toLowerCase());
+.includes(keyword.toLowerCase())
 
-});
+);
 
-if(list.length===0){
+if(filtered.length===0){
 
 studentContainer.innerHTML=
 
@@ -213,9 +225,11 @@ return;
 
 }
 
-list.forEach(student=>{
+filtered.forEach(student=>{
 
-studentContainer.innerHTML += createStudentCard(student);
+studentContainer.innerHTML +=
+
+createStudentCard(student);
 
 });
 
@@ -223,142 +237,30 @@ updateDashboard();
 
 }
 
-/* ---------------- Search ---------------- */
+/* ===========================
+   Search
+=========================== */
 
 if(searchInput){
 
-searchInput.addEventListener("input",function(){
+searchInput.addEventListener("input",()=>{
 
-renderStudents(this.value);
+renderStudents(searchInput.value);
 
 });
 
 }
-
-/* ---------------- Navigation ---------------- */
-
-function openAttendance(){
-
-location.href="attendance.html";
-
-}
-
-function openReport(){
-
-location.href="report.html";
-
-}
-
-function openStudents(){
-
-location.href="students.html";
-
-}
-
-function openFees(){
-
-location.href="fees.html";
-
-}
-
-/* ---------------- Start ---------------- */
-
-// renderStudents();
-
 /* ===========================
-   Edit Student
+   Firebase Functions
 =========================== */
 
-window.editStudent = function(id){
+async function loadStudents(){
 
-localStorage.setItem(
-"editStudentId",
-id
+students = [];
+
+const snapshot = await getDocs(
+collection(db,"students")
 );
-
-location.href="students.html";
-
-}
-
-/* ===========================
-   Delete Student
-=========================== */
-window.deleteStudent = function(id){
-
-if(localStorage.getItem("adminLogin")!=="true"){
-
-alert("Admin Login Required");
-
-location.href="login.html";
-
-return;
-
-}
-
-if(!confirm("Delete this student?")) return;
-
-await deleteDoc(doc(db,"students",id));
-
-alert("Student Deleted Successfully ✅");
-
-await loadStudents();
-
-}
-async function loadStudents(){
-
-students = [];
-
-const querySnapshot = await getDocs(collection(db,"students"));
-
-querySnapshot.forEach((document)=>{
-
-students.push({
-
-id:document.id,
-
-...document.data()
-
-});
-
-});
-
-
-/* ===========================
-   Add Student
-=========================== */
-
-window.addStudent = function () {
-
-    if (localStorage.getItem("adminLogin") !== "true") {
-
-        alert("Admin Login Required");
-
-        location.href = "login.html";
-
-        return;
-
-    }
-
-    location.href = "students.html";
-
-};
-render();
-
-updateDashboard();
-
-}
-
-loadStudents();
-
-/* ===========================
-   Load Students From Firebase
-=========================== */
-
-async function loadStudents(){
-
-students = [];
-
-const snapshot = await getDocs(collection(db,"students"));
 
 snapshot.forEach((docItem)=>{
 
@@ -372,9 +274,96 @@ id: docItem.id,
 
 });
 
-   // renderStudents();
+renderStudents();
 
 }
 
+window.editStudent = function(id){
+
+localStorage.setItem(
+"editStudentId",
+id
+);
+
+location.href="students.html";
+
+};
+
+window.deleteStudent = async function(id){
+
+if(localStorage.getItem("adminLogin")!=="true"){
+
+alert("Admin Login Required");
+
+location.href="login.html";
+
+return;
+
+}
+
+if(!confirm("Delete this student?")){
+
+return;
+
+}
+
+await deleteDoc(doc(db,"students",id));
+
+alert("Student Deleted Successfully ✅");
+
+await loadStudents();
+
+};
+
+window.addStudent = function(){
+
+if(localStorage.getItem("adminLogin")!=="true"){
+
+alert("Admin Login Required");
+
+location.href="login.html";
+
+return;
+
+}
+
+location.href="students.html";
+
+};
+/* ===========================
+   Navigation
+=========================== */
+
+window.openAttendance = function(){
+
+location.href = "attendance.html";
+
+};
+
+window.openReport = function(){
+
+location.href = "report.html";
+
+};
+
+window.openStudents = function(){
+
+location.href = "students.html";
+
+};
+
+window.openFees = function(){
+
+location.href = "fees.html";
+
+};
+
+/* ===========================
+   App Start
+=========================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
 loadStudents();
-window.deleteStudent = deleteStudent;
+
+});
