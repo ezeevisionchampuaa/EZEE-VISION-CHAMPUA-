@@ -271,21 +271,24 @@ location.href="students.html";
 /* ===========================
    Delete Student
 =========================== */
-
 function deleteStudent(id){
+
+if(localStorage.getItem("adminLogin")!=="true"){
+
+alert("Admin Login Required");
+
+location.href="login.html";
+
+return;
+
+}
 
 if(!confirm("Delete this student?")) return;
 
 students = students.filter(student=>student.id!==id);
 
-localStorage.setItem(
+localStorage.setItem("students",JSON.stringify(students));
 
-"students",
-
-JSON.stringify(students)
-
-);
-
-renderStudents(searchInput.value);
+renderStudents();
 
 }
