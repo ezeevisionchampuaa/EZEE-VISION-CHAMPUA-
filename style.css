@@ -3038,3 +3038,246 @@ right:auto;
 
 }
 
+/* ==================================
+   Version 6.5F
+   Final UI Polish
+================================== */
+
+/* Smooth Scrolling */
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+/* Fade Animation */
+
+@keyframes pageFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(15px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+main,
+
+.container{
+
+animation:pageFade .45s ease;
+
+}
+
+/* Better Button Effect */
+
+button{
+
+transition:
+
+transform .25s,
+
+box-shadow .25s,
+
+opacity .25s;
+
+}
+
+button:active{
+
+transform:scale(.97);
+
+}
+
+/* Card Hover */
+
+.student-card:hover,
+
+.card:hover,
+
+.summary-card:hover{
+
+box-shadow:
+
+0 18px 40px rgba(37,99,235,.15);
+
+}
+
+/* Premium Empty State */
+
+.empty{
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+padding:45px 20px;
+
+border-radius:22px;
+
+background:#fff;
+
+box-shadow:0 8px 25px rgba(0,0,0,.06);
+
+color:#64748b;
+
+font-size:15px;
+
+text-align:center;
+
+}
+
+.empty::before{
+
+content:"📂";
+
+font-size:56px;
+
+margin-bottom:15px;
+
+}
+
+/* Loading */
+
+.loader{
+
+width:48px;
+
+height:48px;
+
+border:5px solid #e5e7eb;
+
+border-top:5px solid #2563eb;
+
+border-radius:50%;
+
+margin:35px auto;
+
+animation:spin .9s linear infinite;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+/* Floating Action */
+
+.floating{
+
+position:fixed;
+
+right:18px;
+
+bottom:95px;
+
+width:58px;
+
+height:58px;
+
+border-radius:50%;
+
+background:linear-gradient(
+
+135deg,
+
+#2563eb,
+
+#1d4ed8
+
+);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:26px;
+
+color:#fff;
+
+box-shadow:
+
+0 12px 28px rgba(37,99,235,.3);
+
+z-index:999;
+
+}
+
+/* Selection */
+
+::selection{
+
+background:#2563eb;
+
+color:#fff;
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#2563eb;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#eef2ff;
+
+}
+
+/* Mobile */
+
+@media(max-width:480px){
+
+.card{
+
+padding:18px;
+
+}
+
+.student-card{
+
+padding:18px;
+
+}
+
+.bottom-nav{
+
+height:68px;
+
+}
+
+}
+
