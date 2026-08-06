@@ -263,7 +263,7 @@ location.href="fees.html";
 
 /* ---------------- Start ---------------- */
 
-renderStudents();
+// renderStudents();
 
 /* ===========================
    Edit Student
@@ -301,7 +301,7 @@ students = students.filter(student=>student.id!==id);
 
 localStorage.setItem("students",JSON.stringify(students));
 
-renderStudents();
+// renderStudents();
 
 }
 async function loadStudents(){
@@ -372,7 +372,7 @@ id: docItem.id,
 
 });
 
-renderStudents();
+   // renderStudents();
 
 }
 
