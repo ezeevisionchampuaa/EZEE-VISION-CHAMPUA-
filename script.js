@@ -1,6 +1,18 @@
 /* ===================================
    EZEE VISION ERP v4.0
 =================================== */
+import { db } from "./firebase.js";
+
+import {
+collection,
+addDoc,
+getDocs,
+deleteDoc,
+doc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
 
 let students = JSON.parse(localStorage.getItem("students")) || [];
 
