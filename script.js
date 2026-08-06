@@ -269,7 +269,7 @@ renderStudents();
    Edit Student
 =========================== */
 
-function editStudent(id){
+window.editStudent = function(id){
 
 localStorage.setItem(
 "editStudentId",
@@ -283,7 +283,7 @@ location.href="students.html";
 /* ===========================
    Delete Student
 =========================== */
-function deleteStudent(id){
+window.deleteStudent = function(id){
 
 if(localStorage.getItem("adminLogin")!=="true"){
 
