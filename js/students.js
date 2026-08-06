@@ -1,26 +1,65 @@
 /* ===================================
-   EZEE VISION ERP v4.0
+   EZEE VISION ERP v5.2
    Student Module
 =================================== */
 
 import { db } from "./firebase.js";
 
 import {
+
 collection,
-addDoc
+addDoc,
+doc,
+getDoc,
+updateDoc
+
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-let students = [];
+/* ===========================
+   Global Variables
+=========================== */
+
+const studentName =
+document.getElementById("studentName");
+
+const rollNumber =
+document.getElementById("rollNumber");
+
+const className =
+document.getElementById("className");
+
+const parentName =
+document.getElementById("parentName");
+
+const mobileNumber =
+document.getElementById("mobileNumber");
+
+const saveBtn =
+document.getElementById("saveBtn");
+
+const updateBtn =
+document.getElementById("updateBtn");
+
+const editId =
+localStorage.getItem("editStudentId");
+
+/* ===========================
+   Save Student
+=========================== */
 
 async function saveStudent(){
 
-const name = document.getElementById("studentName").value.trim();
-const roll = document.getElementById("rollNumber").value.trim();
-const className = document.getElementById("className").value;
-const parent = document.getElementById("parentName").value.trim();
-const mobile = document.getElementById("mobileNumber").value.trim();
+const name = studentName.value.trim();
 
-if(name=="" || roll=="" || className==""){
+const roll = rollNumber.value.trim();
+
+const studentClass = className.value;
+
+const parent = parentName.value.trim();
+
+const mobile = mobileNumber.value.trim();
+
+if(name==="" || roll==="" || studentClass===""){
 
 alert("Please fill all required fields.");
 
@@ -30,13 +69,11 @@ return;
 
 const student={
 
-id:Date.now(),
-
 name:name,
 
 roll:roll,
 
-className:className,
+className:studentClass,
 
 parent:parent,
 
@@ -54,76 +91,326 @@ due:0
 
 },
 
-homework:[]
+homework:[],
+
+createdAt:new Date().toISOString()
 
 };
 
-await addDoc(collection(db,"students"), student);
+try{
+
+await addDoc(
+
+collection(db,"students"),
+
+student
+
+);
 
 alert("Student Added Successfully ✅");
 
-window.location.href="index.html";
-
-}
-/* ===========================
-   Edit Student
-=========================== */
-
-const editId = localStorage.getItem("editStudentId");
-
-if(editId){
-
-const student = students.find(s=>s.id==editId);
-
-if(student){
-
-document.getElementById("studentName").value = student.name;
-
-document.getElementById("rollNumber").value = student.roll;
-
-document.getElementById("className").value = student.className;
-
-document.getElementById("parentName").value = student.parent;
-
-document.getElementById("mobileNumber").value = student.mobile;
-
-document.querySelector("button").style.display="none";
-
-document.getElementById("updateBtn").style.display="block";
-
-}
-
-}
-
-function updateStudent(){
-
-const index = students.findIndex(s=>s.id==editId);
-
-students[index].name =
-document.getElementById("studentName").value.trim();
-
-students[index].roll =
-document.getElementById("rollNumber").value.trim();
-
-students[index].className =
-document.getElementById("className").value;
-
-students[index].parent =
-document.getElementById("parentName").value.trim();
-
-students[index].mobile =
-document.getElementById("mobileNumber").value.trim();
-
-localStorage.setItem(
-"students",
-JSON.stringify(students)
-);
-
-localStorage.removeItem("editStudentId");
-
-alert("Student Updated Successfully ✅");
+clearForm();
 
 location.href="index.html";
 
+}catch(error){
+
+console.error(error);
+
+alert("Failed to save student ❌");
+
 }
+
+}
+/* ===========================
+   Clear Form
+=========================== */
+
+function clearForm(){
+
+studentName.value="";
+
+rollNumber.value="";
+
+className.value="";
+
+parentName.value="";
+
+mobileNumber.value="";
+
+}
+
+
+/* ===========================
+   Load Student For Edit
+=========================== */
+
+async function loadStudent(){
+
+if(!editId){
+
+return;
+
+}
+
+try{
+
+const studentRef = doc(db,"students",editId);
+
+const studentSnap = await getDoc(studentRef);
+
+if(!studentSnap.exists()){
+
+alert("Student not found.");
+
+location.href="index.html";
+
+return;
+
+}
+
+const student = studentSnap.data();
+
+studentName.value = student.name || "";
+
+rollNumber.value = student.roll || "";
+
+className.value = student.className || "";
+
+parentName.value = student.parent || "";
+
+mobileNumber.value = student.mobile || "";
+
+if(saveBtn){
+
+saveBtn.style.display="none";
+
+}
+
+if(updateBtn){
+
+updateBtn.style.display="block";
+
+}
+
+}catch(error){
+
+console.error(error);
+
+alert("Unable to load student.");
+
+}
+
+}
+/* ===========================
+   Update Student
+=========================== */
+
+async function updateStudent(){
+
+if(!editId){
+
+return;
+
+}
+
+const name = studentName.value.trim();
+
+const roll = rollNumber.value.trim();
+
+const studentClass = className.value;
+
+const parent = parentName.value.trim();
+
+const mobile = mobileNumber.value.trim();
+
+if(name==="" || roll==="" || studentClass===""){
+
+alert("Please fill all required fields.");
+
+return;
+
+}
+
+try{
+
+await updateDoc(
+
+doc(db,"students",editId),
+
+{
+
+name:name,
+
+roll:roll,
+
+className:studentClass,
+
+parent:parent,
+
+mobile:mobile
+
+}
+
+);
+
+alert("Student Updated Successfully ✅");
+
+localStorage.removeItem("editStudentId");
+
+location.href="index.html";
+
+}catch(error){
+
+console.error(error);
+
+alert("Failed to update student ❌");
+
+}
+
+}
+/* ===========================
+   Button Events
+=========================== */
+
+if(saveBtn){
+
+saveBtn.addEventListener("click",saveStudent);
+
+}
+
+if(updateBtn){
+
+updateBtn.addEventListener("click",updateStudent);
+
+updateBtn.style.display="none";
+
+}
+
+/* ===========================
+   Page Initialize
+=========================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+loadStudent();
+
+});
+
+/* ===========================
+   Global Functions
+=========================== */
+
 window.saveStudent = saveStudent;
+
+window.updateStudent = updateStudent;
+
+/* ===========================
+   Form Validation
+=========================== */
+
+function validateForm(){
+
+const name = studentName.value.trim();
+
+const roll = rollNumber.value.trim();
+
+const studentClass = className.value;
+
+if(name.length < 3){
+
+alert("Student name must contain at least 3 characters.");
+
+studentName.focus();
+
+return false;
+
+}
+
+if(roll===""){
+
+alert("Please enter Roll Number.");
+
+rollNumber.focus();
+
+return false;
+
+}
+
+if(studentClass===""){
+
+alert("Please select Class.");
+
+className.focus();
+
+return false;
+
+}
+
+const mobile = mobileNumber.value.trim();
+
+if(mobile!=="" && !/^[0-9]{10}$/.test(mobile)){
+
+alert("Please enter a valid 10-digit mobile number.");
+
+mobileNumber.focus();
+
+return false;
+
+}
+
+return true;
+
+}
+
+/* ===========================
+   Loading State
+=========================== */
+
+function setButtonLoading(button,status){
+
+if(!button) return;
+
+if(status){
+
+button.disabled = true;
+
+button.textContent = "Saving...";
+
+}else{
+
+button.disabled = false;
+
+button.textContent =
+
+button.id==="updateBtn"
+
+? "Update Student"
+
+: "Save Student";
+
+}
+
+}
+
+/* ===========================
+   Final Initialization
+=========================== */
+
+window.addEventListener("load",()=>{
+
+if(saveBtn){
+
+saveBtn.disabled=false;
+
+}
+
+if(updateBtn){
+
+updateBtn.disabled=false;
+
+}
+
+console.log("EZEE VISION ERP v5.2 Ready ✅");
+
+});
