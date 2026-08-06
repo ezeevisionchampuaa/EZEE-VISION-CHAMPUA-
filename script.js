@@ -349,3 +349,31 @@ updateDashboard();
 }
 
 loadStudents();
+
+/* ===========================
+   Load Students From Firebase
+=========================== */
+
+async function loadStudents(){
+
+students = [];
+
+const snapshot = await getDocs(collection(db,"students"));
+
+snapshot.forEach((docItem)=>{
+
+students.push({
+
+id: docItem.id,
+
+...docItem.data()
+
+});
+
+});
+
+renderStudents();
+
+}
+
+loadStudents();
