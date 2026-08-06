@@ -67,22 +67,38 @@ rel="stylesheet">
 </header>
 
 <!-- ===========================
-     Welcome Dashboard v2
+     Premium Welcome Dashboard
 =========================== -->
 
 <section class="welcome-card">
 
+<div class="welcome-overlay"></div>
+
 <div class="welcome-left">
+
+<div class="welcome-badge">
+
+✨ EZEE VISION ERP
+
+</div>
 
 <h2>
 
-👋 Welcome Back, Admin
+Welcome Back,
+<span class="admin-name">
+
+Admin
+
+</span>
+
+👋
 
 </h2>
 
 <p>
 
-Manage your coaching faster and smarter.
+Manage students, attendance, fees and reports
+from one smart dashboard.
 
 </p>
 
@@ -90,21 +106,45 @@ Manage your coaching faster and smarter.
 
 <div class="welcome-right">
 
+<div class="time-box">
+
+<small>
+
+TODAY
+
+</small>
+
 <div id="liveDate">
 
-06 August 2026
+Loading...
 
 </div>
 
+</div>
+
+<div class="time-box">
+
+<small>
+
+CURRENT TIME
+
+</small>
+
 <div id="liveTime">
 
-08:30 AM
+--:--
+
+</div>
 
 </div>
 
 </div>
 
 </section>
+
+<!-- ===========================
+     Dashboard Statistics
+=========================== -->
 
 <section class="dashboard-grid">
 
@@ -116,7 +156,7 @@ Manage your coaching faster and smarter.
 
 </div>
 
-<div>
+<div class="card-content">
 
 <h3 id="totalStudents">
 
@@ -126,7 +166,7 @@ Manage your coaching faster and smarter.
 
 <p>
 
-Students
+Total Students
 
 </p>
 
@@ -142,7 +182,7 @@ Students
 
 </div>
 
-<div>
+<div class="card-content">
 
 <h3 id="presentToday">
 
@@ -152,7 +192,7 @@ Students
 
 <p>
 
-Present
+Present Today
 
 </p>
 
@@ -168,7 +208,7 @@ Present
 
 </div>
 
-<div>
+<div class="card-content">
 
 <h3 id="absentToday">
 
@@ -178,7 +218,7 @@ Present
 
 <p>
 
-Absent
+Absent Today
 
 </p>
 
@@ -194,7 +234,7 @@ Absent
 
 </div>
 
-<div>
+<div class="card-content">
 
 <h3 id="attendancePercent">
 
@@ -204,7 +244,7 @@ Absent
 
 <p>
 
-Attendance
+Attendance %
 
 </p>
 
@@ -214,11 +254,27 @@ Attendance
 
 </section>
 
+<!-- ===========================
+     Quick Actions
+=========================== -->
+
+<div class="dashboard-title">
+
+Quick Actions
+
+</div>
+
 <section class="quick-grid">
 
-<button onclick="location.href='students.html'">
+<button class="quick-card"
+
+onclick="location.href='students.html'">
+
+<div class="quick-icon">
 
 👨‍🎓
+
+</div>
 
 <span>
 
@@ -228,9 +284,15 @@ Students
 
 </button>
 
-<button onclick="location.href='attendance.html'">
+<button class="quick-card"
+
+onclick="location.href='attendance.html'">
+
+<div class="quick-icon">
 
 📅
+
+</div>
 
 <span>
 
@@ -240,9 +302,15 @@ Attendance
 
 </button>
 
-<button onclick="location.href='fees.html'">
+<button class="quick-card"
+
+onclick="location.href='fees.html'">
+
+<div class="quick-icon">
 
 💰
+
+</div>
 
 <span>
 
@@ -252,9 +320,15 @@ Fees
 
 </button>
 
-<button onclick="location.href='report.html'">
+<button class="quick-card"
 
-📊
+onclick="location.href='report.html'">
+
+<div class="quick-icon">
+
+📈
+
+</div>
 
 <span>
 
