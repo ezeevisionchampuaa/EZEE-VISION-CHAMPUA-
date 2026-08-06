@@ -4,92 +4,229 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add Student | EZEE VISION ERP</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+<meta name="theme-color"
+content="#0F172A">
+
+<title>Students • EZEE VISION CHAMPUA</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet"
+href="assets/css/style.css">
+
+<link rel="stylesheet"
+href="assets/css/students.css">
 
 </head>
 
 <body>
 
-<header class="header">
+<div class="bg-blur blur1"></div>
+
+<div class="bg-blur blur2"></div>
+
+<div class="app">
+
+<header class="top-header">
+
+<div class="header-left">
+
+<div class="logo">
+
+<i class="fa-solid fa-user-graduate"></i>
+
+</div>
 
 <div>
 
-<h1>Add Student</h1>
+<h1>Students</h1>
 
-<p>EZEE VISION CHAMPUA</p>
+<p class="tagline">
+
+EZEE VISION CHAMPUA
+
+</p>
+
+</div>
 
 </div>
 
-<div class="profile">
+<button
+class="notification-btn"
+onclick="location.href='index.html'">
 
-👨‍🎓
+<i class="fa-solid fa-arrow-left"></i>
 
-</div>
+</button>
 
 </header>
 
-<div class="form-container">
+<section class="glass">
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
 
 <input
 type="text"
-id="studentName"
-placeholder="Student Name">
-
-<input
-type="text"
-id="rollNumber"
-placeholder="Roll Number">
-
-<select id="className">
-
-<option value="">Select Class</option>
-
-<option>Class 6</option>
-<option>Class 7</option>
-<option>Class 8</option>
-<option>Class 9</option>
-<option>Class 10</option>
-
-</select>
-
-<input
-type="text"
-id="parentName"
-placeholder="Parent Name">
-
-<input
-type="tel"
-id="mobileNumber"
-placeholder="Mobile Number">
-
-<button onclick="saveStudent()">
-
-💾 Save Student
-
-</button>
-
-  <button
-id="updateBtn"
-onclick="updateStudent()"
-style="display:none;">
-
-✏️ Update Student
-
-  </button>
-
-<button onclick="location.href='index.html'">
-
-🏠 Back to Dashboard
-
-</button>
+id="studentSearch"
+placeholder="Search student...">
 
 </div>
 
-<script src="students.js"></script>
+</section>
+
+<section class="stats-grid">
+
+<div class="glass stat-card">
+
+<div class="stat-icon blue">
+
+<i class="fa-solid fa-users"></i>
+
+</div>
+
+<div class="stat-info">
+
+<p>Total Students</p>
+
+<h2 id="totalStudents">
+
+0
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="glass stat-card">
+
+<div class="stat-icon green">
+
+<i class="fa-solid fa-user-check"></i>
+
+</div>
+
+<div class="stat-info">
+
+<p>Active</p>
+
+<h2 id="activeStudents">
+
+0
+
+</h2>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+id="studentList">
+
+<div class="glass empty-state">
+
+<i class="fa-solid fa-user-graduate"></i>
+
+<h3>
+
+No Students Yet
+
+</h3>
+
+<p>
+
+Tap the + button below to add your first student.
+
+</p>
+
+</div>
+
+</section>
+
+<button
+id="fabAddStudent"
+class="fab">
+
+<i class="fa-solid fa-plus"></i>
+
+</button>
+
+<nav class="bottom-nav">
+
+<button
+class="nav-item"
+onclick="location.href='index.html'">
+
+<i class="fa-solid fa-house"></i>
+
+<span>Home</span>
+
+</button>
+
+<button
+class="nav-item active">
+
+<i class="fa-solid fa-users"></i>
+
+<span>Students</span>
+
+</button>
+
+<button
+class="nav-item">
+
+<i class="fa-solid fa-calendar-check"></i>
+
+<span>Attendance</span>
+
+</button>
+
+<button
+class="nav-item">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Fees</span>
+
+</button>
+
+<button
+class="nav-item">
+
+<i class="fa-solid fa-chart-column"></i>
+
+<span>Reports</span>
+
+</button>
+
+</nav>
+
+<footer class="footer">
+
+Made With ❤️ By <strong>Shahid Sir</strong>
+
+</footer>
+
+<script src="assets/js/students.js"></script>
 
 </body>
 
