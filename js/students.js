@@ -58,15 +58,7 @@ homework:[]
 
 };
 
-students.push(student);
-
-localStorage.setItem(
-
-"students",
-
-JSON.stringify(students)
-
-);
+await addDoc(collection(db,"students"), student);
 
 alert("Student Added Successfully ✅");
 
