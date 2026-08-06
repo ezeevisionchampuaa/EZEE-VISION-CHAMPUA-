@@ -12,7 +12,7 @@ addDoc
 
 let students = JSON.parse(localStorage.getItem("students")) || [];
 
-function saveStudent(){
+async function saveStudent(){
 
 const name = document.getElementById("studentName").value.trim();
 const roll = document.getElementById("rollNumber").value.trim();
