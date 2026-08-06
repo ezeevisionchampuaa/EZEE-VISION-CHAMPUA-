@@ -139,49 +139,65 @@ color="#f59e0b";
 
 return `
 
-<div class="student">
+<div class="student-card">
 
-<div class="student-top">
+<div class="student-header">
 
-<div class="avatar">👨‍🎓</div>
+<div class="student-avatar">
 
-<div>
+👨‍🎓
+
+</div>
+
+<div class="student-details">
 
 <h3>${student.name}</h3>
 
-<p><b>Roll :</b> ${student.roll}</p>
-
-<p><b>${student.className}</b></p>
+<p>Class ${student.className} • Roll ${student.roll}</p>
 
 </div>
 
-</div>
-
-<p><b>Parent :</b> ${student.parent || "-"}</p>
-
-<p><b>Mobile :</b> ${student.mobile || "-"}</p>
-
-<p>
-
-<b>Attendance :</b>
-
-<span style="color:${color};font-weight:bold;">
+<div class="attendance-badge">
 
 ${percentage}%
 
-</span>
+</div>
 
-</p>
+</div>
 
-<div class="actions">
+<div class="student-info">
 
-<button onclick="editStudent('${student.id}')">
+<div>
+
+<span>👤 Parent</span>
+
+<strong>${student.parent || "-"}</strong>
+
+</div>
+
+<div>
+
+<span>📞 Mobile</span>
+
+<strong>${student.mobile || "-"}</strong>
+
+</div>
+
+</div>
+
+<div class="student-actions">
+
+<button class="edit-btn"
+
+onclick="editStudent('${student.id}')">
 
 ✏️ Edit
 
 </button>
 
-<button onclick="deleteStudent('${student.id}')">
+<button class="delete-btn"
+
+onclick="deleteStudent('${student.id}')">
 
 🗑 Delete
 
@@ -192,8 +208,6 @@ ${percentage}%
 </div>
 
 `;
-
-}
 
 /* ===========================
    Render Students
