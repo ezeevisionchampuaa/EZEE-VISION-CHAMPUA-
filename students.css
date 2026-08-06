@@ -632,3 +632,181 @@ outline:2px solid var(--secondary);
 outline-offset:3px;
 
 }
+
+/* ==========================================================
+   EZEE VISION CHAMPUA
+   Student Management
+   Version 1.0
+==========================================================*/
+
+/* ==========================
+   SEARCH
+========================== */
+
+.search-box{
+    padding:16px;
+    margin-bottom:18px;
+}
+
+.search-input{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:14px 16px;
+}
+
+.search-input i{
+    color:var(--secondary);
+    font-size:18px;
+}
+
+.search-input input{
+    flex:1;
+    background:transparent;
+    border:none;
+    color:var(--white);
+    font-size:.95rem;
+}
+
+.search-input input::placeholder{
+    color:var(--text-light);
+}
+
+/* ==========================
+   FILTERS
+========================== */
+
+.filter-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:20px;
+}
+
+.filter-grid select{
+    width:100%;
+    padding:14px;
+    background:rgba(255,255,255,.06);
+    color:var(--white);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+}
+
+/* ==========================
+   SUMMARY
+========================== */
+
+.students-summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-bottom:22px;
+}
+
+.summary-item{
+    padding:18px;
+    text-align:center;
+}
+
+.summary-item h3{
+    font-size:1.5rem;
+    color:var(--secondary);
+}
+
+.summary-item p{
+    margin-top:6px;
+    font-size:.8rem;
+    color:var(--text-light);
+}
+
+/* ==========================
+   STUDENT LIST
+========================== */
+
+.student-list{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    margin-bottom:110px;
+}
+
+.student-cards{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+/* ==========================
+   EMPTY STATE
+========================== */
+
+.empty-state{
+    padding:35px 20px;
+    text-align:center;
+}
+
+.empty-state i{
+    font-size:58px;
+    color:var(--secondary);
+    margin-bottom:18px;
+}
+
+.empty-state h3{
+    font-size:1.2rem;
+    margin-bottom:8px;
+}
+
+.empty-state p{
+    color:var(--text-light);
+    margin-bottom:20px;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+.primary-btn,
+.secondary-btn{
+
+    padding:14px 20px;
+
+    border-radius:16px;
+
+    font-weight:600;
+
+    transition:.3s ease;
+
+}
+
+.primary-btn{
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:#fff;
+
+}
+
+.secondary-btn{
+
+    background:rgba(255,255,255,.06);
+
+    color:var(--white);
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.primary-btn:active,
+.secondary-btn:active{
+
+    transform:scale(.97);
+
+}
+
