@@ -70,3 +70,38 @@ alert("Invalid Backup File ❌");
 reader.readAsText(file);
 
 }
+function changePin(){
+
+const current = prompt("Enter Current PIN");
+
+if(current !== localStorage.getItem("adminPin")){
+
+alert("Wrong Current PIN");
+
+return;
+
+}
+
+const newPin = prompt("Enter New PIN");
+
+if(!newPin || newPin.length < 4){
+
+alert("PIN must be at least 4 digits");
+
+return;
+
+}
+
+localStorage.setItem("adminPin", newPin);
+
+alert("PIN Changed Successfully ✅");
+
+}
+
+function logout(){
+
+localStorage.removeItem("adminLogin");
+
+location.href="login.html";
+
+}
