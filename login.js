@@ -1,25 +1,112 @@
-const DEFAULT_PIN = "1234";
+/* ===================================
+   EZEE VISION ERP v6.0
+   Admin Login
+=================================== */
 
-if(!localStorage.getItem("adminPin")){
-    localStorage.setItem("adminPin", DEFAULT_PIN);
+import { auth } from "./firebase.js";
+
+import {
+
+signInWithEmailAndPassword
+
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+/* ===========================
+   Elements
+=========================== */
+
+const emailInput =
+document.getElementById("email");
+
+const passwordInput =
+document.getElementById("password");
+
+const loginBtn =
+document.getElementById("loginBtn");
+
+/* ===========================
+   Login Function
+=========================== */
+
+async function login(){
+
+const email =
+emailInput.value.trim();
+
+const password =
+passwordInput.value;
+
+if(email==="" || password===""){
+
+alert("Please enter Email & Password");
+
+return;
+
 }
 
-function login(){
+loginBtn.disabled = true;
 
-const pin = document.getElementById("pin").value;
+loginBtn.textContent = "Logging in...";
 
-const savedPin = localStorage.getItem("adminPin");
+try{
 
-if(pin === savedPin){
+await signInWithEmailAndPassword(
 
-localStorage.setItem("adminLogin","true");
+auth,
 
-location.href="settings.html";
+email,
 
-}else{
+password
 
-alert("❌ Wrong PIN");
+);
+
+localStorage.setItem(
+
+"adminLogin",
+
+"true"
+
+);
+
+alert("Login Successful ✅");
+
+location.href="index.html";
+
+}catch(error){
+
+console.error(error);
+
+alert("Invalid Email or Password");
+
+loginBtn.disabled = false;
+
+loginBtn.textContent = "Login";
 
 }
 
 }
+
+/* ===========================
+   Events
+=========================== */
+
+if(loginBtn){
+
+loginBtn.addEventListener(
+
+"click",
+
+login
+
+);
+
+}
+
+window.login = login;
+
+console.log(
+
+"Login Module Ready ✅"
+
+);
+
