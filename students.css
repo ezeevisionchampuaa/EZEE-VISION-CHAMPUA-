@@ -810,3 +810,195 @@ outline-offset:3px;
 
 }
 
+/* ==========================================================
+   STUDENT CARD
+========================================================== */
+
+.student-card{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:18px;
+    border-radius:20px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    transition:.3s ease;
+}
+
+.student-card:hover{
+    transform:translateY(-3px);
+}
+
+.student-photo{
+    width:64px;
+    height:64px;
+    border-radius:18px;
+    overflow:hidden;
+    background:rgba(255,255,255,.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.student-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.student-info{
+    flex:1;
+}
+
+.student-info h3{
+    font-size:1rem;
+    margin-bottom:6px;
+}
+
+.student-info p{
+    color:var(--text-light);
+    font-size:.82rem;
+    margin-bottom:3px;
+}
+
+.student-actions{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.student-actions button{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+    color:#fff;
+    transition:.3s;
+}
+
+.student-actions button:active{
+    transform:scale(.95);
+}
+
+/* ==========================================================
+   MODAL
+========================================================== */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    z-index:3000;
+}
+
+.modal-content{
+    width:100%;
+    max-width:700px;
+    max-height:90vh;
+    overflow:auto;
+    padding:22px;
+}
+
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.form-group label{
+    font-size:.85rem;
+    font-weight:600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.05);
+    color:var(--white);
+    font-size:.92rem;
+}
+
+.form-group textarea{
+    resize:vertical;
+    min-height:90px;
+}
+
+.form-group input[type="file"]{
+    padding:10px;
+}
+
+/* ==========================================================
+   ACTION BUTTONS
+========================================================== */
+
+.modal-actions{
+    display:flex;
+    gap:14px;
+    margin-top:24px;
+}
+
+.modal-actions button{
+    flex:1;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(min-width:768px){
+
+    .form-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .form-group textarea{
+        grid-column:1 / -1;
+    }
+
+    .student-card{
+        padding:22px;
+    }
+}
+
+@media(max-width:420px){
+
+    .student-card{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .student-actions{
+        flex-direction:row;
+        justify-content:center;
+    }
+
+    .modal-content{
+        padding:18px;
+    }
+}
