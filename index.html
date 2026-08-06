@@ -146,67 +146,59 @@ Made With ❤️ By Shahid Sir
 
 </section>
 
-<!-- Search -->
+<!-- ===========================
+     Search + Quick Actions
+=========================== -->
 
-<section class="search-box">
+<section class="search-section">
+
+<div class="search-box">
+
+<span class="search-icon">🔍</span>
 
 <input
-
-type="search"
-
+type="text"
 id="searchInput"
+placeholder="Search by Name or Roll Number..."
+>
 
-placeholder="Search Student...">
+</div>
 
-</section>
+<div class="quick-actions">
 
-<!-- Quick Actions -->
+<button
+id="addStudentBtn"
+class="btn-primary">
 
-<section class="actions">
+<span>➕</span>
 
-<button onclick="location.href='students.html'">
-
-➕ Add Student
+Add Student
 
 </button>
 
-<button onclick="location.href='attendance.html'">
+<button
+onclick="openAttendance()"
+class="btn-secondary">
 
 📅 Attendance
 
 </button>
 
-<button onclick="location.href='report.html'">
+<button
+onclick="openReport()"
+class="btn-secondary">
 
-📊 Report
+📊 Reports
 
 </button>
 
-<button onclick="location.href='fees.html'">
+<button
+onclick="openFees()"
+class="btn-danger">
 
 💰 Fees
 
 </button>
-
-</section>
-
-<!-- Student List -->
-
-<section>
-
-<h2 class="heading">
-
-Students
-
-</h2>
-
-<div id="studentContainer">
-
-<p class="empty">
-
-No Students Found
-
-</p>
 
 </div>
 
