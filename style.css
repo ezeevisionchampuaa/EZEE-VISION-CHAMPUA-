@@ -2883,48 +2883,158 @@ flex-direction:column;
 }
 
 }
-<!-- ===========================
-     Bottom Navigation
-=========================== -->
+/* ==================================
+   Version 6.5E
+   Floating Bottom Navigation
+================================== */
 
-<nav class="bottom-nav">
+.bottom-nav{
 
-<button onclick="location.href='index.html'" class="nav-item active">
+position:fixed;
 
-<span>🏠</span>
+left:15px;
 
-<small>Home</small>
+right:15px;
 
-</button>
+bottom:15px;
 
-<button onclick="location.href='students.html'" class="nav-item">
+height:72px;
 
-<span>👨‍🎓</span>
+background:#ffffff;
 
-<small>Students</small>
+border-radius:22px;
 
-</button>
+display:flex;
 
-<button onclick="addStudent()" class="nav-item nav-add">
+justify-content:space-around;
 
-<span>➕</span>
+align-items:center;
 
-</button>
+box-shadow:
 
-<button onclick="location.href='attendance.html'" class="nav-item">
+0 12px 35px rgba(0,0,0,.18);
 
-<span>📅</span>
+z-index:999;
 
-<small>Attendance</small>
+padding:0 10px;
 
-</button>
+}
 
-<button onclick="location.href='report.html'" class="nav-item">
+.nav-item{
 
-<span>📊</span>
+background:none;
 
-<small>Reports</small>
+border:none;
 
-</button>
+display:flex;
 
-</nav>
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+gap:4px;
+
+color:#64748b;
+
+font-size:12px;
+
+cursor:pointer;
+
+flex:1;
+
+transition:.25s;
+
+}
+
+.nav-item span{
+
+font-size:22px;
+
+}
+
+.nav-item.active{
+
+color:#2563eb;
+
+font-weight:600;
+
+}
+
+.nav-item:hover{
+
+color:#2563eb;
+
+transform:translateY(-2px);
+
+}
+
+.nav-add{
+
+width:58px;
+
+height:58px;
+
+background:linear-gradient(
+
+135deg,
+
+#2563eb,
+
+#1d4ed8
+
+);
+
+border-radius:50%;
+
+margin-top:-30px;
+
+box-shadow:
+
+0 10px 25px rgba(37,99,235,.35);
+
+color:#fff;
+
+flex:none;
+
+}
+
+.nav-add span{
+
+font-size:28px;
+
+}
+
+.nav-add small{
+
+display:none;
+
+}
+
+/* Bottom navigation ke neeche content hide na ho */
+
+body{
+
+padding-bottom:95px;
+
+}
+
+@media(min-width:900px){
+
+.bottom-nav{
+
+max-width:500px;
+
+margin:auto;
+
+left:50%;
+
+transform:translateX(-50%);
+
+right:auto;
+
+}
+
+}
+
