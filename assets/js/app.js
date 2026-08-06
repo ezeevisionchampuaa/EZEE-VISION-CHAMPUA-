@@ -122,3 +122,176 @@ loadDashboard();
 setInterval(updateTime,1000);
 
 
+/* ==========================================================
+   Phase 1C-2B
+   Navigation + Notification + Future Ready Events
+==========================================================*/
+
+/* ---------- Elements ---------- */
+
+const notificationBtn = document.getElementById("notificationBtn");
+const notificationPanel = document.getElementById("notificationPanel");
+
+const quickButtons = document.querySelectorAll(".quick-card");
+
+const navButtons = document.querySelectorAll(".nav-item");
+
+/* ---------- Notification Panel ---------- */
+
+if(notificationBtn && notificationPanel){
+
+notificationBtn.addEventListener("click",()=>{
+
+const hidden = notificationPanel.hasAttribute("hidden");
+
+if(hidden){
+
+notificationPanel.removeAttribute("hidden");
+
+}
+
+else{
+
+notificationPanel.setAttribute("hidden","");
+
+}
+
+});
+
+document.addEventListener("click",(e)=>{
+
+if(
+
+!notificationPanel.contains(e.target)
+
+&&
+
+!notificationBtn.contains(e.target)
+
+){
+
+notificationPanel.setAttribute("hidden","");
+
+}
+
+});
+
+}
+
+/* ---------- Bottom Navigation ---------- */
+
+navButtons.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+navButtons.forEach(item=>{
+
+item.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+const page = button.dataset.page;
+
+console.log("Navigate :",page);
+
+/*
+
+Future
+
+dashboard.html
+
+students.html
+
+attendance.html
+
+fees.html
+
+reports.html
+
+*/
+
+});
+
+});
+
+/* ---------- Quick Actions ---------- */
+
+quickButtons.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+button.style.transform="scale(.96)";
+
+setTimeout(()=>{
+
+button.style.transform="";
+
+},150);
+
+const action = button.dataset.action;
+
+console.log("Action :",action);
+
+/*
+
+Future Routing
+
+add-student
+
+attendance
+
+fees
+
+reports
+
+students
+
+settings
+
+*/
+
+});
+
+});
+
+/* ---------- Placeholder Functions ---------- */
+
+function openStudents(){
+
+console.log("Students Module");
+
+}
+
+function openAttendance(){
+
+console.log("Attendance Module");
+
+}
+
+function openFees(){
+
+console.log("Fees Module");
+
+}
+
+function openReports(){
+
+console.log("Reports Module");
+
+}
+
+function openSettings(){
+
+console.log("Settings Module");
+
+}
+
+/* ---------- App Loaded ---------- */
+
+window.addEventListener("load",()=>{
+
+console.log("EZEE VISION CHAMPUA Loaded Successfully");
+
+});
