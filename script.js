@@ -381,3 +381,38 @@ document.addEventListener("DOMContentLoaded",()=>{
 loadStudents();
 
 });
+/* ===========================
+   Live Clock
+=========================== */
+
+function updateClock(){
+
+const now=new Date();
+
+document.getElementById("liveDate").innerHTML=
+
+now.toLocaleDateString("en-IN",{
+
+day:"2-digit",
+
+month:"long",
+
+year:"numeric"
+
+});
+
+document.getElementById("liveTime").innerHTML=
+
+now.toLocaleTimeString("en-IN",{
+
+hour:"2-digit",
+
+minute:"2-digit"
+
+});
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
