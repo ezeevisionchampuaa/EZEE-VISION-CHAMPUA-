@@ -322,6 +322,26 @@ id:document.id,
 
 });
 
+
+/* ===========================
+   Add Student
+=========================== */
+
+window.addStudent = function () {
+
+    if (localStorage.getItem("adminLogin") !== "true") {
+
+        alert("Admin Login Required");
+
+        location.href = "login.html";
+
+        return;
+
+    }
+
+    location.href = "students.html";
+
+};
 render();
 
 updateDashboard();
