@@ -1,10 +1,16 @@
-const ADMIN_PIN="1234";
+const DEFAULT_PIN = "1234";
+
+if(!localStorage.getItem("adminPin")){
+    localStorage.setItem("adminPin", DEFAULT_PIN);
+}
 
 function login(){
 
-const pin=document.getElementById("pin").value;
+const pin = document.getElementById("pin").value;
 
-if(pin===ADMIN_PIN){
+const savedPin = localStorage.getItem("adminPin");
+
+if(pin === savedPin){
 
 localStorage.setItem("adminLogin","true");
 
@@ -12,7 +18,7 @@ location.href="settings.html";
 
 }else{
 
-alert("Wrong PIN");
+alert("❌ Wrong PIN");
 
 }
 
