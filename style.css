@@ -3281,3 +3281,203 @@ height:68px;
 
 }
 
+/* ===================================
+Version 7.0A
+Premium Dashboard
+=================================== */
+
+.welcome-card{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+padding:20px;
+
+border-radius:22px;
+
+color:#fff;
+
+margin-bottom:20px;
+
+box-shadow:0 12px 30px rgba(37,99,235,.25);
+
+}
+
+.welcome-card h2{
+
+font-size:22px;
+
+margin-bottom:6px;
+
+}
+
+.welcome-card p{
+
+opacity:.9;
+
+font-size:14px;
+
+}
+
+#liveDate{
+
+font-size:13px;
+
+opacity:.9;
+
+text-align:right;
+
+}
+
+#liveTime{
+
+font-size:22px;
+
+font-weight:700;
+
+margin-top:6px;
+
+}
+
+.dashboard-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:14px;
+
+margin-bottom:20px;
+
+}
+
+.dashboard-card{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+padding:18px;
+
+border-radius:18px;
+
+background:#fff;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.dashboard-card .icon{
+
+width:54px;
+
+height:54px;
+
+border-radius:15px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:26px;
+
+color:#fff;
+
+}
+
+.blue .icon{
+
+background:#2563eb;
+
+}
+
+.green .icon{
+
+background:#16a34a;
+
+}
+
+.red .icon{
+
+background:#dc2626;
+
+}
+
+.purple .icon{
+
+background:#7c3aed;
+
+}
+
+.dashboard-card h3{
+
+font-size:28px;
+
+margin:0;
+
+}
+
+.dashboard-card p{
+
+font-size:13px;
+
+color:#6b7280;
+
+margin-top:4px;
+
+}
+
+.quick-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:14px;
+
+margin-bottom:20px;
+
+}
+
+.quick-grid button{
+
+border:none;
+
+border-radius:18px;
+
+padding:18px;
+
+background:#fff;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:8px;
+
+font-size:26px;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+.quick-grid span{
+
+font-size:14px;
+
+}
