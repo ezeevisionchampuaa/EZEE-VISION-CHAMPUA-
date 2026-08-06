@@ -1,111 +1,286 @@
 /* ===================================
-   EZEE VISION ERP v4.0
-   Fees Management
+   EZEE VISION ERP v5.5
+   Fees Management Module
 =================================== */
 
-let students = JSON.parse(localStorage.getItem("students")) || [];
+import { db } from "./firebase.js";
 
-const studentSelect = document.getElementById("studentSelect");
-const paymentDate = document.getElementById("paymentDate");
-const feeHistory = document.getElementById("feeHistory");
+import {
 
-paymentDate.value = new Date().toISOString().split("T")[0];
+collection,
+getDocs,
+doc,
+updateDoc,
+arrayUnion
 
-students.forEach(student=>{
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-studentSelect.innerHTML +=
-`<option value="${student.id}">
+/* ===========================
+   Global Variables
+=========================== */
+
+let students = [];
+
+const studentSelect =
+document.getElementById("studentSelect");
+
+const amountInput =
+document.getElementById("feeAmount");
+
+const dateInput =
+document.getElementById("feeDate");
+
+const paymentMode =
+document.getElementById("paymentMode");
+
+const historyContainer =
+document.getElementById("feeHistory");
+
+const totalCollection =
+document.getElementById("totalCollection");
+
+const totalPending =
+document.getElementById("totalPending");
+
+/* ===========================
+   Default Date
+=========================== */
+
+const today =
+new Date().toISOString().split("T")[0];
+
+if(dateInput){
+
+dateInput.value = today;
+
+}
+
+console.log("Fees Module v5.5 Started ✅");
+
+/* ===========================
+   Load Students From Firebase
+=========================== */
+
+async function loadStudents(){
+
+students = [];
+
+try{
+
+const snapshot = await getDocs(
+
+collection(db,"students")
+
+);
+
+if(studentSelect){
+
+studentSelect.innerHTML =
+
+'<option value="">Select Student</option>';
+
+}
+
+snapshot.forEach((docItem)=>{
+
+const student={
+
+id:docItem.id,
+
+...docItem.data()
+
+};
+
+students.push(student);
+
+if(studentSelect){
+
+studentSelect.innerHTML += `
+
+<option value="${student.id}">
+
 ${student.name} (${student.className})
-</option>`;
+
+</option>
+
+`;
+
+}
 
 });
 
-function saveFee(){
+updateFeeDashboard();
 
-const id = Number(studentSelect.value);
-const amount = Number(document.getElementById("feeAmount").value);
-const date = paymentDate.value;
+}catch(error){
 
-if(!id || !amount){
+console.error(error);
 
-alert("Select student and enter fee amount.");
+alert("Unable to load students.");
+
+}
+
+}
+
+/* ===========================
+   Dashboard
+=========================== */
+
+function updateFeeDashboard(){
+
+if(totalCollection){
+
+totalCollection.textContent="₹0";
+
+}
+
+if(totalPending){
+
+totalPending.textContent="₹0";
+
+}
+
+}
+
+/* ===========================
+   Page Initialize
+=========================== */
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+loadStudents();
+
+}
+
+);
+
+/* ===========================
+   Collect Fee
+=========================== */
+
+async function collectFee(){
+
+const studentId = studentSelect.value;
+
+const amount = Number(amountInput.value);
+
+const feeDate = dateInput.value;
+
+const mode = paymentMode.value;
+
+if(studentId===""){
+
+alert("Please select a student.");
 
 return;
 
 }
 
-const student = students.find(s=>s.id===id);
+if(!amount || amount<=0){
 
-if(!student.feesHistory){
+alert("Please enter a valid amount.");
 
-student.feesHistory=[];
+return;
 
 }
 
-student.feesHistory.push({
+const feeRecord={
 
-amount,
+amount:amount,
 
-date
+date:feeDate,
 
-});
+mode:mode,
 
-localStorage.setItem(
-"students",
-JSON.stringify(students)
+timestamp:new Date().toISOString()
+
+};
+
+try{
+
+await updateDoc(
+
+doc(db,"students",studentId),
+
+{
+
+fees:arrayUnion(feeRecord)
+
+}
+
 );
 
-alert("Fee Saved Successfully ✅");
+alert("Fee Collected Successfully ✅");
 
-document.getElementById("feeAmount").value="";
+amountInput.value="";
 
-loadHistory();
+loadStudents();
+
+}catch(error){
+
+console.error(error);
+
+alert("Failed to collect fee ❌");
 
 }
 
-function loadHistory(){
+}
 
-feeHistory.innerHTML="";
+/* ===========================
+   Button Event
+=========================== */
 
-let totalCollection=0;
+const collectBtn =
+document.getElementById("collectFeeBtn");
 
-let totalPayments=0;
+if(collectBtn){
 
-let paidStudents=0;
+collectBtn.addEventListener(
 
-let dueStudents=0;
+"click",
+
+collectFee
+
+);
+
+}
+
+/* ===========================
+   Fee History
+=========================== */
+
+function loadFeeHistory(){
+
+if(!historyContainer) return;
+
+historyContainer.innerHTML = "";
+
+let totalCollected = 0;
 
 students.forEach(student=>{
 
-const history=student.feesHistory || [];
+const fees = student.fees || [];
 
-if(history.length>0){
+fees.forEach(fee=>{
 
-paidStudents++;
+totalCollected += Number(fee.amount || 0);
 
-}else{
-
-dueStudents++;
-
-}
-
-history.forEach(fee=>{
-
-totalCollection += Number(fee.amount);
-
-totalPayments++;
-
-feeHistory.innerHTML += `
+historyContainer.innerHTML += `
 
 <div class="student">
 
 <h3>${student.name}</h3>
 
-<p><b>Class:</b> ${student.className}</p>
+<p><b>Class :</b> ${student.className}</p>
 
-<p><b>Amount:</b> ₹${fee.amount}</p>
+<p><b>Amount :</b> ₹${fee.amount}</p>
 
-<p><b>Date:</b> ${fee.date}</p>
+<p><b>Date :</b> ${fee.date}</p>
+
+<p><b>Mode :</b> ${fee.mode}</p>
 
 </div>
 
@@ -115,31 +290,358 @@ feeHistory.innerHTML += `
 
 });
 
-if(totalPayments===0){
+if(historyContainer.innerHTML===""){
 
-feeHistory.innerHTML=
+historyContainer.innerHTML=
 
-'<p class="empty">No Payments Found</p>';
+'<p class="empty">No Fee Records Found</p>';
 
 }
 
-document.getElementById("totalCollection").textContent=
+if(totalCollection){
 
-"₹"+totalCollection;
+totalCollection.textContent="₹"+totalCollected;
 
-document.getElementById("paidStudents").textContent=
-
-paidStudents;
-
-document.getElementById("dueStudents").textContent=
-
-dueStudents;
-
-document.getElementById("totalPayments").textContent=
-
-totalPayments;
 }
 
 }
 
-loadHistory();
+/* ===========================
+   Pending Fees
+=========================== */
+
+function updatePendingFees(){
+
+let pending = 0;
+
+students.forEach(student=>{
+
+const totalPaid =
+
+(student.fees || [])
+
+.reduce((sum,fee)=>
+
+sum + Number(fee.amount || 0)
+
+,0);
+
+/* Default Monthly Fee */
+
+const monthlyFee = 1000;
+
+if(totalPaid < monthlyFee){
+
+pending +=
+
+(monthlyFee-totalPaid);
+
+}
+
+});
+
+if(totalPending){
+
+totalPending.textContent=
+
+"₹"+pending;
+
+}
+
+}
+
+/* ===========================
+   Dashboard Refresh
+=========================== */
+
+function refreshFees(){
+
+loadFeeHistory();
+
+updatePendingFees();
+
+}
+
+const oldLoadStudents = loadStudents;
+
+loadStudents = async function(){
+
+await oldLoadStudents();
+
+refreshFees();
+
+};
+
+/* ===========================
+   Search Student
+=========================== */
+
+const searchInput =
+document.getElementById("searchInput");
+
+const monthFilter =
+document.getElementById("monthFilter");
+
+function filterFeeHistory(){
+
+if(!historyContainer) return;
+
+const keyword =
+
+searchInput
+
+? searchInput.value.toLowerCase().trim()
+
+: "";
+
+const selectedMonth =
+
+monthFilter
+
+? monthFilter.value
+
+: "";
+
+const cards =
+
+historyContainer.querySelectorAll(".student");
+
+cards.forEach(card=>{
+
+const text =
+
+card.textContent.toLowerCase();
+
+let visible = true;
+
+/* ---------- Search ---------- */
+
+if(
+
+keyword!=="" &&
+
+!text.includes(keyword)
+
+){
+
+visible = false;
+
+}
+
+/* ---------- Month Filter ---------- */
+
+if(
+
+selectedMonth!=="" &&
+
+selectedMonth!=="All"
+
+){
+
+const dateText =
+
+card.innerHTML.match(
+
+/Date :<\/b>\s*([0-9-]+)/
+
+);
+
+if(dateText){
+
+const month =
+
+new Date(dateText[1])
+
+.getMonth()+1;
+
+if(
+
+month != Number(selectedMonth)
+
+){
+
+visible = false;
+
+}
+
+}
+
+}
+
+card.style.display =
+
+visible ? "block" : "none";
+
+});
+
+}
+
+/* ===========================
+   Events
+=========================== */
+
+if(searchInput){
+
+searchInput.addEventListener(
+
+"input",
+
+filterFeeHistory
+
+);
+
+}
+
+if(monthFilter){
+
+monthFilter.addEventListener(
+
+"change",
+
+filterFeeHistory
+
+);
+
+}
+
+/* ===========================
+   Print Receipt
+=========================== */
+
+window.printReceipt = function(){
+
+window.print();
+
+};
+
+/* ===========================
+   Export CSV
+=========================== */
+
+window.exportFeesCSV = function(){
+
+let csv =
+"Student,Class,Amount,Date,Payment Mode\n";
+
+students.forEach(student=>{
+
+const fees = student.fees || [];
+
+fees.forEach(fee=>{
+
+csv +=
+
+`${student.name},${student.className},${fee.amount},${fee.date},${fee.mode}\n`;
+
+});
+
+});
+
+const blob = new Blob(
+
+[csv],
+
+{type:"text/csv"}
+
+);
+
+const link =
+document.createElement("a");
+
+link.href =
+URL.createObjectURL(blob);
+
+link.download =
+"EZEE_VISION_Fee_Report.csv";
+
+link.click();
+
+URL.revokeObjectURL(link.href);
+
+};
+
+/* ===========================
+   Monthly Collection
+=========================== */
+
+function updateMonthlyCollection(){
+
+const month =
+
+new Date().getMonth();
+
+const year =
+
+new Date().getFullYear();
+
+let total = 0;
+
+students.forEach(student=>{
+
+(student.fees || []).forEach(fee=>{
+
+const d = new Date(fee.date);
+
+if(
+
+d.getMonth()===month &&
+
+d.getFullYear()===year
+
+){
+
+total += Number(fee.amount || 0);
+
+}
+
+});
+
+});
+
+const monthlyBox =
+
+document.getElementById("monthlyCollection");
+
+if(monthlyBox){
+
+monthlyBox.textContent =
+
+"₹"+total;
+
+}
+
+}
+
+/* ===========================
+   Dashboard Refresh
+=========================== */
+
+const oldRefreshFees = refreshFees;
+
+refreshFees = function(){
+
+oldRefreshFees();
+
+updateMonthlyCollection();
+
+};
+
+/* ===========================
+   Auto Initialize
+=========================== */
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+loadStudents();
+
+});
+
+console.log(
+
+"EZEE VISION ERP v5.5 Ready ✅"
+
+);
