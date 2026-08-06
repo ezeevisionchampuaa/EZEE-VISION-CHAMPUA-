@@ -297,11 +297,11 @@ return;
 
 if(!confirm("Delete this student?")) return;
 
-students = students.filter(student=>student.id!==id);
+await deleteDoc(doc(db,"students",id));
 
-localStorage.setItem("students",JSON.stringify(students));
+alert("Student Deleted Successfully ✅");
 
-// renderStudents();
+await loadStudents();
 
 }
 async function loadStudents(){
@@ -377,3 +377,4 @@ id: docItem.id,
 }
 
 loadStudents();
+window.deleteStudent = deleteStudent;
