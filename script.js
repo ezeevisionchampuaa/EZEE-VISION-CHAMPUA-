@@ -14,7 +14,7 @@ updateDoc
 
 
 
-let students = JSON.parse(localStorage.getItem("students")) || [];
+let students = [];
 
 const studentContainer = document.getElementById("studentContainer");
 const searchInput = document.getElementById("searchInput");
@@ -304,3 +304,28 @@ localStorage.setItem("students",JSON.stringify(students));
 renderStudents();
 
 }
+async function loadStudents(){
+
+students = [];
+
+const querySnapshot = await getDocs(collection(db,"students"));
+
+querySnapshot.forEach((document)=>{
+
+students.push({
+
+id:document.id,
+
+...document.data()
+
+});
+
+});
+
+render();
+
+updateDashboard();
+
+}
+
+loadStudents();
