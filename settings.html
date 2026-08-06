@@ -62,6 +62,17 @@
 📤 Backup Data
 </button>
 
+<button onclick="document.getElementById('restoreFile').click()">
+📥 Restore Backup
+</button>
+
+<input
+type="file"
+id="restoreFile"
+accept=".json"
+style="display:none"
+onchange="restoreBackup(event)">
+  
 <button onclick="aboutApp()">
 ℹ️ About App
 </button>
