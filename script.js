@@ -1,207 +1,424 @@
 /* ===================================
-   EZEE VISION ERP v5.1
-   Dashboard Module
+   EZEE VISION ERP v8.0
+   Script Part 1
 =================================== */
 
-import { db } from "./firebase.js";
+document.addEventListener("DOMContentLoaded", () => {
 
-import {
-collection,
-getDocs,
-deleteDoc,
-doc
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+  initLoader();
+  initClock();
+  initCounters();
+  setActiveNavigation();
 
-/* ===========================
-   Global Variables
-=========================== */
-
-let students = [];
-
-const studentContainer =
-document.getElementById("studentContainer");
-
-const searchInput =
-document.getElementById("searchInput");
+});
 
 /* ===========================
-   Dashboard
+   Loader
 =========================== */
 
-function updateDashboard(){
+function initLoader() {
 
-const total = students.length;
+  setTimeout(() => {
 
-let present = 0;
+    document.body.classList.add("loaded");
 
-let absent = 0;
+  }, 1200);
 
-const today =
-new Date().toISOString().split("T")[0];
+}
 
-students.forEach(student=>{
+/* ===========================
+   Live Date & Time
+=========================== */
 
-if(student.attendance){
+function initClock() {
 
-if(student.attendance[today]=="P")
+  const dateEl = document.getElementById("currentDate");
+  const timeEl = document.getElementById("currentTime");
+
+  function updateClock() {
+
+    const now = new Date();
+
+    const dateOptions = {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    };
+
+    const timeOptions = {
+      hour: "2-digit",
+      minute: "2-digit"
+    };
+
+    if (dateEl) {
+      dateEl.textContent = now.toLocaleDateString("en-IN", dateOptions);
+    }
+
+    if (timeEl) {
+      timeEl.textContent = now.toLocaleTimeString("en-IN", timeOptions);
+    }
+
+  }
+
+  updateClock();
+
+  setInterval(updateClock, 1000);
+
+}
+
+/* ===========================
+   Counter Animation
+=========================== */
+
+function animateCounter(id, target, suffix = "") {
+
+  const el = document.getElementById(id);
+
+  if (!el) return;
+
+  let current = 0;
+
+  const step = Math.max(1, Math.ceil(target / 40));
+
+  const timer = setInterval(() => {
+
+    current += step;
+
+    if (current >= target) {
+
+      current = target;
+
+      clearInterval(timer);
+
+    }
+
+    el.textContent = current + suffix;
+
+  }, 20);
+
+}
+
+function initCounters() {
+
+  animateCounter("totalStudents", 0);
+  animateCounter("presentToday", 0);
+  animateCounter("absentToday", 0);
+  animateCounter("attendancePercent", 0, "%");
+
+}
+
+/* ===========================
+   Bottom Navigation
+=========================== */
+
+function setActiveNavigation() {
+
+  const currentPage = location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll(".nav-item").forEach(item => {
+
+    const href = item.getAttribute("href");
+
+    if (href === currentPage) {
+      item.classList.add("active");
+    } else {
+      item.classList.remove("active");
+    }
+
+  });
+
+}
+/* ===================================
+   EZEE VISION ERP v8.0
+   Script Part 2
+   Dashboard Data
+===================================*/
+
+/* ===========================
+   Local Storage
+=========================== */
+
+const STORAGE_KEYS = {
+
+students:"erp_students",
+
+attendance:"erp_attendance",
+
+activity:"erp_activity"
+
+};
+
+/* ===========================
+   Load Dashboard
+=========================== */
+
+function loadDashboard(){
+
+const students=getStudents();
+
+const attendance=getAttendance();
+
+updateDashboard(students,attendance);
+
+renderRecentActivity();
+
+}
+
+window.addEventListener("load",loadDashboard);
+
+/* ===========================
+   Students
+=========================== */
+
+function getStudents(){
+
+return JSON.parse(
+
+localStorage.getItem(
+
+STORAGE_KEYS.students
+
+)
+
+)||[];
+
+}
+
+/* ===========================
+   Attendance
+=========================== */
+
+function getAttendance(){
+
+return JSON.parse(
+
+localStorage.getItem(
+
+STORAGE_KEYS.attendance
+
+)
+
+)||[];
+
+}
+
+/* ===========================
+   Dashboard Update
+=========================== */
+
+function updateDashboard(students,attendance){
+
+const total=students.length;
+
+let present=0;
+
+attendance.forEach(item=>{
+
+if(item.status==="Present"){
+
 present++;
-
-if(student.attendance[today]=="A")
-absent++;
 
 }
 
 });
 
-document.getElementById("totalStudents").textContent=total;
+const absent=Math.max(
 
-document.getElementById("presentToday").textContent=present;
+0,
 
-document.getElementById("absentToday").textContent=absent;
+total-present
 
-const totalMarked = present + absent;
+);
 
-const percent =
+const percent=
 
-totalMarked===0
+total===0
 
 ?0
 
-:((present/totalMarked)*100).toFixed(1);
+:Math.round(
 
-const attendanceBox =
-document.getElementById("attendancePercent");
+(present/total)*100
 
-if(attendanceBox){
+);
 
-attendanceBox.textContent =
-percent+"%";
+animateCounter(
+
+"totalStudents",
+
+total
+
+);
+
+animateCounter(
+
+"presentToday",
+
+present
+
+);
+
+animateCounter(
+
+"absentToday",
+
+absent
+
+);
+
+animateCounter(
+
+"attendancePercent",
+
+percent,
+
+"%"
+
+);
 
 }
 
-}
 /* ===========================
-   Student Card
+   Search Student
 =========================== */
 
-function createStudentCard(student){
+const searchInput=
 
-let present = 0;
-let absent = 0;
+document.getElementById(
 
-const today = new Date();
-const year = today.getFullYear();
-const month = today.getMonth();
+"searchInput"
 
-if(student.attendance){
+);
 
-for(const date in student.attendance){
+if(searchInput){
 
-const d = new Date(date);
+searchInput.addEventListener(
 
-if(d.getFullYear()===year && d.getMonth()===month){
+"input",
 
-if(student.attendance[date]==="P"){
+function(){
 
-present++;
+const keyword=
+
+this.value
+
+.toLowerCase()
+
+.trim();
+
+filterStudents(
+
+keyword
+
+);
+
+}
+
+);
+
+}
+
+function filterStudents(keyword){
+
+const cards=
+
+document.querySelectorAll(
+
+".student-card"
+
+);
+
+cards.forEach(card=>{
+
+const name=
+
+card.dataset.name||
+
+"";
+
+if(
+
+name
+
+.toLowerCase()
+
+.includes(keyword)
+
+){
+
+card.style.display="flex";
 
 }else{
 
-absent++;
+card.style.display="none";
 
 }
 
-}
+});
 
 }
 
+/* ===========================
+   Recent Activity
+=========================== */
+
+function renderRecentActivity(){
+
+const container=
+
+document.getElementById(
+
+"activityList"
+
+);
+
+if(!container) return;
+
+const activity=
+
+JSON.parse(
+
+localStorage.getItem(
+
+STORAGE_KEYS.activity
+
+)
+
+)||[];
+
+if(activity.length===0){
+
+return;
+
 }
 
-const total = present + absent;
+container.innerHTML="";
 
-const percentage =
+activity
 
-total===0 ? 0 :
+.slice(0,5)
 
-((present/total)*100).toFixed(1);
+.forEach(item=>{
 
-let color="#ef4444";
+container.innerHTML+=`
 
-if(percentage>=90){
+<div class="activity-card">
 
-color="#16a34a";
+<div class="activity-icon">
 
-}else if(percentage>=75){
+<span class="material-symbols-rounded">
 
-color="#f59e0b";
+history
 
-}
-
-return `
-
-<div class="student-card">
-
-<div class="student-header">
-
-<div class="student-avatar">
-
-👨‍🎓
-
-</div>
-
-<div class="student-details">
-
-<h3>${student.name}</h3>
-
-<p>Class ${student.className} • Roll ${student.roll}</p>
-
-</div>
-
-<div class="attendance-badge">
-
-${percentage}%
-
-</div>
-
-</div>
-
-<div class="student-info">
-
-<div>
-
-<span>👤 Parent</span>
-
-<strong>${student.parent || "-"}</strong>
+</span>
 
 </div>
 
 <div>
 
-<span>📞 Mobile</span>
+<h4>${item.title}</h4>
 
-<strong>${student.mobile || "-"}</strong>
-
-</div>
-
-</div>
-
-<div class="student-actions">
-
-<button class="edit-btn"
-
-onclick="editStudent('${student.id}')">
-
-✏️ Edit
-
-</button>
-
-<button class="delete-btn"
-
-onclick="deleteStudent('${student.id}')">
-
-🗑 Delete
-
-</button>
+<p>${item.time}</p>
 
 </div>
 
@@ -209,210 +426,12 @@ onclick="deleteStudent('${student.id}')">
 
 `;
 
-/* ===========================
-   Render Students
-=========================== */
-
-function renderStudents(keyword=""){
-
-if(!studentContainer) return;
-
-studentContainer.innerHTML="";
-
-const filtered = students.filter(student=>
-
-student.name.toLowerCase()
-
-.includes(keyword.toLowerCase())
-
-);
-
-if(filtered.length===0){
-
-studentContainer.innerHTML=
-
-'<p class="empty">No Students Found</p>';
-
-updateDashboard();
-
-return;
-
-}
-
-filtered.forEach(student=>{
-
-studentContainer.innerHTML +=
-
-createStudentCard(student);
-
-});
-
-updateDashboard();
-
-}
-
-/* ===========================
-   Search
-=========================== */
-
-if(searchInput){
-
-searchInput.addEventListener("input",()=>{
-
-renderStudents(searchInput.value);
-
 });
 
 }
-/* ===========================
-   Firebase Functions
-=========================== */
-
-async function loadStudents(){
-
-students = [];
-
-const snapshot = await getDocs(
-collection(db,"students")
-);
-
-snapshot.forEach((docItem)=>{
-
-students.push({
-
-id: docItem.id,
-
-...docItem.data()
-
+window.addEventListener("load", () => {
+    const loader = document.getElementById("loader");
+    if (loader) {
+        loader.style.display = "none";
+    }
 });
-
-});
-
-renderStudents();
-
-}
-
-window.editStudent = function(id){
-
-localStorage.setItem(
-"editStudentId",
-id
-);
-
-location.href="students.html";
-
-};
-
-window.deleteStudent = async function(id){
-
-if(localStorage.getItem("adminLogin")!=="true"){
-
-alert("Admin Login Required");
-
-location.href="login.html";
-
-return;
-
-}
-
-if(!confirm("Delete this student?")){
-
-return;
-
-}
-
-await deleteDoc(doc(db,"students",id));
-
-alert("Student Deleted Successfully ✅");
-
-await loadStudents();
-
-};
-
-window.addStudent = function(){
-
-if(localStorage.getItem("adminLogin")!=="true"){
-
-alert("Admin Login Required");
-
-location.href="login.html";
-
-return;
-
-}
-
-location.href="students.html";
-
-};
-/* ===========================
-   Navigation
-=========================== */
-
-window.openAttendance = function(){
-
-location.href = "attendance.html";
-
-};
-
-window.openReport = function(){
-
-location.href = "report.html";
-
-};
-
-window.openStudents = function(){
-
-location.href = "students.html";
-
-};
-
-window.openFees = function(){
-
-location.href = "fees.html";
-
-};
-
-/* ===========================
-   App Start
-=========================== */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-loadStudents();
-
-});
-/* ===========================
-   Live Clock
-=========================== */
-
-function updateClock(){
-
-const now=new Date();
-
-document.getElementById("liveDate").innerHTML=
-
-now.toLocaleDateString("en-IN",{
-
-day:"2-digit",
-
-month:"long",
-
-year:"numeric"
-
-});
-
-document.getElementById("liveTime").innerHTML=
-
-now.toLocaleTimeString("en-IN",{
-
-hour:"2-digit",
-
-minute:"2-digit"
-
-});
-
-}
-
-updateClock();
-
-setInterval(updateClock,1000);
