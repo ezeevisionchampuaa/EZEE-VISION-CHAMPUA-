@@ -2883,3 +2883,48 @@ flex-direction:column;
 }
 
 }
+<!-- ===========================
+     Bottom Navigation
+=========================== -->
+
+<nav class="bottom-nav">
+
+<button onclick="location.href='index.html'" class="nav-item active">
+
+<span>🏠</span>
+
+<small>Home</small>
+
+</button>
+
+<button onclick="location.href='students.html'" class="nav-item">
+
+<span>👨‍🎓</span>
+
+<small>Students</small>
+
+</button>
+
+<button onclick="addStudent()" class="nav-item nav-add">
+
+<span>➕</span>
+
+</button>
+
+<button onclick="location.href='attendance.html'" class="nav-item">
+
+<span>📅</span>
+
+<small>Attendance</small>
+
+</button>
+
+<button onclick="location.href='report.html'" class="nav-item">
+
+<span>📊</span>
+
+<small>Reports</small>
+
+</button>
+
+</nav>
