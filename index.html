@@ -3,62 +3,80 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#0F172A">
+    <meta name="theme-color"
+          content="#0F172A">
 
-<meta
-name="description"
-content="EZEE VISION CHAMPUA - Coaching Management System">
+    <meta name="description"
+          content="EZEE VISION CHAMPUA Coaching Management System">
 
-<title>EZEE VISION CHAMPUA</title>
+    <meta name="color-scheme"
+          content="dark light">
 
-<!-- Google Font -->
+    <title>
+        EZEE VISION CHAMPUA
+    </title>
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
+    <!-- Google Font -->
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-<!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Font Awesome -->
 
-<!-- CSS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-<link rel="stylesheet"
-href="assets/css/style.css">
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="assets/css/dashboard.css">
 
 </head>
 
 <body>
 
-<!-- ========= Background ========= -->
+<!-- =======================================================
+     BACKGROUND
+======================================================= -->
 
-<div class="bg-blur blur1"></div>
+<div class="bg-gradient"></div>
 
-<div class="bg-blur blur2"></div>
+<div class="bg-circle circle-1"></div>
 
-<!-- ========= Main Wrapper ========= -->
+<div class="bg-circle circle-2"></div>
+
+<div class="bg-circle circle-3"></div>
+
+<!-- =======================================================
+     APP
+======================================================= -->
 
 <div class="app">
 
-<!-- ================= HEADER ================= -->
+<!-- =======================================================
+     HEADER
+======================================================= -->
 
-<header class="top-header">
+<header class="header">
 
-<div class="header-left">
+<div class="brand">
 
-<div class="logo">
+<div class="brand-logo">
 
 <i class="fa-solid fa-graduation-cap"></i>
 
@@ -70,11 +88,15 @@ href="assets/css/style.css">
 
 EZEE VISION
 
-<span>CHAMPUA</span>
+<span>
+
+CHAMPUA
+
+</span>
 
 </h1>
 
-<p class="tagline">
+<p>
 
 Coaching Management System
 
@@ -84,13 +106,23 @@ Coaching Management System
 
 </div>
 
-<div class="header-right">
+<div class="header-actions">
 
-<button class="notification-btn" id="notificationBtn" aria-label="Notifications">
+<button
+id="notificationBtn"
+class="icon-btn">
 
 <i class="fa-solid fa-bell"></i>
 
-<span class="notify-dot"></span>
+<span class="dot"></span>
+
+</button>
+
+<button
+id="profileBtn"
+class="icon-btn">
+
+<i class="fa-solid fa-user"></i>
 
 </button>
 
@@ -98,51 +130,82 @@ Coaching Management System
 
 </header>
 
-<!-- Notification Panel -->
+<!-- =======================================================
+     NOTIFICATION PANEL
+======================================================= -->
 
-<div class="glass notification-panel" id="notificationPanel" hidden>
+<div
+id="notificationPanel"
+class="notification-panel"
+hidden>
 
-    <div class="panel-header">
-
-        <h3>Notifications</h3>
-
-    </div>
-
-    <div class="panel-body">
-
-        <p>No new notifications.</p>
-
-    </div>
-
-</div>
-
-<!-- ================= Greeting ================= -->
-
-<section class="welcome-card glass">
-
-<div>
-
-<h2 id="greeting">
-
-Good Evening,
-
-</h2>
+<div class="panel-head">
 
 <h3>
 
-Shahid Sir 👋
+Notifications
 
 </h3>
 
+</div>
+
+<div class="panel-body">
+
+<div class="empty-panel">
+
+<i class="fa-regular fa-bell"></i>
+
 <p>
 
-Welcome back to your coaching dashboard.
+No new notifications
 
 </p>
 
 </div>
 
-<div class="welcome-icon">
+</div>
+
+</div>
+
+<!-- =======================================================
+     WELCOME
+======================================================= -->
+
+<section class="welcome glass">
+
+<div>
+
+<h3 id="greeting">
+
+Good Evening,
+
+</h3>
+
+<h2>
+
+Shahid Sir 👋
+
+</h2>
+
+<p>
+
+Welcome back to your coaching dashboard.
+
+Manage attendance,
+
+fees,
+
+students,
+
+reports
+
+and much more.
+
+</p>
+
+</div>
+
+<div class="welcome-image">
 
 <i class="fa-solid fa-school"></i>
 
@@ -150,25 +213,27 @@ Welcome back to your coaching dashboard.
 
 </section>
 
-<!-- ================= Live Time ================= -->
+<!-- =======================================================
+     LIVE INFO
+======================================================= -->
 
-<section class="live-section">
+<section class="live-grid">
 
 <div class="glass live-card">
 
 <div class="live-icon">
 
-<i class="fa-solid fa-clock"></i>
+<i class="fa-regular fa-clock"></i>
 
 </div>
 
 <div>
 
-<p class="small-title">
+<span>
 
 Current Time
 
-</p>
+</span>
 
 <h2 id="liveTime">
 
@@ -184,17 +249,17 @@ Current Time
 
 <div class="live-icon">
 
-<i class="fa-solid fa-calendar-days"></i>
+<i class="fa-regular fa-calendar"></i>
 
 </div>
 
 <div>
 
-<p class="small-title">
+<span>
 
 Today's Date
 
-</p>
+</span>
 
 <h2 id="liveDate">
 
@@ -208,43 +273,53 @@ Loading...
 
 </section>
 
-<!-- ================= Dashboard Title ================= -->
+<!-- =======================================================
+     DASHBOARD
+======================================================= -->
 
-<section class="section-title">
+<section class="page-title">
 
 <h2>
 
-Dashboard Overview
+Dashboard
 
 </h2>
 
 <p>
 
-Real-time overview of attendance, fees and students.
+Overview of your coaching
 
 </p>
 
 </section>
 
-<!-- ================= Statistics Start ================= -->
+<section class="dashboard-grid">
 
-<section class="stats-grid">
-
-<!-- ===== Statistics Cards ===== -->
+<!-- =======================================================
+     DASHBOARD STATISTICS
+======================================================= -->
 
 <article class="glass stat-card">
 
-    <div class="stat-icon blue">
-        <i class="fa-solid fa-user-graduate"></i>
+    <div class="stat-top">
+
+        <div class="stat-icon blue">
+            <i class="fa-solid fa-user-graduate"></i>
+        </div>
+
+        <span class="trend positive">
+            +12%
+        </span>
+
     </div>
 
-    <div class="stat-info">
+    <div class="stat-content">
 
         <p>Total Students</p>
 
         <h2 id="studentCount">0</h2>
 
-        <span>Registered Students</span>
+        <small>Registered Students</small>
 
     </div>
 
@@ -252,17 +327,25 @@ Real-time overview of attendance, fees and students.
 
 <article class="glass stat-card">
 
-    <div class="stat-icon green">
-        <i class="fa-solid fa-user-check"></i>
+    <div class="stat-top">
+
+        <div class="stat-icon green">
+            <i class="fa-solid fa-user-check"></i>
+        </div>
+
+        <span class="trend positive">
+            Today
+        </span>
+
     </div>
 
-    <div class="stat-info">
+    <div class="stat-content">
 
-        <p>Today's Attendance</p>
+        <p>Attendance</p>
 
         <h2 id="attendanceCount">0</h2>
 
-        <span>Present Today</span>
+        <small>Present Students</small>
 
     </div>
 
@@ -270,17 +353,25 @@ Real-time overview of attendance, fees and students.
 
 <article class="glass stat-card">
 
-    <div class="stat-icon gold">
-        <i class="fa-solid fa-indian-rupee-sign"></i>
+    <div class="stat-top">
+
+        <div class="stat-icon gold">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+        </div>
+
+        <span class="trend positive">
+            Paid
+        </span>
+
     </div>
 
-    <div class="stat-info">
+    <div class="stat-content">
 
-        <p>Today's Collection</p>
+        <p>Today's Fees</p>
 
         <h2 id="feesToday">₹0</h2>
 
-        <span>Fees Received</span>
+        <small>Collection</small>
 
     </div>
 
@@ -288,17 +379,25 @@ Real-time overview of attendance, fees and students.
 
 <article class="glass stat-card">
 
-    <div class="stat-icon red">
-        <i class="fa-solid fa-wallet"></i>
+    <div class="stat-top">
+
+        <div class="stat-icon red">
+            <i class="fa-solid fa-wallet"></i>
+        </div>
+
+        <span class="trend negative">
+            Pending
+        </span>
+
     </div>
 
-    <div class="stat-info">
+    <div class="stat-content">
 
         <p>Pending Fees</p>
 
         <h2 id="pendingFees">₹0</h2>
 
-        <span>Awaiting Payment</span>
+        <small>Remaining</small>
 
     </div>
 
@@ -306,142 +405,315 @@ Real-time overview of attendance, fees and students.
 
 </section>
 
-<!-- ================= Quick Actions ================= -->
+<!-- =======================================================
+     QUICK ACTIONS
+======================================================= -->
 
-<section class="section-title">
+<section class="page-title">
 
-    <h2>Quick Actions</h2>
+<h2>
 
-    <p>Frequently used shortcuts.</p>
+Quick Actions
+
+</h2>
+
+<p>
+
+Frequently used shortcuts
+
+</p>
 
 </section>
 
 <section class="quick-grid">
 
-    <button class="glass quick-card" id="addStudentBtn" data-action="add-student">
+<button
+class="glass quick-card"
+id="addStudentBtn"
+data-action="students">
 
-        <i class="fa-solid fa-user-plus"></i>
+<i class="fa-solid fa-user-plus"></i>
 
-        <h3>Add Student</h3>
+<h3>
 
-        <p>Create a new student profile.</p>
+Add Student
 
-    </button>
+</h3>
 
-  <button class="glass quick-card" id="attendanceBtn" data-action="attendance">
+<p>
 
-        <i class="fa-solid fa-calendar-check"></i>
+Create new admission
 
-        <h3>Attendance</h3>
+</p>
 
-        <p>Mark today's attendance.</p>
+</button>
 
-    </button>
+<button
+class="glass quick-card"
+id="attendanceBtn"
+data-action="attendance">
 
-    <button class="glass quick-card" id="feesBtn" data-action="fees">
+<i class="fa-solid fa-calendar-check"></i>
 
-        <i class="fa-solid fa-money-bill-wave"></i>
+<h3>
 
-        <h3>Fees</h3>
+Attendance
 
-        <p>Collect and manage fees.</p>
+</h3>
 
-    </button>
+<p>
 
-    <button class="glass quick-card" id="reportBtn" data-action="reports">
+Mark today's attendance
 
-        <i class="fa-solid fa-chart-line"></i>
+</p>
 
-        <h3>Reports</h3>
+</button>
 
-        <p>View monthly reports.</p>
+<button
+class="glass quick-card"
+id="feesBtn"
+data-action="fees">
 
-    </button>
+<i class="fa-solid fa-money-bill-wave"></i>
 
-    <button class="glass quick-card" id="studentsBtn" data-action="students">
+<h3>
 
-        <i class="fa-solid fa-users"></i>
+Fees
 
-        <h3>Students</h3>
+</h3>
 
-        <p>Manage all student records.</p>
+<p>
 
-    </button>
+Collect monthly fees
 
-    <button class="glass quick-card" id="settingsBtn" data-action="settings">
+</p>
 
-        <i class="fa-solid fa-gear"></i>
+</button>
 
-        <h3>Settings</h3>
+<button
+class="glass quick-card"
+id="reportsBtn"
+data-action="reports">
 
-        <p>Customize your dashboard.</p>
+<i class="fa-solid fa-chart-line"></i>
 
-    </button>
+<h3>
+
+Reports
+
+</h3>
+
+<p>
+
+View analytics
+
+</p>
+
+</button>
 
 </section>
 
-<!-- ================= Recent Activity Starts ================= -->
+<!-- =======================================================
+     MONTHLY SUMMARY
+======================================================= -->
 
-<section class="section-title">
+<section class="page-title">
 
-    <h2>Recent Activity</h2>
+<h2>
 
-    <p>Latest updates will appear here.</p>
+Monthly Summary
+
+</h2>
+
+<p>
+
+Current month overview
+
+</p>
 
 </section>
 
-<section class="glass activity-card" id="recentActivity">
+<section class="glass summary-card">
 
-<div class="activity-list">
+<div class="summary-row">
 
-    <div class="activity-item">
+<span>
 
-        <div class="activity-icon">
-            <i class="fa-solid fa-circle-info"></i>
-        </div>
+Attendance Progress
 
-        <div class="activity-content">
-            <h4>Welcome to EZEE VISION CHAMPUA</h4>
-            <p>Your coaching management system is ready.</p>
-        </div>
+</span>
 
-    </div>
+<strong id="attendancePercent">
 
-    <div class="activity-item">
+0%
 
-        <div class="activity-icon">
-            <i class="fa-solid fa-database"></i>
-        </div>
+</strong>
 
-        <div class="activity-content">
-            <h4>Database Status</h4>
-            <p>Firebase will be connected in upcoming phases.</p>
-        </div>
+</div>
 
-    </div>
+<div class="progress">
 
-    <div class="activity-item">
+<div
+class="progress-fill attendance-progress"
+style="width:0%"></div>
 
-        <div class="activity-icon">
-            <i class="fa-solid fa-shield-halved"></i>
-        </div>
+</div>
 
-        <div class="activity-content">
-            <h4>Security</h4>
-            <p>Admin Login & Cloud Backup will be enabled later.</p>
-        </div>
+<div class="summary-row">
 
-    </div>
+<span>
+
+Fees Collection
+
+</span>
+
+<strong id="feesPercent">
+
+0%
+
+</strong>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-fill fees-progress"
+style="width:0%"></div>
 
 </div>
 
 </section>
 
-<!-- ================= Bottom Navigation ================= -->
+<!-- =======================================================
+     RECENT ACTIVITY
+======================================================= -->
+
+<section class="page-title">
+
+<h2>
+
+Recent Activity
+
+</h2>
+
+<p>
+
+Latest updates from your coaching
+
+</p>
+
+</section>
+
+<section
+class="glass activity-card"
+id="recentActivity">
+
+<div class="activity-list">
+
+<div class="activity-item">
+
+<div class="activity-icon">
+
+<i class="fa-solid fa-circle-info"></i>
+
+</div>
+
+<div class="activity-content">
+
+<h4>
+
+System Ready
+
+</h4>
+
+<p>
+
+Dashboard initialized successfully.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="activity-item">
+
+<div class="activity-icon">
+
+<i class="fa-solid fa-cloud"></i>
+
+</div>
+
+<div class="activity-content">
+
+<h4>
+
+Cloud Sync
+
+</h4>
+
+<p>
+
+Firebase integration will be activated in upcoming milestones.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="activity-item">
+
+<div class="activity-icon">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<div class="activity-content">
+
+<h4>
+
+Security
+
+</h4>
+
+<p>
+
+Admin authentication module is ready for integration.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- =======================================================
+     FLOATING ACTION BUTTON
+======================================================= -->
+
+<button
+    id="fabAddStudent"
+    class="fab"
+    aria-label="Add Student">
+
+    <i class="fa-solid fa-plus"></i>
+
+</button>
+
+<!-- =======================================================
+     BOTTOM NAVIGATION
+======================================================= -->
 
 <nav class="bottom-nav">
 
-    <button class="nav-item active" data-page="dashboard">
+    <button
+        class="nav-item active"
+        data-page="dashboard">
 
         <i class="fa-solid fa-house"></i>
 
@@ -449,15 +721,19 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="nav-item" data-page="students">
+    <button
+        class="nav-item"
+        data-page="students">
 
-        <i class="fa-solid fa-users"></i>
+        <i class="fa-solid fa-user-graduate"></i>
 
         <span>Students</span>
 
     </button>
 
-    <button class="nav-item" data-page="attendance">
+    <button
+        class="nav-item"
+        data-page="attendance">
 
         <i class="fa-solid fa-calendar-check"></i>
 
@@ -465,7 +741,9 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="nav-item" data-page="fees">
+    <button
+        class="nav-item"
+        data-page="fees">
 
         <i class="fa-solid fa-wallet"></i>
 
@@ -473,7 +751,9 @@ Real-time overview of attendance, fees and students.
 
     </button>
 
-    <button class="nav-item" data-page="reports">
+    <button
+        class="nav-item"
+        data-page="reports">
 
         <i class="fa-solid fa-chart-column"></i>
 
@@ -483,9 +763,19 @@ Real-time overview of attendance, fees and students.
 
 </nav>
 
-<!-- ================= Footer ================= -->
+<!-- =======================================================
+     FOOTER
+======================================================= -->
 
 <footer class="footer">
+
+    <p>
+
+        © <span id="currentYear"></span>
+
+        EZEE VISION CHAMPUA
+
+    </p>
 
     <p>
 
@@ -497,10 +787,36 @@ Real-time overview of attendance, fees and students.
 
 </div>
 
-<!-- JavaScript -->
+<!-- =======================================================
+     JAVASCRIPT
+======================================================= -->
 
 <script src="assets/js/app.js"></script>
+
 <script src="assets/js/ui.js"></script>
+
+<script src="assets/js/dashboard.js"></script>
+
+<!-- =======================================================
+     FIREBASE (Future)
+======================================================= -->
+
+<!--
+
+<script type="module"
+src="firebase/firebase-config.js"></script>
+
+<script type="module"
+src="firebase/auth.js"></script>
+
+<script type="module"
+src="firebase/firestore.js"></script>
+
+<script type="module"
+src="firebase/storage.js"></script>
+
+-->
+
 </body>
 
 </html>
