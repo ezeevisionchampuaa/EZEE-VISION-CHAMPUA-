@@ -420,7 +420,208 @@ this.renderPercentage();
         this.updateSummary(students);
 
     },
+/* ==========================================================
+   MONTHLY ATTENDANCE
+========================================================== */
 
+renderMonthly(){
+
+    const container =
+        document.getElementById(
+            "monthlyAttendanceList"
+        );
+
+    if(!container) return;
+
+    const students =
+        this.getStudents();
+
+    if(students.length === 0){
+
+        container.innerHTML = `
+
+            <div class="glass monthly-empty">
+
+                No students available.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    const monthInput =
+        document.getElementById(
+            "attendanceMonth"
+        );
+
+    const month =
+        monthInput
+            ? monthInput.value
+            : "";
+
+    if(!month){
+
+        container.innerHTML = `
+
+            <div class="glass monthly-empty">
+
+                Select a month to view attendance.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    container.innerHTML =
+        students.map(student=>{
+
+            let present = 0;
+
+            let absent = 0;
+
+            Object.keys(this.records)
+                .forEach(date=>{
+
+                    if(!date.startsWith(month)){
+
+                        return;
+
+                    }
+
+                    const record =
+                        this.records[date];
+
+                    if(
+                        !record ||
+                        !record[student.id]
+                    ){
+
+                        return;
+
+                    }
+
+                    if(
+                        record[student.id]
+                        === "present"
+                    ){
+
+                        present++;
+
+                    }
+
+                    if(
+                        record[student.id]
+                        === "absent"
+                    ){
+
+                        absent++;
+
+                    }
+
+                });
+
+            const total =
+                present + absent;
+
+            const percentage =
+                total === 0
+                ? 0
+                : Math.round(
+                    (present / total) * 100
+                );
+
+            return `
+
+                <div class="glass monthly-card">
+
+                    <div class="monthly-card-header">
+
+                        <div class="monthly-student-info">
+
+                            <h3>
+                                ${this.escape(
+                                    student.name
+                                )}
+                            </h3>
+
+                            <p>
+                                ${this.escape(
+                                    student.class
+                                )}
+                            </p>
+
+                        </div>
+
+                        <div class="monthly-percentage">
+
+                            ${percentage}%
+
+                        </div>
+
+                    </div>
+
+                    <div class="monthly-stats">
+
+                        <div class="monthly-stat">
+
+                            <span>
+                                Marked
+                            </span>
+
+                            <strong>
+                                ${total}
+                            </strong>
+
+                        </div>
+
+                        <div class="monthly-stat">
+
+                            <span>
+                                Present
+                            </span>
+
+                            <strong>
+                                ${present}
+                            </strong>
+
+                        </div>
+
+                        <div class="monthly-stat">
+
+                            <span>
+                                Absent
+                            </span>
+
+                            <strong>
+                                ${absent}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="monthly-progress">
+
+                        <div
+                            class="monthly-progress-fill"
+                            style="width:${percentage}%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+},
 /* ==========================================================
    SUMMARY
 ========================================================== */
