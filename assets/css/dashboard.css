@@ -1,27 +1,110 @@
 /* ==========================================================
    EZEE VISION CHAMPUA
    Dashboard CSS
-   Version : 1.0.0
+   Version : 2.0.0
 ========================================================== */
 
-/* ==========================
-   BACKGROUND
-========================== */
+/* ==========================================================
+   DASHBOARD BACKGROUND
+========================================================== */
 
 body{
 
     background:
-    radial-gradient(circle at top left,#1B3A6F 0%,transparent 35%),
-    radial-gradient(circle at bottom right,#13294B 0%,transparent 30%),
-    var(--bg);
+        radial-gradient(circle at top left,
+        rgba(79,140,255,.18) 0%,
+        transparent 35%),
+
+        radial-gradient(circle at bottom right,
+        rgba(34,197,94,.14) 0%,
+        transparent 30%),
+
+        var(--bg);
+
+    min-height:100vh;
+
+    overflow-x:hidden;
 
 }
 
-/* ==========================
-   APP ANIMATION
-========================== */
+/* ==========================================================
+   FLOATING GLOW
+========================================================== */
+
+body::before,
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:240px;
+
+    height:240px;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    opacity:.18;
+
+    pointer-events:none;
+
+    z-index:-1;
+
+    animation:floatGlow 12s ease-in-out infinite;
+
+}
+
+body::before{
+
+    top:-80px;
+
+    left:-70px;
+
+    background:#4F8CFF;
+
+}
+
+body::after{
+
+    bottom:-80px;
+
+    right:-70px;
+
+    background:#22C55E;
+
+    animation-delay:6s;
+
+}
+
+@keyframes floatGlow{
+
+    0%,100%{
+
+        transform:
+        translate(0,0)
+        scale(1);
+
+    }
+
+    50%{
+
+        transform:
+        translate(24px,-18px)
+        scale(1.12);
+
+    }
+
+}
+
+/* ==========================================================
+   APP CONTAINER
+========================================================== */
 
 .app{
+
+    position:relative;
 
     animation:fadeUp .6s ease;
 
@@ -33,7 +116,7 @@ body{
 
         opacity:0;
 
-        transform:translateY(18px);
+        transform:translateY(20px);
 
     }
 
@@ -47,16 +130,23 @@ body{
 
 }
 
-/* ==========================
-   GLASS ENHANCEMENT
-========================== */
+/* ==========================================================
+   GLASS CARD BASE
+========================================================== */
 
 .glass{
 
+    position:relative;
+
+    overflow:hidden;
+
     transition:
-    transform .3s ease,
-    box-shadow .3s ease,
-    border-color .3s ease;
+
+        transform .3s ease,
+
+        border-color .3s ease,
+
+        box-shadow .3s ease;
 
 }
 
@@ -65,119 +155,14 @@ body{
     transform:translateY(-3px);
 
     border-color:
+
     rgba(79,140,255,.35);
 
     box-shadow:
-    0 16px 40px
+
+    0 18px 42px
+
     rgba(0,0,0,.35);
-
-}
-
-/* ==========================
-   PREMIUM SCROLLBAR
-========================== */
-
-::-webkit-scrollbar{
-
-    width:6px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:transparent;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:rgba(255,255,255,.18);
-
-    border-radius:50px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:var(--primary);
-
-}
-/* ==========================================================
-   PREMIUM BACKGROUND GLOW
-========================================================== */
-
-body::before,
-body::after{
-
-    content:"";
-
-    position:fixed;
-
-    width:220px;
-
-    height:220px;
-
-    border-radius:50%;
-
-    filter:blur(90px);
-
-    opacity:.18;
-
-    z-index:-1;
-
-    pointer-events:none;
-
-    animation:floatGlow 12s ease-in-out infinite;
-
-}
-
-body::before{
-
-    top:-60px;
-
-    left:-60px;
-
-    background:#4F8CFF;
-
-}
-
-body::after{
-
-    right:-70px;
-
-    bottom:-70px;
-
-    background:#22C55E;
-
-    animation-delay:6s;
-
-}
-
-@keyframes floatGlow{
-
-    0%,100%{
-
-        transform:translate(0,0) scale(1);
-
-    }
-
-    50%{
-
-        transform:translate(25px,-20px) scale(1.12);
-
-    }
-
-}
-
-/* ==========================================================
-   CARD SHINE EFFECT
-========================================================== */
-
-.glass{
-
-    position:relative;
-
-    overflow:hidden;
 
 }
 
@@ -195,7 +180,9 @@ body::after{
 
     height:100%;
 
-    background:linear-gradient(
+    background:
+
+    linear-gradient(
 
         90deg,
 
@@ -216,9 +203,546 @@ body::after{
     left:130%;
 
 }
+/* ==========================================================
+   HERO SECTION
+========================================================== */
+
+.hero{
+
+    display:grid;
+
+    grid-template-columns:1fr auto;
+
+    gap:20px;
+
+    align-items:center;
+
+    margin-bottom:24px;
+
+}
+
+.hero-left h2{
+
+    font-size:2rem;
+
+    line-height:1.3;
+
+    margin:12px 0;
+
+    font-weight:700;
+
+    background:linear-gradient(
+        135deg,
+        #FFFFFF,
+        #BFD8FF
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    background-clip:text;
+
+}
+
+.hero-left p{
+
+    color:var(--text);
+
+    opacity:.85;
+
+    line-height:1.7;
+
+}
+
+.hero-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:rgba(79,140,255,.12);
+
+    color:var(--primary);
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+}
 
 /* ==========================================================
-   BUTTON MICRO ANIMATION
+   CLOCK CARD
+========================================================== */
+
+.clock-card{
+
+    min-width:220px;
+
+    padding:22px;
+
+    border:1px solid rgba(79,140,255,.15);
+
+}
+
+.clock-item{
+
+    text-align:center;
+
+}
+
+.clock-item p{
+
+    font-size:.85rem;
+
+    opacity:.75;
+
+    margin-bottom:8px;
+
+}
+
+.clock-item h3{
+
+    font-size:1.6rem;
+
+    color:var(--primary);
+
+    letter-spacing:1px;
+
+}
+
+.clock-item h4{
+
+    margin-top:6px;
+
+    font-weight:500;
+
+}
+
+.divider{
+
+    width:100%;
+
+    height:1px;
+
+    margin:16px 0;
+
+    background:rgba(255,255,255,.08);
+
+}
+
+/* ==========================================================
+   DASHBOARD STATS
+========================================================== */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+    margin-bottom:24px;
+
+}
+
+.stat-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:18px;
+
+}
+
+.stat-card:hover{
+
+    box-shadow:
+        0 0 0 1px rgba(79,140,255,.20),
+        0 16px 36px rgba(79,140,255,.18);
+
+}
+
+.stat-icon{
+
+    width:56px;
+
+    height:56px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:1.25rem;
+
+}
+
+.stat-content p{
+
+    font-size:.9rem;
+
+    opacity:.75;
+
+}
+
+.stat-content h3{
+
+    margin-top:4px;
+
+    font-size:1.4rem;
+
+}
+
+/* ==========================================================
+   QUICK ACTIONS
+========================================================== */
+
+.quick-actions{
+
+    margin-bottom:28px;
+
+}
+
+.section-title{
+
+    margin-bottom:16px;
+
+}
+
+.section-title h2{
+
+    font-size:1.3rem;
+
+    margin-bottom:4px;
+
+}
+
+.section-title p{
+
+    opacity:.7;
+
+    font-size:.9rem;
+
+}
+
+.quick-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+}
+
+.quick-card{
+
+    padding:20px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    color:inherit;
+
+    transition:
+
+        transform .25s ease,
+
+        box-shadow .25s ease;
+
+}
+
+.quick-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.quick-card i{
+
+    font-size:1.8rem;
+
+    color:var(--primary);
+
+    margin-bottom:12px;
+
+}
+
+.quick-card span{
+
+    display:block;
+
+    font-weight:600;
+
+}
+
+/* ==========================================================
+   DASHBOARD PANELS
+========================================================== */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:20px;
+
+    margin-bottom:24px;
+
+}
+
+.panel{
+
+    padding:20px;
+
+}
+
+.panel-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:18px;
+
+}
+
+.panel-header h3{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:1.1rem;
+
+    font-weight:600;
+
+}
+
+.panel-header i{
+
+    color:var(--primary);
+
+}
+
+/* ==========================================================
+   ACTIVITY LIST
+========================================================== */
+
+.activity-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.activity-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:14px;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.03);
+
+    transition:.3s ease;
+
+}
+
+.activity-item:hover{
+
+    background:rgba(255,255,255,.06);
+
+}
+
+.activity-icon{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:1rem;
+
+    flex-shrink:0;
+
+}
+
+.activity-item h4{
+
+    margin-bottom:4px;
+
+    font-size:1rem;
+
+}
+
+.activity-item p{
+
+    opacity:.75;
+
+    line-height:1.5;
+
+    font-size:.9rem;
+
+}
+
+/* ==========================================================
+   NOTICE BOARD
+========================================================== */
+
+.notice-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.notice-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.03);
+
+    transition:.3s ease;
+
+}
+
+.notice-item:hover{
+
+    background:rgba(255,255,255,.06);
+
+}
+
+.notice-badge{
+
+    min-width:52px;
+
+    text-align:center;
+
+    padding:5px 10px;
+
+    border-radius:999px;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    background:rgba(79,140,255,.18);
+
+    color:var(--primary);
+
+}
+
+/* ==========================================================
+   SUMMARY PANEL
+========================================================== */
+
+.summary-panel{
+
+    padding:20px;
+
+    margin-bottom:24px;
+
+}
+
+.summary-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:14px;
+
+}
+
+.summary-box{
+
+    text-align:center;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.03);
+
+    transition:.3s ease;
+
+}
+
+.summary-box:hover{
+
+    transform:translateY(-3px);
+
+    background:rgba(255,255,255,.06);
+
+}
+
+.summary-box h4{
+
+    font-size:1.5rem;
+
+    margin-bottom:6px;
+
+    color:var(--primary);
+
+}
+
+.summary-box span{
+
+    font-size:.9rem;
+
+    opacity:.75;
+
+}
+
+/* ==========================================================
+   BUTTONS
 ========================================================== */
 
 .icon-btn,
@@ -227,12 +751,17 @@ body::after{
 .quick-card{
 
     transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
 
-    transform .25s ease,
+}
 
-    box-shadow .25s ease,
+.icon-btn:hover,
+.primary-btn:hover,
+.secondary-btn:hover{
 
-    background .25s ease;
+    transform:translateY(-2px);
 
 }
 
@@ -246,66 +775,68 @@ body::after{
 }
 
 /* ==========================================================
-   STAT CARD GLOW
+   PREMIUM SCROLLBAR
 ========================================================== */
 
-.stat-card:hover{
+::-webkit-scrollbar{
 
-    box-shadow:
+    width:6px;
 
-    0 0 0 1px rgba(79,140,255,.20),
+}
 
-    0 16px 36px rgba(79,140,255,.18);
+::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:rgba(255,255,255,.18);
+
+    border-radius:999px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--primary);
 
 }
 
 /* ==========================================================
-   HERO TITLE GRADIENT
+   RESPONSIVE
 ========================================================== */
 
-.hero h2{
+@media (max-width:768px){
 
-    background:linear-gradient(
+    .hero{
 
-        135deg,
+        grid-template-columns:1fr;
 
-        #FFFFFF,
+    }
 
-        #BFD8FF
+    .hero-right{
 
-    );
+        width:100%;
 
-    -webkit-background-clip:text;
+    }
 
-    -webkit-text-fill-color:transparent;
+    .clock-card{
 
-    background-clip:text;
+        width:100%;
 
-}
-
-/* ==========================================================
-   CLOCK GLOW
-========================================================== */
-
-.clock-card{
-
-    border:1px solid rgba(79,140,255,.12);
+    }
 
 }
-
-.clock-card h3{
-
-    color:var(--primary);
-
-    letter-spacing:1px;
-
-}
-
-/* ==========================================================
-   MOBILE POLISH
-========================================================== */
 
 @media (max-width:430px){
+
+    .hero{
+
+        gap:18px;
+
+    }
 
     .hero h2{
 
@@ -313,9 +844,101 @@ body::after{
 
     }
 
-    .clock-card{
+    .hero-left p{
+
+        font-size:.92rem;
+
+    }
+
+    .stats-grid{
+
+        gap:14px;
+
+    }
+
+    .stat-card{
+
+        padding:16px;
+
+    }
+
+    .stat-icon{
+
+        width:50px;
+
+        height:50px;
+
+        font-size:1.1rem;
+
+    }
+
+    .stat-content h3{
+
+        font-size:1.25rem;
+
+    }
+
+    .quick-grid{
+
+        gap:14px;
+
+    }
+
+    .quick-card{
 
         padding:18px;
+
+    }
+
+    .quick-card i{
+
+        font-size:1.5rem;
+
+    }
+
+    .summary-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .activity-item,
+
+    .notice-item{
+
+        padding:12px;
+
+    }
+
+}
+
+/* ==========================================================
+   LARGE SCREENS
+========================================================== */
+
+@media (min-width:992px){
+
+    .dashboard-grid{
+
+        grid-template-columns:2fr 1fr;
+
+    }
+
+}
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
 
     }
 
