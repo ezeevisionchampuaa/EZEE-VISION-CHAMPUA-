@@ -441,6 +441,10 @@ this.renderPercentage();
 
         this.updateSummary(students);
 
+this.renderPercentage();
+
+this.renderMonthly();
+
     },
 /* ==========================================================
    MONTHLY ATTENDANCE
