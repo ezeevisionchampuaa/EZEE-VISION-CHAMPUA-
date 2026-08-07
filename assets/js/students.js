@@ -200,37 +200,55 @@ const Students = {
         this.render();
 
     },
-
 /* ==========================================================
-   FILTER
+   APPLY FILTERS
 ========================================================== */
 
-    filter(){
+applyFilters(){
 
-        const classValue =
-            document.getElementById("classFilter").value;
+    const keyword=document
+    .getElementById("studentSearch")
+    .value
+    .trim()
+    .toLowerCase();
 
-        const statusValue =
-            document.getElementById("statusFilter").value;
+    const classValue=document
+    .getElementById("classFilter")
+    .value;
 
-        this.filteredData = this.data.filter(student=>{
+    const statusValue=document
+    .getElementById("statusFilter")
+    .value;
 
-            const classMatch =
-                !classValue ||
-                student.class === classValue;
+    this.filteredData=this.data.filter(student=>{
 
-            const statusMatch =
-                !statusValue ||
-                student.status === statusValue;
+        const searchMatch=
 
-            return classMatch && statusMatch;
+        student.name
+        .toLowerCase()
+        .includes(keyword);
 
-        });
+        const classMatch=
 
-        this.render();
+        !classValue ||
 
-    },
+        student.class===classValue;
 
+        const statusMatch=
+
+        !statusValue ||
+
+        student.status===statusValue;
+
+        return searchMatch &&
+               classMatch &&
+               statusMatch;
+
+    });
+
+    this.render();
+
+}
 /* ==========================================================
    RENDER
 ========================================================== */
