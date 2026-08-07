@@ -9,9 +9,13 @@
 const Attendance = {
 
     students: [],
+
     records: {},
+
     selectedDate: "",
+
     selectedClass: "",
+
 
     /* ======================================================
        INIT
@@ -23,15 +27,8 @@ const Attendance = {
 
         this.loadRecords();
 
-        this.setToday();
-
-        this.setCurrentMonth();
-
-        this.bindEvents();
-
-        this.render();
-
     },
+
 
     /* ======================================================
        LOAD STUDENTS
@@ -39,7 +36,8 @@ const Attendance = {
 
     loadStudents() {
 
-        const saved = localStorage.getItem("ezee_students");
+        const saved =
+            localStorage.getItem("ezee_students");
 
         if (!saved) {
 
@@ -51,7 +49,8 @@ const Attendance = {
 
         try {
 
-            const data = JSON.parse(saved);
+            const data =
+                JSON.parse(saved);
 
             this.students =
                 Array.isArray(data)
@@ -65,6 +64,7 @@ const Attendance = {
         }
 
     },
+
 
     /* ======================================================
        LOAD ATTENDANCE RECORDS
@@ -85,7 +85,8 @@ const Attendance = {
 
         try {
 
-            const data = JSON.parse(saved);
+            const data =
+                JSON.parse(saved);
 
             this.records =
                 data &&
@@ -101,8 +102,9 @@ const Attendance = {
 
     },
 
+
     /* ======================================================
-       SAVE RECORDS
+       SAVE ATTENDANCE RECORDS
     ====================================================== */
 
     saveRecords() {
@@ -112,8 +114,9 @@ const Attendance = {
             JSON.stringify(this.records)
         );
 
-    },
+    }
 
+};
     /* ======================================================
        SET TODAY
     ====================================================== */
@@ -121,25 +124,20 @@ const Attendance = {
     setToday() {
 
         const input =
-            document.getElementById(
-                "attendanceDate"
-            );
+            document.getElementById("attendanceDate");
 
-        const today =
-            new Date();
+        const today = new Date();
 
         const year =
             today.getFullYear();
 
         const month =
-            String(
-                today.getMonth() + 1
-            ).padStart(2, "0");
+            String(today.getMonth() + 1)
+                .padStart(2, "0");
 
         const day =
-            String(
-                today.getDate()
-            ).padStart(2, "0");
+            String(today.getDate())
+                .padStart(2, "0");
 
         this.selectedDate =
             `${year}-${month}-${day}`;
@@ -153,6 +151,7 @@ const Attendance = {
 
     },
 
+
     /* ======================================================
        SET CURRENT MONTH
     ====================================================== */
@@ -160,36 +159,31 @@ const Attendance = {
     setCurrentMonth() {
 
         const input =
-            document.getElementById(
-                "attendanceMonth"
-            );
+            document.getElementById("attendanceMonth");
 
         if (!input) return;
 
-        const today =
-            new Date();
+        const today = new Date();
 
         const year =
             today.getFullYear();
 
         const month =
-            String(
-                today.getMonth() + 1
-            ).padStart(2, "0");
+            String(today.getMonth() + 1)
+                .padStart(2, "0");
 
         input.value =
             `${year}-${month}`;
 
     },
 
+
     /* ======================================================
        EVENTS
     ====================================================== */
 
     bindEvents() {
-
-        /* DATE */
-
+this.bindAttendanceButtons();
         const dateInput =
             document.getElementById(
                 "attendanceDate"
@@ -211,8 +205,6 @@ const Attendance = {
 
         }
 
-
-        /* CLASS */
 
         const classSelect =
             document.getElementById(
@@ -236,8 +228,6 @@ const Attendance = {
         }
 
 
-        /* MONTH */
-
         const monthInput =
             document.getElementById(
                 "attendanceMonth"
@@ -256,8 +246,6 @@ const Attendance = {
 
         }
 
-
-        /* SAVE */
 
         const saveButton =
             document.getElementById(
@@ -278,8 +266,6 @@ const Attendance = {
         }
 
 
-        /* EXPORT */
-
         const exportButton =
             document.getElementById(
                 "exportAttendanceBtn"
@@ -299,8 +285,6 @@ const Attendance = {
         }
 
 
-        /* PRINT */
-
         const printButton =
             document.getElementById(
                 "printAttendanceBtn"
@@ -319,62 +303,7 @@ const Attendance = {
 
         }
 
-
-        /* ATTENDANCE BUTTONS */
-
-        document.addEventListener(
-            "click",
-            (event) => {
-
-                const button =
-                    event.target.closest(
-                        ".attendance-btn"
-                    );
-
-                if (!button) return;
-
-                const id =
-                    button.dataset.id;
-
-                const status =
-                    button.dataset.status;
-
-                if (!id || !status) return;
-
-                this.mark(
-                    id,
-                    status
-                );
-
-            }
-        );
-
-
-        /* RECORD EDIT */
-
-        document.addEventListener(
-            "click",
-            (event) => {
-
-                const button =
-                    event.target.closest(
-                        ".attendance-record-edit"
-                    );
-
-                if (!button) return;
-
-                const date =
-                    button.dataset.date;
-
-                if (!date) return;
-
-                this.loadRecord(date);
-
-            }
-        );
-
     },
-
     /* ======================================================
        GET FILTERED STUDENTS
     ====================================================== */
@@ -399,6 +328,7 @@ const Attendance = {
         );
 
     },
+
 
     /* ======================================================
        GET CURRENT RECORD
@@ -430,8 +360,9 @@ const Attendance = {
 
     },
 
+
     /* ======================================================
-       GET STATUS
+       GET STUDENT STATUS
     ====================================================== */
 
     getStatus(studentId) {
@@ -452,6 +383,7 @@ const Attendance = {
         );
 
     },
+
 
     /* ======================================================
        MARK ATTENDANCE
@@ -475,26 +407,41 @@ const Attendance = {
 
     },
 
+
     /* ======================================================
-       RENDER EVERYTHING
+       ATTENDANCE BUTTON EVENTS
     ====================================================== */
 
-    render() {
+    bindAttendanceButtons() {
 
-        this.renderStudents();
+        document.addEventListener(
+            "click",
+            (event) => {
 
-        this.renderSummary();
+                const button =
+                    event.target.closest(
+                        ".attendance-btn"
+                    );
 
-        this.renderPercentage();
+                if (!button) return;
 
-        this.renderMonthly();
+                const id =
+                    button.dataset.id;
 
-        this.renderRecords();
+                const status =
+                    button.dataset.status;
 
-        this.renderAnalytics();
+                if (!id || !status) return;
+
+                this.mark(
+                    id,
+                    status
+                );
+
+            }
+        );
 
     },
-
     /* ======================================================
        RENDER STUDENT LIST
     ====================================================== */
@@ -544,9 +491,7 @@ const Attendance = {
                 (student) => {
 
                     const status =
-                        record[
-                            student.id
-                        ] || "";
+                        record[student.id] || "";
 
                     return `
 
@@ -561,15 +506,11 @@ const Attendance = {
                             <div class="attendance-student">
 
                                 <h3>
-                                    ${this.escape(
-                                        student.name
-                                    )}
+                                    ${student.name}
                                 </h3>
 
                                 <p>
-                                    ${this.escape(
-                                        student.class
-                                    )}
+                                    ${student.class}
                                 </p>
 
                             </div>
@@ -583,16 +524,14 @@ const Attendance = {
                                             ? "active"
                                             : ""
                                     }"
-                                    data-id="${this.escape(
-                                        String(student.id)
-                                    )}"
+                                    data-id="${student.id}"
                                     data-status="present"
-                                    aria-label="Present"
                                 >
 
                                     <i class="fa-solid fa-check"></i>
 
                                 </button>
+
 
                                 <button
                                     type="button"
@@ -601,11 +540,8 @@ const Attendance = {
                                             ? "active"
                                             : ""
                                     }"
-                                    data-id="${this.escape(
-                                        String(student.id)
-                                    )}"
+                                    data-id="${student.id}"
                                     data-status="absent"
-                                    aria-label="Absent"
                                 >
 
                                     <i class="fa-solid fa-xmark"></i>
@@ -622,9 +558,8 @@ const Attendance = {
             ).join("");
 
     },
-
     /* ======================================================
-       SUMMARY
+       RENDER SUMMARY
     ====================================================== */
 
     renderSummary() {
@@ -701,6 +636,7 @@ const Attendance = {
 
     },
 
+
     /* ======================================================
        SAVE ATTENDANCE
     ====================================================== */
@@ -768,17 +704,185 @@ const Attendance = {
 
         this.saveRecords();
 
-        this.render();
-
         this.showToast(
             "Attendance Saved",
             "success"
         );
 
     },
+    /* ======================================================
+       MONTHLY ATTENDANCE
+    ====================================================== */
+
+    renderMonthly() {
+
+        const container =
+            document.getElementById(
+                "monthlyAttendanceList"
+            );
+
+        if (!container) return;
+
+        const students =
+            this.getStudents();
+
+        if (students.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="glass monthly-empty">
+
+                    No students available.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+        const monthInput =
+            document.getElementById(
+                "attendanceMonth"
+            );
+
+        if (!monthInput) return;
+
+        const selectedMonth =
+            monthInput.value;
+
+        if (!selectedMonth) {
+
+            container.innerHTML = `
+
+                <div class="glass monthly-empty">
+
+                    Select a month.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+        const dates =
+            Object.keys(this.records)
+                .filter(
+                    (date) =>
+                        date.startsWith(
+                            selectedMonth
+                        )
+                )
+                .sort();
+
+        if (dates.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="glass monthly-empty">
+
+                    No attendance records for
+                    this month.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+        container.innerHTML =
+            students.map(
+                (student) => {
+
+                    let present = 0;
+
+                    let absent = 0;
+
+                    dates.forEach(
+                        (date) => {
+
+                            const record =
+                                this.records[date];
+
+                            if (
+                                !record ||
+                                !record[
+                                    student.id
+                                ]
+                            ) {
+
+                                return;
+
+                            }
+
+                            if (
+                                record[
+                                    student.id
+                                ] === "present"
+                            ) {
+
+                                present++;
+
+                            }
+
+                            if (
+                                record[
+                                    student.id
+                                ] === "absent"
+                            ) {
+
+                                absent++;
+
+                            }
+
+                        }
+                    );
+
+                    return `
+
+                        <div class="glass monthly-attendance-card">
+
+                            <div class="attendance-avatar">
+
+                                <i class="fa-solid fa-user"></i>
+
+                            </div>
+
+                            <div class="monthly-attendance-info">
+
+                                <h3>
+                                    ${student.name}
+                                </h3>
+
+                                <p>
+                                    ${student.class}
+                                </p>
+
+                                <span>
+                                    Present: ${present}
+                                    &nbsp; • &nbsp;
+                                    Absent: ${absent}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            ).join("");
+
+    },
+
 
     /* ======================================================
-       PERCENTAGE
+       ATTENDANCE PERCENTAGE
     ====================================================== */
 
     renderPercentage() {
@@ -842,9 +946,7 @@ const Attendance = {
                         (date) => {
 
                             const record =
-                                this.records[
-                                    date
-                                ];
+                                this.records[date];
 
                             if (
                                 record &&
@@ -858,8 +960,7 @@ const Attendance = {
                                 if (
                                     record[
                                         student.id
-                                    ]
-                                    === "present"
+                                    ] === "present"
                                 ) {
 
                                     present++;
@@ -894,15 +995,11 @@ const Attendance = {
                             <div class="percentage-info">
 
                                 <h3>
-                                    ${this.escape(
-                                        student.name
-                                    )}
+                                    ${student.name}
                                 </h3>
 
                                 <p>
-                                    ${this.escape(
-                                        student.class
-                                    )}
+                                    ${student.class}
                                     •
                                     ${present}/${total}
                                     present
@@ -933,1598 +1030,636 @@ const Attendance = {
             ).join("");
 
     },
+    /* ======================================================
+       ATTENDANCE RECORDS
+    ====================================================== */
 
-    /* ==========================================================
-   MONTHLY ATTENDANCE
-   CONTINUED
-========================================================== */
+    renderRecords() {
 
-renderMonthly(){
+        const container =
+            document.getElementById(
+                "attendanceRecordsList"
+            );
 
-    const container =
-        document.getElementById("monthlyAttendanceList");
+        if (!container) return;
 
-    if(!container) return;
+        const dates =
+            Object.keys(this.records)
+                .sort()
+                .reverse();
 
-    const students = this.getStudents();
+        if (dates.length === 0) {
 
-    if(students.length === 0){
+            container.innerHTML = `
 
-        container.innerHTML = `
-            <div class="glass monthly-empty">
-                No students available.
-            </div>
-        `;
+                <div class="glass attendance-empty">
 
-        return;
-    }
-
-    const monthInput =
-        document.getElementById("attendanceMonth");
-
-    const month =
-        monthInput ? monthInput.value : "";
-
-    if(!month){
-
-        container.innerHTML = `
-            <div class="glass monthly-empty">
-                Select a month to view attendance.
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML = students.map(student => {
-
-        let present = 0;
-        let absent = 0;
-
-        Object.keys(this.records).forEach(date => {
-
-            if(!date.startsWith(month)) return;
-
-            const record = this.records[date];
-
-            if(!record) return;
-
-            const status = record[student.id];
-
-            if(status === "present"){
-                present++;
-            }
-
-            if(status === "absent"){
-                absent++;
-            }
-
-        });
-
-        const total = present + absent;
-
-        const percentage =
-            total === 0
-                ? 0
-                : Math.round((present / total) * 100);
-
-        return `
-            <div class="glass monthly-card">
-
-                <div class="monthly-card-header">
-
-                    <div class="monthly-student-info">
-
-                        <h3>
-                            ${this.escape(student.name)}
-                        </h3>
-
-                        <p>
-                            ${this.escape(student.class)}
-                        </p>
-
-                    </div>
-
-                    <div class="monthly-percentage">
-                        ${percentage}%
-                    </div>
-
-                </div>
-
-                <div class="monthly-stats">
-
-                    <div class="monthly-stat">
-                        <span>Marked</span>
-                        <strong>${total}</strong>
-                    </div>
-
-                    <div class="monthly-stat">
-                        <span>Present</span>
-                        <strong>${present}</strong>
-                    </div>
-
-                    <div class="monthly-stat">
-                        <span>Absent</span>
-                        <strong>${absent}</strong>
-                    </div>
-
-                </div>
-
-                <div class="monthly-progress">
-
-                    <div
-                        class="monthly-progress-fill"
-                        style="width:${percentage}%"
-                    ></div>
-
-                </div>
-
-            </div>
-        `;
-
-    }).join("");
-
-},
-
-/* ==========================================================
-   LOAD SAVED RECORD
-========================================================== */
-
-loadRecord(date){
-
-    if(!this.records[date]){
-        return;
-    }
-
-    this.selectedDate = date;
-
-    const dateInput =
-        document.getElementById("attendanceDate");
-
-    if(dateInput){
-        dateInput.value = date;
-    }
-
-    this.render();
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-    if(window.UI){
-
-        UI.toast(
-            "Attendance record loaded",
-            "success"
-        );
-
-    }
-
-},
-
-/* ==========================================================
-   SUMMARY
-========================================================== */
-
-updateSummary(students){
-
-    const record = this.getCurrentRecord();
-
-    let present = 0;
-    let absent = 0;
-
-    students.forEach(student => {
-
-        if(record[student.id] === "present"){
-            present++;
-        }
-
-        if(record[student.id] === "absent"){
-            absent++;
-        }
-
-    });
-
-    const total =
-        document.getElementById("attendanceTotal");
-
-    const presentEl =
-        document.getElementById("attendancePresent");
-
-    const absentEl =
-        document.getElementById("attendanceAbsent");
-
-    if(total){
-        total.textContent = students.length;
-    }
-
-    if(presentEl){
-        presentEl.textContent = present;
-    }
-
-    if(absentEl){
-        absentEl.textContent = absent;
-    }
-
-},
-
-/* ==========================================================
-   ATTENDANCE PERCENTAGE
-========================================================== */
-
-renderPercentage(){
-
-    const container =
-        document.getElementById(
-            "attendancePercentageList"
-        );
-
-    if(!container) return;
-
-    const students = this.getStudents();
-
-    if(students.length === 0){
-
-        container.innerHTML = `
-            <div class="glass percentage-empty">
-                No students available.
-            </div>
-        `;
-
-        return;
-    }
-
-    const dates = Object.keys(this.records);
-
-    if(dates.length === 0){
-
-        container.innerHTML = `
-            <div class="glass percentage-empty">
-                No attendance records available yet.
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML = students.map(student => {
-
-        let present = 0;
-        let total = 0;
-
-        dates.forEach(date => {
-
-            const record = this.records[date];
-
-            if(
-                record &&
-                record[student.id]
-            ){
-
-                total++;
-
-                if(
-                    record[student.id] === "present"
-                ){
-                    present++;
-                }
-
-            }
-
-        });
-
-        const percentage =
-            total === 0
-                ? 0
-                : Math.round((present / total) * 100);
-
-        return `
-            <div class="glass percentage-card">
-
-                <div class="attendance-avatar">
-
-                    <i class="fa-solid fa-user"></i>
-
-                </div>
-
-                <div class="percentage-info">
+                    <i class="fa-solid fa-calendar-xmark"></i>
 
                     <h3>
-                        ${this.escape(student.name)}
+                        No Attendance Records
                     </h3>
 
                     <p>
-                        ${this.escape(student.class)}
-                        •
-                        ${present}/${total}
-                        present
+                        Saved attendance records
+                        will appear here.
                     </p>
-
-                    <div class="percentage-bar">
-
-                        <div
-                            class="percentage-fill"
-                            style="width:${percentage}%"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-                <div class="percentage-value">
-                    ${percentage}%
-                </div>
-
-            </div>
-        `;
-
-    }).join("");
-
-},
-
-/* ==========================================================
-   SAVED ATTENDANCE RECORDS
-========================================================== */
-
-renderRecords(){
-
-    const container =
-        document.getElementById(
-            "attendanceRecordsList"
-        );
-
-    if(!container) return;
-
-    const dates =
-        Object.keys(this.records)
-        .sort()
-        .reverse();
-
-    if(dates.length === 0){
-
-        container.innerHTML = `
-            <div class="glass attendance-record-empty">
-                No saved attendance records yet.
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML = dates.map(date => {
-
-        const record =
-            this.records[date] || {};
-
-        let present = 0;
-        let absent = 0;
-
-        Object.values(record).forEach(status => {
-
-            if(status === "present"){
-                present++;
-            }
-
-            if(status === "absent"){
-                absent++;
-            }
-
-        });
-
-        const total = present + absent;
-
-        return `
-            <div class="glass attendance-record-card">
-
-                <div class="attendance-record-header">
-
-                    <div class="attendance-record-date">
-
-                        <div class="attendance-record-icon">
-
-                            <i class="fa-solid fa-calendar-check"></i>
-
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                ${this.formatDate(date)}
-                            </h3>
-
-                            <p>
-                                Attendance Record
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="attendance-record-stats">
-
-                    <div class="attendance-record-stat">
-
-                        <span>Total</span>
-
-                        <strong>
-                            ${total}
-                        </strong>
-
-                    </div>
-
-                    <div class="attendance-record-stat">
-
-                        <span>Present</span>
-
-                        <strong>
-                            ${present}
-                        </strong>
-
-                    </div>
-
-                    <div class="attendance-record-stat">
-
-                        <span>Absent</span>
-
-                        <strong>
-                            ${absent}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-                <div class="attendance-record-actions">
-
-                    <button
-                        type="button"
-                        class="attendance-record-edit"
-                        data-date="${date}"
-                    >
-
-                        <i class="fa-solid fa-pen"></i>
-
-                        Edit
-
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-
-    }).join("");
-
-},
-
-/* ==========================================================
-   ANALYTICS
-========================================================== */
-
-renderAnalytics(){
-
-    const students =
-        this.getStudents();
-
-    let present = 0;
-    let absent = 0;
-
-    Object.values(this.records).forEach(record => {
-
-        if(!record) return;
-
-        Object.values(record).forEach(status => {
-
-            if(status === "present"){
-                present++;
-            }
-
-            if(status === "absent"){
-                absent++;
-            }
-
-        });
-
-    });
-
-    const totalMarked =
-        present + absent;
-
-    const average =
-        totalMarked === 0
-            ? 0
-            : Math.round(
-                (present / totalMarked) * 100
-            );
-
-    const studentsEl =
-        document.getElementById(
-            "analyticsStudents"
-        );
-
-    const presentEl =
-        document.getElementById(
-            "analyticsPresent"
-        );
-
-    const absentEl =
-        document.getElementById(
-            "analyticsAbsent"
-        );
-
-    const averageEl =
-        document.getElementById(
-            "analyticsAverage"
-        );
-
-    if(studentsEl){
-        studentsEl.textContent =
-            students.length;
-    }
-
-    if(presentEl){
-        presentEl.textContent =
-            present;
-    }
-
-    if(absentEl){
-        absentEl.textContent =
-            absent;
-    }
-
-    if(averageEl){
-        averageEl.textContent =
-            `${average}%`;
-    }
-
-    this.renderClassAnalytics();
-
-},
-
-/* ==========================================================
-   CLASS ANALYTICS
-========================================================== */
-
-renderClassAnalytics(){
-
-    const container =
-        document.getElementById(
-            "classAnalyticsList"
-        );
-
-    if(!container) return;
-
-    if(this.students.length === 0){
-
-        container.innerHTML = `
-            <div class="glass analytics-empty">
-                No students available.
-            </div>
-        `;
-
-        return;
-    }
-
-    const classes = [
-        "Class 6",
-        "Class 7",
-        "Class 8",
-        "Class 9",
-        "Class 10"
-    ];
-
-    container.innerHTML = classes.map(className => {
-
-        const students =
-            this.students.filter(
-                student =>
-                    student.class === className
-            );
-
-        if(students.length === 0){
-            return "";
-        }
-
-        let present = 0;
-        let absent = 0;
-
-        Object.values(this.records).forEach(record => {
-
-            if(!record) return;
-
-            students.forEach(student => {
-
-                const status =
-                    record[student.id];
-
-                if(status === "present"){
-                    present++;
-                }
-
-                if(status === "absent"){
-                    absent++;
-                }
-
-            });
-
-        });
-
-        const total =
-            present + absent;
-
-        const percentage =
-            total === 0
-                ? 0
-                : Math.round(
-                    (present / total) * 100
-                );
-
-        return `
-            <div class="glass class-analytics-card">
-
-                <div class="class-analytics-header">
-
-                    <h3>
-                        ${this.escape(className)}
-                    </h3>
-
-                    <strong>
-                        ${percentage}%
-                    </strong>
-
-                </div>
-
-                <div class="class-analytics-meta">
-
-                    <span>
-                        Students: ${students.length}
-                    </span>
-
-                    <span>
-                        Present: ${present}
-                    </span>
-
-                    <span>
-                        Absent: ${absent}
-                    </span>
-
-                </div>
-
-                <div class="class-analytics-bar">
-
-                    <div
-                        class="class-analytics-fill"
-                        style="width:${percentage}%"
-                    ></div>
-
-                </div>
-
-            </div>
-        `;
-
-    }).join("");
-
-},
-
-/* ==========================================================
-   SAVE ATTENDANCE
-========================================================== */
-
-saveAttendance(){
-
-    if(!this.selectedDate){
-
-        if(window.UI){
-            UI.toast(
-                "Select attendance date",
-                "error"
-            );
-        }
-
-        return;
-    }
-
-    const students =
-        this.getStudents();
-
-    if(students.length === 0){
-
-        if(window.UI){
-            UI.toast(
-                "No students available",
-                "error"
-            );
-        }
-
-        return;
-    }
-
-    const record =
-        this.getCurrentRecord();
-
-    let marked = 0;
-
-    students.forEach(student => {
-
-        if(
-            record[student.id] === "present" ||
-            record[student.id] === "absent"
-        ){
-            marked++;
-        }
-
-    });
-
-    if(marked === 0){
-
-        if(window.UI){
-            UI.toast(
-                "Mark attendance first",
-                "error"
-            );
-        }
-
-        return;
-    }
-
-    this.saveRecords();
-
-    this.render();
-
-    if(window.UI){
-
-        UI.toast(
-            "Attendance saved successfully",
-            "success"
-        );
-
-    }
-
-},
-
-/* ==========================================================
-   CSV EXPORT
-========================================================== */
-
-exportCSV(){
-
-    const dates =
-        Object.keys(this.records)
-        .sort();
-
-    if(dates.length === 0){
-
-        if(window.UI){
-            UI.toast(
-                "No attendance records to export",
-                "error"
-            );
-        }
-
-        return;
-    }
-
-    const rows = [
-        [
-            "Date",
-            "Student Name",
-            "Class",
-            "Status"
-        ]
-    ];
-
-    dates.forEach(date => {
-
-        const record =
-            this.records[date] || {};
-
-        Object.entries(record).forEach(
-            ([studentId,status]) => {
-
-                const student =
-                    this.students.find(
-                        s => String(s.id) === String(studentId)
-                    );
-
-                if(!student) return;
-
-                rows.push([
-                    date,
-                    student.name,
-                    student.class,
-                    status
-                ]);
-
-            }
-        );
-
-    });
-
-    const csv =
-        rows.map(row =>
-            row.map(value =>
-                `"${String(value)
-                    .replace(/"/g,'""')}"`
-            ).join(",")
-        ).join("\n");
-
-    const blob =
-        new Blob(
-            [csv],
-            {
-                type:"text/csv;charset=utf-8;"
-            }
-        );
-
-    const url =
-        URL.createObjectURL(blob);
-
-    const link =
-        document.createElement("a");
-
-    link.href = url;
-
-    link.download =
-        "attendance-records.csv";
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    link.remove();
-
-    URL.revokeObjectURL(url);
-
-    if(window.UI){
-
-        UI.toast(
-            "Attendance CSV exported",
-            "success"
-        );
-
-    }
-
-},
-
-/* ==========================================================
-   PRINT ATTENDANCE
-========================================================== */
-
-printAttendance(){
-
-    const printArea =
-        document.getElementById(
-            "attendancePrintArea"
-        );
-
-    if(!printArea) return;
-
-    const students =
-        this.getStudents();
-
-    if(students.length === 0){
-
-        if(window.UI){
-            UI.toast(
-                "No students to print",
-                "error"
-            );
-        }
-
-        return;
-    }
-
-    const record =
-        this.getCurrentRecord();
-
-    const dateEl =
-        document.getElementById(
-            "printAttendanceDate"
-        );
-
-    const classEl =
-        document.getElementById(
-            "printAttendanceClass"
-        );
-
-    const body =
-        document.getElementById(
-            "printAttendanceBody"
-        );
-
-    const totalEl =
-        document.getElementById(
-            "printTotal"
-        );
-
-    const presentEl =
-        document.getElementById(
-            "printPresent"
-        );
-
-    const absentEl =
-        document.getElementById(
-            "printAbsent"
-        );
-
-    if(dateEl){
-        dateEl.textContent =
-            this.formatDate(this.selectedDate);
-    }
-
-    if(classEl){
-        classEl.textContent =
-            this.selectedClass ||
-            "All Classes";
-    }
-
-    let present = 0;
-    let absent = 0;
-
-    if(body){
-
-        body.innerHTML =
-            students.map((student,index) => {
-
-                const status =
-                    record[student.id] || "Not Marked";
-
-                if(status === "present"){
-                    present++;
-                }
-
-                if(status === "absent"){
-                    absent++;
-                }
-
-                const displayStatus =
-                    status === "present"
-                        ? "Present"
-                        : status === "absent"
-                            ? "Absent"
-                            : "Not Marked";
-
-                return `
-                    <tr>
-
-                        <td>
-                            ${index + 1}
-                        </td>
-
-                        <td>
-                            ${this.escape(student.name)}
-                        </td>
-
-                        <td>
-                            ${this.escape(student.class)}
-                        </td>
-
-                        <td>
-                            ${displayStatus}
-                        </td>
-
-                    </tr>
-                `;
-
-            }).join("");
-
-    }
-
-    if(totalEl){
-        totalEl.textContent =
-            students.length;
-    }
-
-    if(presentEl){
-        presentEl.textContent =
-            present;
-    }
-
-    if(absentEl){
-        absentEl.textContent =
-            absent;
-    }
-
-    window.print();
-
-},
-/* ==========================================================
-   FORMAT DATE
-========================================================== */
-
-formatDate(date){
-
-    if(!date){
-        return "—";
-    }
-
-    const parts = date.split("-");
-
-    if(parts.length !== 3){
-        return date;
-    }
-
-    return `${parts[2]}-${parts[1]}-${parts[0]}`;
-
-},
-
-/* ==========================================================
-   EXPORT CSV
-========================================================== */
-
-exportCSV(){
-
-    const dates =
-        Object.keys(this.records)
-        .sort();
-
-    if(dates.length === 0){
-
-        if(window.UI){
-
-            UI.toast(
-                "No attendance records to export",
-                "error"
-            );
-
-        }else{
-
-            alert(
-                "No attendance records to export."
-            );
-
-        }
-
-        return;
-
-    }
-
-    const rows = [];
-
-    rows.push([
-        "Date",
-        "Student Name",
-        "Class",
-        "Status"
-    ]);
-
-    dates.forEach(date=>{
-
-        const record =
-            this.records[date] || {};
-
-        this.students.forEach(student=>{
-
-            const status =
-                record[student.id];
-
-            if(!status){
-                return;
-            }
-
-            rows.push([
-                date,
-                student.name,
-                student.class,
-                status === "present"
-                    ? "Present"
-                    : "Absent"
-            ]);
-
-        });
-
-    });
-
-    const csv =
-        rows
-        .map(row =>
-            row.map(value =>
-                `"${String(value)
-                    .replace(/"/g,'""')}"`
-            ).join(",")
-        )
-        .join("\n");
-
-    const blob =
-        new Blob(
-            [csv],
-            {
-                type:"text/csv;charset=utf-8;"
-            }
-        );
-
-    const url =
-        URL.createObjectURL(blob);
-
-    const link =
-        document.createElement("a");
-
-    link.href = url;
-
-    link.download =
-        "ezee-vision-attendance.csv";
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    document.body.removeChild(link);
-
-    URL.revokeObjectURL(url);
-
-    if(window.UI){
-
-        UI.toast(
-            "Attendance CSV exported",
-            "success"
-        );
-
-    }
-
-},
-
-/* ==========================================================
-   PRINT ATTENDANCE
-========================================================== */
-
-printAttendance(){
-
-    const students =
-        this.getStudents();
-
-    if(students.length === 0){
-
-        if(window.UI){
-
-            UI.toast(
-                "No students available to print",
-                "error"
-            );
-
-        }else{
-
-            alert(
-                "No students available to print."
-            );
-
-        }
-
-        return;
-
-    }
-
-    const record =
-        this.getCurrentRecord();
-
-    const date =
-        this.selectedDate || "";
-
-    const classValue =
-        this.selectedClass ||
-        "All Classes";
-
-    const body =
-        document.getElementById(
-            "printAttendanceBody"
-        );
-
-    const printDate =
-        document.getElementById(
-            "printAttendanceDate"
-        );
-
-    const printClass =
-        document.getElementById(
-            "printAttendanceClass"
-        );
-
-    const printTotal =
-        document.getElementById(
-            "printTotal"
-        );
-
-    const printPresent =
-        document.getElementById(
-            "printPresent"
-        );
-
-    const printAbsent =
-        document.getElementById(
-            "printAbsent"
-        );
-
-    if(!body){
-        return;
-    }
-
-    let present = 0;
-
-    let absent = 0;
-
-    body.innerHTML =
-        students.map(
-            (student,index)=>{
-
-                const status =
-                    record[student.id] || "Not Marked";
-
-                if(status === "present"){
-                    present++;
-                }
-
-                if(status === "absent"){
-                    absent++;
-                }
-
-                const displayStatus =
-                    status === "present"
-                        ? "Present"
-                        : status === "absent"
-                            ? "Absent"
-                            : "Not Marked";
-
-                return `
-
-                    <tr>
-
-                        <td>
-                            ${index + 1}
-                        </td>
-
-                        <td>
-                            ${this.escape(
-                                student.name
-                            )}
-                        </td>
-
-                        <td>
-                            ${this.escape(
-                                student.class
-                            )}
-                        </td>
-
-                        <td>
-                            ${displayStatus}
-                        </td>
-
-                    </tr>
-
-                `;
-
-            }
-        ).join("");
-
-    if(printDate){
-
-        printDate.textContent =
-            this.formatDate(date);
-
-    }
-
-    if(printClass){
-
-        printClass.textContent =
-            classValue;
-
-    }
-
-    if(printTotal){
-
-        printTotal.textContent =
-            students.length;
-
-    }
-
-    if(printPresent){
-
-        printPresent.textContent =
-            present;
-
-    }
-
-    if(printAbsent){
-
-        printAbsent.textContent =
-            absent;
-
-    }
-
-    /*
-       Small delay ensures the print area
-       is completely updated before browser
-       print dialog opens.
-    */
-
-    setTimeout(()=>{
-
-        window.print();
-
-    },100);
-
-},
-
-/* ==========================================================
-   ANALYTICS
-========================================================== */
-
-renderAnalytics(){
-
-    const students =
-        this.getStudents();
-
-    let totalPresent = 0;
-
-    let totalAbsent = 0;
-
-    const dates =
-        Object.keys(this.records);
-
-    students.forEach(student=>{
-
-        dates.forEach(date=>{
-
-            const record =
-                this.records[date];
-
-            if(!record){
-                return;
-            }
-
-            const status =
-                record[student.id];
-
-            if(status === "present"){
-
-                totalPresent++;
-
-            }
-
-            if(status === "absent"){
-
-                totalAbsent++;
-
-            }
-
-        });
-
-    });
-
-    const totalMarked =
-        totalPresent + totalAbsent;
-
-    const average =
-        totalMarked === 0
-            ? 0
-            : Math.round(
-                (
-                    totalPresent /
-                    totalMarked
-                ) * 100
-            );
-
-    const studentsEl =
-        document.getElementById(
-            "analyticsStudents"
-        );
-
-    const presentEl =
-        document.getElementById(
-            "analyticsPresent"
-        );
-
-    const absentEl =
-        document.getElementById(
-            "analyticsAbsent"
-        );
-
-    const averageEl =
-        document.getElementById(
-            "analyticsAverage"
-        );
-
-    if(studentsEl){
-
-        studentsEl.textContent =
-            students.length;
-
-    }
-
-    if(presentEl){
-
-        presentEl.textContent =
-            totalPresent;
-
-    }
-
-    if(absentEl){
-
-        absentEl.textContent =
-            totalAbsent;
-
-    }
-
-    if(averageEl){
-
-        averageEl.textContent =
-            `${average}%`;
-
-    }
-
-    this.renderClassAnalytics();
-
-},
-
-/* ==========================================================
-   CLASS ANALYTICS
-========================================================== */
-
-renderClassAnalytics(){
-
-    const container =
-        document.getElementById(
-            "classAnalyticsList"
-        );
-
-    if(!container){
-        return;
-    }
-
-    const classes = [
-        "Class 6",
-        "Class 7",
-        "Class 8",
-        "Class 9",
-        "Class 10"
-    ];
-
-    if(this.students.length === 0){
-
-        container.innerHTML = `
-
-            <div class="glass analytics-empty">
-
-                No students available.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-    container.innerHTML =
-        classes.map(className=>{
-
-            const classStudents =
-                this.students.filter(
-                    student =>
-                        student.class === className
-                );
-
-            if(classStudents.length === 0){
-                return "";
-            }
-
-            let present = 0;
-
-            let absent = 0;
-
-            Object.keys(this.records)
-                .forEach(date=>{
-
-                    const record =
-                        this.records[date];
-
-                    if(!record){
-                        return;
-                    }
-
-                    classStudents.forEach(
-                        student=>{
-
-                            const status =
-                                record[student.id];
-
-                            if(status === "present"){
-                                present++;
-                            }
-
-                            if(status === "absent"){
-                                absent++;
-                            }
-
-                        }
-                    );
-
-                });
-
-            const marked =
-                present + absent;
-
-            const percentage =
-                marked === 0
-                    ? 0
-                    : Math.round(
-                        (
-                            present /
-                            marked
-                        ) * 100
-                    );
-
-            return `
-
-                <div class="glass class-analytics-card">
-
-                    <div class="class-analytics-header">
-
-                        <h3>
-                            ${className}
-                        </h3>
-
-                        <strong>
-                            ${percentage}%
-                        </strong>
-
-                    </div>
-
-                    <div class="class-analytics-meta">
-
-                        <span>
-                            Students:
-                            ${classStudents.length}
-                        </span>
-
-                        <span>
-                            Present:
-                            ${present}
-                        </span>
-
-                        <span>
-                            Absent:
-                            ${absent}
-                        </span>
-
-                    </div>
-
-                    <div class="class-analytics-bar">
-
-                        <div
-                            class="class-analytics-fill"
-                            style="width:${percentage}%"
-                        ></div>
-
-                    </div>
 
                 </div>
 
             `;
 
-        }).join("");
+            return;
 
-},
+        }
 
-/* ==========================================================
-   ESCAPE HTML
-========================================================== */
+        container.innerHTML =
+            dates.map(
+                (date) => {
 
-escape(value){
+                    const record =
+                        this.records[date] || {};
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+                    let present = 0;
 
-}
+                    let absent = 0;
 
-};
+                    Object.values(record)
+                        .forEach(
+                            (status) => {
 
-=====================================================
+                                if (
+                                    status === "present"
+                                ) {
+
+                                    present++;
+
+                                }
+
+                                if (
+                                    status === "absent"
+                                ) {
+
+                                    absent++;
+
+                                }
+
+                            }
+                        );
+
+                    return `
+
+                        <div class="glass attendance-record-card">
+
+                            <div class="attendance-record-info">
+
+                                <h3>
+                                    ${date}
+                                </h3>
+
+                                <p>
+                                    Present: ${present}
+                                    &nbsp; • &nbsp;
+                                    Absent: ${absent}
+                                </p>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="attendance-record-edit"
+                                data-date="${date}"
+                            >
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+                }
+            ).join("");
+
+    },
+
+
+    /* ======================================================
+       LOAD RECORD
+    ====================================================== */
+
+    loadRecord(date) {
+
+        if (!date) return;
+
+        this.selectedDate =
+            date;
+
+        const dateInput =
+            document.getElementById(
+                "attendanceDate"
+            );
+
+        if (dateInput) {
+
+            dateInput.value =
+                date;
+
+        }
+
+        this.render();
+
+    },
+
+
+    /* ======================================================
+       ATTENDANCE ANALYTICS
+    ====================================================== */
+
+    renderAnalytics() {
+
+        let studentsCount =
+            this.students.length;
+
+        let present = 0;
+
+        let absent = 0;
+
+        Object.values(this.records)
+            .forEach(
+                (record) => {
+
+                    Object.values(record)
+                        .forEach(
+                            (status) => {
+
+                                if (
+                                    status === "present"
+                                ) {
+
+                                    present++;
+
+                                }
+
+                                if (
+                                    status === "absent"
+                                ) {
+
+                                    absent++;
+
+                                }
+
+                            }
+                        );
+
+                }
+            );
+
+        const totalMarked =
+            present + absent;
+
+        const average =
+            totalMarked === 0
+                ? 0
+                : Math.round(
+                    (
+                        present /
+                        totalMarked
+                    ) * 100
+                );
+
+        const studentsElement =
+            document.getElementById(
+                "analyticsStudents"
+            );
+
+        const presentElement =
+            document.getElementById(
+                "analyticsPresent"
+            );
+
+        const absentElement =
+            document.getElementById(
+                "analyticsAbsent"
+            );
+
+        const averageElement =
+            document.getElementById(
+                "analyticsAverage"
+            );
+
+        if (studentsElement) {
+
+            studentsElement.textContent =
+                studentsCount;
+
+        }
+
+        if (presentElement) {
+
+            presentElement.textContent =
+                present;
+
+        }
+
+        if (absentElement) {
+
+            absentElement.textContent =
+                absent;
+
+        }
+
+        if (averageElement) {
+
+            averageElement.textContent =
+                `${average}%`;
+
+        }
+
+        this.renderClassAnalytics();
+
+    },
+
+
+    /* ======================================================
+       CLASS-WISE ANALYTICS
+    ====================================================== */
+
+    renderClassAnalytics() {
+
+        const container =
+            document.getElementById(
+                "classAnalyticsList"
+            );
+
+        if (!container) return;
+
+        const classes = [
+            "Class 6",
+            "Class 7",
+            "Class 8",
+            "Class 9",
+            "Class 10"
+        ];
+
+        container.innerHTML =
+            classes.map(
+                (className) => {
+
+                    const students =
+                        this.students.filter(
+                            (student) =>
+                                student.class ===
+                                className
+                        );
+
+                    let present = 0;
+
+                    let absent = 0;
+
+                    Object.values(this.records)
+                        .forEach(
+                            (record) => {
+
+                                students.forEach(
+                                    (student) => {
+
+                                        if (
+                                            record[
+                                                student.id
+                                            ] === "present"
+                                        ) {
+
+                                            present++;
+
+                                        }
+
+                                        if (
+                                            record[
+                                                student.id
+                                            ] === "absent"
+                                        ) {
+
+                                            absent++;
+
+                                        }
+
+                                    }
+                                );
+
+                            }
+                        );
+
+                    const total =
+                        present + absent;
+
+                    const percentage =
+                        total === 0
+                            ? 0
+                            : Math.round(
+                                (
+                                    present /
+                                    total
+                                ) * 100
+                            );
+
+                    return `
+
+                        <div class="glass class-analytics-card">
+
+                            <div>
+
+                                <h3>
+                                    ${className}
+                                </h3>
+
+                                <p>
+                                    Present: ${present}
+                                    &nbsp; • &nbsp;
+                                    Absent: ${absent}
+                                </p>
+
+                            </div>
+
+                            <strong>
+                                ${percentage}%
+                            </strong>
+
+                        </div>
+
+                    `;
+
+                }
+            ).join("");
+
+    },
+    /* ======================================================
+       EXPORT CSV
+    ====================================================== */
+
+    exportCSV() {
+
+        const dates =
+            Object.keys(this.records)
+                .sort();
+
+        if (dates.length === 0) {
+
+            this.showToast(
+                "No attendance records available",
+                "error"
+            );
+
+            return;
+
+        }
+
+        const rows = [
+            [
+                "Date",
+                "Student Name",
+                "Class",
+                "Status"
+            ]
+        ];
+
+        dates.forEach(
+            (date) => {
+
+                const record =
+                    this.records[date] || {};
+
+                this.students.forEach(
+                    (student) => {
+
+                        const status =
+                            record[student.id] || "";
+
+                        if (!status) return;
+
+                        rows.push([
+                            date,
+                            student.name,
+                            student.class,
+                            status
+                        ]);
+
+                    }
+                );
+
+            }
+        );
+
+        const csv =
+            rows.map(
+                (row) =>
+                    row.map(
+                        (value) =>
+                            `"${String(value)
+                                .replace(/"/g, '""')}"`
+                    ).join(",")
+            ).join("\n");
+
+        const blob =
+            new Blob(
+                [csv],
+                {
+                    type:
+                        "text/csv;charset=utf-8;"
+                }
+            );
+
+        const url =
+            URL.createObjectURL(blob);
+
+        const link =
+            document.createElement("a");
+
+        link.href = url;
+
+        link.download =
+            "attendance-records.csv";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(url);
+
+    },
+
+
+    /* ======================================================
+       PRINT ATTENDANCE
+    ====================================================== */
+
+    printAttendance() {
+
+        const students =
+            this.getStudents();
+
+        if (students.length === 0) {
+
+            this.showToast(
+                "No students found",
+                "error"
+            );
+
+            return;
+
+        }
+
+        const record =
+            this.getCurrentRecord();
+
+        const dateElement =
+            document.getElementById(
+                "printAttendanceDate"
+            );
+
+        const classElement =
+            document.getElementById(
+                "printAttendanceClass"
+            );
+
+        const body =
+            document.getElementById(
+                "printAttendanceBody"
+            );
+
+        const totalElement =
+            document.getElementById(
+                "printTotal"
+            );
+
+        const presentElement =
+            document.getElementById(
+                "printPresent"
+            );
+
+        const absentElement =
+            document.getElementById(
+                "printAbsent"
+            );
+
+        if (!body) return;
+
+        let present = 0;
+
+        let absent = 0;
+
+        body.innerHTML =
+            students.map(
+                (student, index) => {
+
+                    const status =
+                        record[student.id] || "";
+
+                    if (
+                        status === "present"
+                    ) {
+
+                        present++;
+
+                    }
+
+                    if (
+                        status === "absent"
+                    ) {
+
+                        absent++;
+
+                    }
+
+                    return `
+                        <tr>
+
+                            <td>
+                                ${index + 1}
+                            </td>
+
+                            <td>
+                                ${student.name}
+                            </td>
+
+                            <td>
+                                ${student.class}
+                            </td>
+
+                            <td>
+                                ${status || "—"}
+                            </td>
+
+                        </tr>
+                    `;
+
+                }
+            ).join("");
+
+        if (dateElement) {
+
+            dateElement.textContent =
+                this.selectedDate || "—";
+
+        }
+
+        if (classElement) {
+
+            classElement.textContent =
+                this.selectedClass ||
+                "All Classes";
+
+        }
+
+        if (totalElement) {
+
+            totalElement.textContent =
+                students.length;
+
+        }
+
+        if (presentElement) {
+
+            presentElement.textContent =
+                present;
+
+        }
+
+        if (absentElement) {
+
+            absentElement.textContent =
+                absent;
+
+        }
+
+        window.print();
+
+    },
+    /* ======================================================
+       RENDER
+    ====================================================== */
+
+    render() {
+
+        this.renderStudents();
+
+        this.renderSummary();
+
+        this.renderPercentage();
+
+        this.renderMonthly();
+
+        this.renderRecords();
+
+        this.renderAnalytics();
+
+    },
+
+
+    /* ======================================================
        TOAST
     ====================================================== */
 
@@ -2540,31 +1675,46 @@ escape(value){
                 type
             );
 
-            return;
-
         }
 
-        console.log(
-            message
-        );
+    },
+
+
+    /* ======================================================
+       ESCAPE HTML
+    ====================================================== */
+
+    escape(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 
     }
 
 };
 
 
-
 /* ==========================================================
-   START ATTENDANCE MODULE
+   START ATTENDANCE
 ========================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
-    ()=>{
+    () => {
 
         Attendance.init();
 
+        Attendance.setToday();
+
+        Attendance.setCurrentMonth();
+
+        Attendance.bindEvents();
+
+        Attendance.render();
+
     }
 );
-
-                
