@@ -146,6 +146,61 @@ id="addStudentBtn">
 <i class="fa-solid fa-plus"></i>
 
 </button>
+<!-- Student Modal -->
+
+<div class="modal" id="studentModal">
+
+    <div class="modal-box glass">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Add Student
+            </h2>
+
+            <button id="closeModal" class="icon-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <form id="studentForm">
+
+            <input
+                type="hidden"
+                id="studentId">
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Student Name"
+                required>
+
+            <select id="studentClass" required>
+                <option value="">Select Class</option>
+                <option>Class 6</option>
+                <option>Class 7</option>
+                <option>Class 8</option>
+                <option>Class 9</option>
+                <option>Class 10</option>
+            </select>
+
+            <select id="studentStatus">
+                <option>Active</option>
+                <option>Inactive</option>
+            </select>
+
+            <button
+                type="submit"
+                class="primary-btn">
+                Save Student
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 </main>
 
 <nav class="bottom-nav">
