@@ -21,13 +21,21 @@ const Attendance = {
        INIT
     ====================================================== */
 
-    init() {
+    init(){
 
-        this.loadStudents();
+    this.loadStudents();
 
-        this.loadRecords();
+    this.loadRecords();
 
-    },
+    this.setToday();
+
+    this.setCurrentMonth();
+
+    this.bindEvents();
+
+    this.render();
+
+},
 
 
     /* ======================================================
