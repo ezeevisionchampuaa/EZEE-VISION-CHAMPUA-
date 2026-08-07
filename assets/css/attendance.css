@@ -1,0 +1,503 @@
+/* ==========================================================
+   EZEE VISION CHAMPUA
+   Attendance Module
+   Version : 1.0.0
+========================================================== */
+
+.attendance-header{
+
+    margin-bottom:22px;
+
+}
+
+.attendance-header h2{
+
+    margin-top:14px;
+
+    font-size:1.7rem;
+
+    font-weight:700;
+
+}
+
+.attendance-header p{
+
+    margin-top:6px;
+
+    color:var(--text);
+
+    font-size:.85rem;
+
+    line-height:1.6;
+
+}
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.hero-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:7px 12px;
+
+    border-radius:30px;
+
+    background:rgba(79,140,255,.10);
+
+    border:1px solid rgba(79,140,255,.18);
+
+    color:var(--primary);
+
+    font-size:.75rem;
+
+    font-weight:600;
+
+}
+
+/* ==========================================================
+   CONTROLS
+========================================================== */
+
+.attendance-controls{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:14px;
+
+    padding:18px;
+
+    margin-bottom:18px;
+
+}
+
+.control-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.control-group label{
+
+    font-size:.78rem;
+
+    color:var(--text);
+
+    font-weight:500;
+
+}
+
+.control-group input,
+.control-group select{
+
+    width:100%;
+
+    min-height:46px;
+
+    padding:11px 13px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:13px;
+
+    background:var(--surface);
+
+    color:var(--white);
+
+    outline:none;
+
+}
+
+.control-group input:focus,
+.control-group select:focus{
+
+    border-color:var(--primary);
+
+}
+
+/* ==========================================================
+   SUMMARY
+========================================================== */
+
+.attendance-summary{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+    margin-bottom:24px;
+
+}
+
+.attendance-stat{
+
+    padding:16px 12px;
+
+    text-align:center;
+
+}
+
+.attendance-stat span{
+
+    display:block;
+
+    color:var(--text);
+
+    font-size:.72rem;
+
+    margin-bottom:7px;
+
+}
+
+.attendance-stat strong{
+
+    display:block;
+
+    font-size:1.35rem;
+
+}
+
+/* ==========================================================
+   SECTION TITLE
+========================================================== */
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:14px;
+
+}
+
+.section-title h2{
+
+    font-size:1.05rem;
+
+}
+
+.section-title p{
+
+    margin-top:3px;
+
+    color:var(--text);
+
+    font-size:.75rem;
+
+}
+
+/* ==========================================================
+   ATTENDANCE LIST
+========================================================== */
+
+.attendance-list{
+
+    display:grid;
+
+    gap:12px;
+
+    padding-bottom:110px;
+
+}
+
+/* ==========================================================
+   ATTENDANCE CARD
+========================================================== */
+
+.attendance-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:14px;
+
+}
+
+.attendance-avatar{
+
+    width:48px;
+
+    height:48px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:rgba(79,140,255,.12);
+
+    color:var(--primary);
+
+}
+
+.attendance-student{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+.attendance-student h3{
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+.attendance-student p{
+
+    margin-top:3px;
+
+    color:var(--text);
+
+    font-size:.72rem;
+
+}
+
+/* ==========================================================
+   ATTENDANCE ACTIONS
+========================================================== */
+
+.attendance-actions{
+
+    display:flex;
+
+    gap:7px;
+
+}
+
+.attendance-btn{
+
+    width:40px;
+
+    height:40px;
+
+    border:1px solid transparent;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+
+}
+
+.attendance-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.attendance-btn:active{
+
+    transform:scale(.94);
+
+}
+
+.attendance-btn.present{
+
+    background:rgba(34,197,94,.12);
+
+    color:#22C55E;
+
+    border-color:rgba(34,197,94,.18);
+
+}
+
+.attendance-btn.absent{
+
+    background:rgba(239,68,68,.12);
+
+    color:#EF4444;
+
+    border-color:rgba(239,68,68,.18);
+
+}
+
+.attendance-btn.active{
+
+    box-shadow:0 0 0 2px currentColor;
+
+}
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.attendance-empty{
+
+    padding:40px 20px;
+
+    text-align:center;
+
+}
+
+.attendance-empty i{
+
+    font-size:30px;
+
+    color:var(--text);
+
+    margin-bottom:14px;
+
+}
+
+.attendance-empty h3{
+
+    font-size:.95rem;
+
+    margin-bottom:6px;
+
+}
+
+.attendance-empty p{
+
+    color:var(--text);
+
+    font-size:.75rem;
+
+    line-height:1.5;
+
+}
+
+/* ==========================================================
+   SAVE BUTTON
+========================================================== */
+
+.attendance-save{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:82px;
+
+    transform:translateX(-50%);
+
+    width:calc(100% - 36px);
+
+    max-width:394px;
+
+    z-index:1000;
+
+    box-shadow:0 14px 30px rgba(0,0,0,.28);
+
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width:430px){
+
+    .attendance-controls{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .attendance-header h2{
+
+        font-size:1.5rem;
+
+    }
+
+    .attendance-card{
+
+        padding:12px;
+
+    }
+
+    .attendance-avatar{
+
+        width:44px;
+
+        height:44px;
+
+    }
+
+    .attendance-btn{
+
+        width:38px;
+
+        height:38px;
+
+    }
+
+}
+
+/* ==========================================================
+   VERY SMALL SCREEN
+========================================================== */
+
+@media (max-width:360px){
+
+    .attendance-summary{
+
+        gap:8px;
+
+    }
+
+    .attendance-stat{
+
+        padding:13px 8px;
+
+    }
+
+    .attendance-stat strong{
+
+        font-size:1.15rem;
+
+    }
+
+    .attendance-card{
+
+        gap:9px;
+
+    }
+
+    .attendance-actions{
+
+        gap:5px;
+
+    }
+
+}
