@@ -464,6 +464,8 @@ this.renderPercentage();
 this.renderMonthly();
        
 this.renderRecords();
+
+this.renderAnalytics();
     },
 /* ==========================================================
    MONTHLY ATTENDANCE
