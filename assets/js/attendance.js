@@ -204,6 +204,28 @@ const Attendance = {
                 }
             );
 
+           const monthInput =
+    document.getElementById(
+        "attendanceMonth"
+    );
+
+if(monthInput){
+
+    const today = new Date();
+
+    monthInput.value =
+        `${today.getFullYear()}-${String(
+            today.getMonth()+1
+        ).padStart(2,"0")}`;
+
+    monthInput.addEventListener(
+        "change",
+        ()=>{
+            this.renderMonthly();
+        }
+    );
+
+}
         }
 
         document.addEventListener(
