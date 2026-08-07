@@ -964,3 +964,56 @@ textarea::placeholder{
     color:var(--text);
 
 }
+/* ==========================
+   TOAST
+========================== */
+
+.toast{
+
+position:fixed;
+
+left:50%;
+
+bottom:95px;
+
+transform:translateX(-50%) translateY(30px);
+
+background:#111C2E;
+
+color:#fff;
+
+padding:14px 18px;
+
+border-radius:14px;
+
+opacity:0;
+
+transition:.3s;
+
+z-index:5000;
+
+box-shadow:0 12px 30px rgba(0,0,0,.3);
+
+}
+
+.toast.show{
+
+opacity:1;
+
+transform:translateX(-50%) translateY(0);
+
+}
+
+/* ==========================
+   LOADING
+========================== */
+
+.loading{
+
+cursor:progress;
+
+pointer-events:none;
+
+opacity:.75;
+
+}
