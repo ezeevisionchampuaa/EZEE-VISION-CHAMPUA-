@@ -87,6 +87,15 @@ if(addBtn){
 
 }
 
+           if(e.target.closest(".edit-btn")){
+
+const id=e.target.closest(".edit-btn").dataset.id;
+
+const student=this.data.find(s=>s.id===id);
+
+this.openModal(student);
+
+           }
 document.addEventListener("click",(e)=>{
 
     if(e.target.closest(".delete-btn")){
@@ -96,6 +105,47 @@ document.addEventListener("click",(e)=>{
         this.deleteStudent(id);
 
     }
+   document
+
+.getElementById("addStudentBtn")
+
+.addEventListener(
+
+"click",
+
+()=>this.openModal()
+
+);
+
+document
+
+.getElementById("closeModal")
+
+.addEventListener(
+
+"click",
+
+()=>this.closeModal()
+
+);
+
+document
+
+.getElementById("studentForm")
+
+.addEventListener(
+
+"submit",
+
+(e)=>{
+
+e.preventDefault();
+
+this.saveStudent();
+
+}
+
+);
 
 });
         }
@@ -261,7 +311,13 @@ document.addEventListener("click",(e)=>{
 
 <button
 
-<button class="action-btn edit-btn" disabled>
+<button
+class="action-btn edit-btn"
+data-id="${student.id}">
+
+<i class="fa-solid fa-pen"></i>
+
+</button>
 
 <i class="fa-solid fa-pen"></i>
 
@@ -286,18 +342,59 @@ data-id="${student.id}">
     }
 
 };
+openModal(student=null){
 
-document.addEventListener(
+document
+.getElementById("studentModal")
+.classList.add("show");
 
-"DOMContentLoaded",
+if(student){
 
-()=>{
+document
+.getElementById("modalTitle")
+.textContent="Edit Student";
 
-Students.init();
+document
+.getElementById("studentId")
+.value=student.id;
+
+document
+.getElementById("studentName")
+.value=student.name;
+
+document
+.getElementById("studentClass")
+.value=student.class;
+
+document
+.getElementById("studentStatus")
+.value=student.status;
+
+}else{
+
+document
+.getElementById("studentForm")
+.reset();
+
+document
+.getElementById("studentId")
+.value="";
+
+document
+.getElementById("modalTitle")
+.textContent="Add Student";
 
 }
 
-);
+},
+
+closeModal(){
+
+document
+.getElementById("studentModal")
+.classList.remove("show");
+
+},
 /* ==========================================================
    ADD STUDENT
 ========================================================== */
@@ -378,3 +475,60 @@ deleteStudent(id){
     }
 
 },
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+Students.init();
+
+}
+
+);
+
+saveStudent(){
+
+const id=document.getElementById("studentId").value;
+
+const student={
+
+id:id || Date.now().toString(),
+
+name:document.getElementById("studentName").value,
+
+class:document.getElementById("studentClass").value,
+
+status:document.getElementById("studentStatus").value
+
+};
+
+if(id){
+
+const index=this.data.findIndex(
+
+s=>s.id===id
+
+);
+
+this.data[index]=student;
+
+}else{
+
+this.data.push(student);
+
+}
+
+this.filteredData=[...this.data];
+
+this.save();
+
+this.render();
+
+this.closeModal();
+
+UI.toast("Student Saved","success");
+
+}
