@@ -187,7 +187,21 @@ const Attendance = {
                     this.render();
                 }
             );
+const exportButton =
+    document.getElementById(
+        "exportAttendanceBtn"
+    );
 
+if(exportButton){
+
+    exportButton.addEventListener(
+        "click",
+        ()=>{
+            this.exportCSV();
+        }
+    );
+
+}
         }
 
         const saveButton =
@@ -1329,6 +1343,167 @@ renderAnalytics(){
             `;
 
         }).join("");
+
+},
+
+/* ==========================================================
+   EXPORT CSV
+========================================================== */
+
+exportCSV(){
+
+    const dates =
+        Object.keys(this.records)
+        .sort();
+
+    if(dates.length === 0){
+
+        if(window.UI){
+
+            UI.toast(
+                "No attendance records to export",
+                "error"
+            );
+
+        }
+
+        return;
+
+    }
+
+    const students =
+        this.students;
+
+    if(students.length === 0){
+
+        if(window.UI){
+
+            UI.toast(
+                "No students available",
+                "error"
+            );
+
+        }
+
+        return;
+
+    }
+
+    const rows = [];
+
+    /* HEADER */
+
+    rows.push([
+        "Date",
+        "Student Name",
+        "Class",
+        "Status"
+    ]);
+
+    /* DATA */
+
+    dates.forEach(date=>{
+
+        const record =
+            this.records[date] || {};
+
+        students.forEach(student=>{
+
+            const status =
+                record[student.id];
+
+            if(!status){
+
+                return;
+
+            }
+
+            rows.push([
+
+                date,
+
+                student.name,
+
+                student.class,
+
+                status === "present"
+                    ? "Present"
+                    : "Absent"
+
+            ]);
+
+        });
+
+    });
+
+    if(rows.length === 1){
+
+        if(window.UI){
+
+            UI.toast(
+                "No marked attendance found",
+                "error"
+            );
+
+        }
+
+        return;
+
+    }
+
+    const csv =
+        rows.map(row=>{
+
+            return row.map(value=>{
+
+                return `"${String(value)
+                    .replace(/"/g,'""')}"`;
+
+            }).join(",");
+
+        }).join("\r\n");
+
+    const blob =
+        new Blob(
+            ["\uFEFF" + csv],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    const today =
+        new Date()
+        .toISOString()
+        .slice(0,10);
+
+    link.href = url;
+
+    link.download =
+        `ezee-attendance-${today}.csv`;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+    if(window.UI){
+
+        UI.toast(
+            "Attendance CSV exported",
+            "success"
+        );
+
+    }
 
 },
    /* ==========================================================
