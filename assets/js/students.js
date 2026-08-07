@@ -73,7 +73,31 @@ const Students = {
                 ()=>this.search(search.value)
 
             );
+const addBtn=document.getElementById("addStudentBtn");
 
+if(addBtn){
+
+    addBtn.addEventListener(
+
+        "click",
+
+        ()=>this.addStudent()
+
+    );
+
+}
+
+document.addEventListener("click",(e)=>{
+
+    if(e.target.closest(".delete-btn")){
+
+        const id=e.target.closest(".delete-btn").dataset.id;
+
+        this.deleteStudent(id);
+
+    }
+
+});
         }
 
         const classFilter=document.getElementById("classFilter");
@@ -105,6 +129,7 @@ const Students = {
         }
 
     },
+   
   /* ==========================================================
    SEARCH
 ========================================================== */
@@ -236,9 +261,7 @@ const Students = {
 
 <button
 
-class="action-btn edit-btn"
-
-data-id="${student.id}">
+<button class="action-btn edit-btn" disabled>
 
 <i class="fa-solid fa-pen"></i>
 
@@ -275,3 +298,83 @@ Students.init();
 }
 
 );
+/* ==========================================================
+   ADD STUDENT
+========================================================== */
+
+addStudent(){
+
+    const name=prompt("Student Name");
+
+    if(!name) return;
+
+    const className=prompt("Class (Example: Class 9)");
+
+    if(!className) return;
+
+    const student={
+
+        id:Date.now().toString(),
+
+        name:name,
+
+        class:className,
+
+        status:"Active"
+
+    };
+
+    this.data.push(student);
+
+    this.filteredData=[...this.data];
+
+    this.save();
+
+    this.render();
+
+    if(window.UI){
+
+        UI.toast("Student Added","success");
+
+    }
+
+},
+/* ==========================================================
+   DELETE
+========================================================== */
+
+deleteStudent(id){
+
+    const ok=confirm(
+
+        "Delete this student?"
+
+    );
+
+    if(!ok) return;
+
+    this.data=this.data.filter(
+
+        s=>s.id!==id
+
+    );
+
+    this.filteredData=[...this.data];
+
+    this.save();
+
+    this.render();
+
+    if(window.UI){
+
+        UI.toast(
+
+            "Student Deleted",
+
+            "success"
+
+        );
+
+    }
+
+},
