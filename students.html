@@ -7,13 +7,27 @@
 
 <meta
 name="viewport"
-content="width=device-width,initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
+
+<meta
+name="theme-color"
+content="#07111F">
+
+<meta
+name="description"
+content="EZEE VISION CHAMPUA - Students Management">
+
+<meta
+name="author"
+content="Shahid Sir">
 
 <title>
 
 Students • EZEE VISION CHAMPUA
 
 </title>
+
+<!-- Google Fonts -->
 
 <link
 rel="preconnect"
@@ -25,12 +39,16 @@ href="https://fonts.gstatic.com"
 crossorigin>
 
 <link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
 rel="stylesheet">
+
+<!-- Font Awesome -->
 
 <link
 rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<!-- CSS -->
 
 <link
 rel="stylesheet"
@@ -46,6 +64,10 @@ href="assets/css/students.css">
 
 <div class="app">
 
+<!-- ===========================
+     HEADER
+=========================== -->
+
 <header class="topbar">
 
 <div class="brand">
@@ -58,9 +80,17 @@ href="assets/css/students.css">
 
 <div>
 
-<h1>Students</h1>
+<h1>
 
-<p>EZEE VISION CHAMPUA</p>
+Students
+
+</h1>
+
+<p>
+
+EZEE VISION CHAMPUA
+
+</p>
 
 </div>
 
@@ -70,7 +100,8 @@ href="assets/css/students.css">
 
 <button
 class="icon-btn"
-id="themeBtn">
+id="themeBtn"
+aria-label="Toggle Theme">
 
 <i class="fa-solid fa-moon"></i>
 
@@ -80,8 +111,17 @@ id="themeBtn">
 
 </header>
 
+<!-- ===========================
+     MAIN
+=========================== -->
+
 <main class="main-content">
-  <section class="search-section">
+
+<!-- ===========================
+     SEARCH & FILTER
+=========================== -->
+
+<section class="search-section">
 
 <div class="glass search-box">
 
@@ -90,7 +130,8 @@ id="themeBtn">
 <input
 type="search"
 id="studentSearch"
-placeholder="Search student...">
+placeholder="Search student..."
+autocomplete="off">
 
 </div>
 
@@ -105,9 +146,13 @@ All Classes
 </option>
 
 <option>Class 6</option>
+
 <option>Class 7</option>
+
 <option>Class 8</option>
+
 <option>Class 9</option>
+
 <option>Class 10</option>
 
 </select>
@@ -120,46 +165,77 @@ All Status
 
 </option>
 
-<option>Active</option>
+<option>
 
-<option>Inactive</option>
+Active
+
+</option>
+
+<option>
+
+Inactive
+
+</option>
 
 </select>
 
 </div>
 
-  </section>
-  <section>
+</section>
+<!-- ===========================
+     STUDENTS LIST
+=========================== -->
+
+<section class="students-section">
 
 <div
 id="studentCards"
 class="students-grid">
 
+    <!-- Students will be rendered here -->
+
 </div>
 
 </section>
 
+<!-- ===========================
+     FLOATING ACTION BUTTON
+=========================== -->
+
 <button
 class="fab"
-id="addStudentBtn">
+id="addStudentBtn"
+aria-label="Add Student">
 
 <i class="fa-solid fa-plus"></i>
 
 </button>
-<!-- Student Modal -->
 
-<div class="modal" id="studentModal">
+  <!-- ===========================
+     STUDENT MODAL
+=========================== -->
+
+<div
+class="modal"
+id="studentModal">
 
     <div class="modal-box glass">
 
         <div class="modal-header">
 
             <h2 id="modalTitle">
+
                 Add Student
+
             </h2>
 
-            <button id="closeModal" class="icon-btn">
+            <button
+            id="closeModal"
+            class="icon-btn"
+            aria-label="Close">
+
                 <i class="fa-solid fa-xmark"></i>
+
             </button>
 
         </div>
@@ -167,74 +243,202 @@ id="addStudentBtn">
         <form id="studentForm">
 
             <input
-                type="hidden"
-                id="studentId">
+            type="hidden"
+            id="studentId">
 
-            <input
+            <div class="form-group">
+
+                <label for="studentName">
+
+                    Student Name
+
+                </label>
+
+                <input
                 type="text"
                 id="studentName"
-                placeholder="Student Name"
+                placeholder="Enter student name"
                 required>
 
-            <select id="studentClass" required>
-                <option value="">Select Class</option>
-                <option>Class 6</option>
-                <option>Class 7</option>
-                <option>Class 8</option>
-                <option>Class 9</option>
-                <option>Class 10</option>
-            </select>
+            </div>
 
-            <select id="studentStatus">
-                <option>Active</option>
-                <option>Inactive</option>
-            </select>
+            <div class="form-group">
 
-            <button
+                <label for="studentClass">
+
+                    Class
+
+                </label>
+
+                <select
+                id="studentClass"
+                required>
+
+                    <option value="">
+
+                        Select Class
+
+                    </option>
+
+                    <option>Class 6</option>
+                    <option>Class 7</option>
+                    <option>Class 8</option>
+                    <option>Class 9</option>
+                    <option>Class 10</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="studentStatus">
+
+                    Status
+
+                </label>
+
+                <select
+                id="studentStatus">
+
+                    <option>
+
+                        Active
+
+                    </option>
+
+                    <option>
+
+                        Inactive
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                type="button"
+                id="cancelStudent"
+                class="secondary-btn">
+
+                    Cancel
+
+                </button>
+
+                <button
                 type="submit"
                 class="primary-btn">
-                Save Student
-            </button>
+
+                    Save Student
+
+                </button>
+
+            </div>
 
         </form>
 
     </div>
 
 </div>
+<!-- ===========================
+     END MAIN
+=========================== -->
+
 </main>
+
+</div>
+
+<!-- ===========================
+     BOTTOM NAVIGATION
+=========================== -->
 
 <nav class="bottom-nav">
 
-    <a href="index.html" class="nav-item">
+    <a
+    href="index.html"
+    class="nav-item">
+
         <i class="fa-solid fa-house"></i>
-        <span>Home</span>
+
+        <span>
+
+            Home
+
+        </span>
+
     </a>
 
-    <a href="students.html" class="nav-item active">
+    <a
+    href="students.html"
+    class="nav-item active">
+
         <i class="fa-solid fa-user-graduate"></i>
-        <span>Students</span>
+
+        <span>
+
+            Students
+
+        </span>
+
     </a>
 
-    <a href="attendance.html" class="nav-item">
+    <a
+    href="attendance.html"
+    class="nav-item">
+
         <i class="fa-solid fa-calendar-check"></i>
-        <span>Attendance</span>
+
+        <span>
+
+            Attendance
+
+        </span>
+
     </a>
 
-    <a href="fees.html" class="nav-item">
+    <a
+    href="fees.html"
+    class="nav-item">
+
         <i class="fa-solid fa-wallet"></i>
-        <span>Fees</span>
+
+        <span>
+
+            Fees
+
+        </span>
+
     </a>
 
-    <a href="reports.html" class="nav-item">
+    <a
+    href="reports.html"
+    class="nav-item">
+
         <i class="fa-solid fa-chart-column"></i>
-        <span>Reports</span>
+
+        <span>
+
+            Reports
+
+        </span>
+
     </a>
 
 </nav>
 
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+
 <script src="assets/js/app.js"></script>
+
 <script src="assets/js/ui.js"></script>
+
 <script src="assets/js/students.js"></script>
 
 </body>
+
 </html>
