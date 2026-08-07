@@ -73,8 +73,6 @@ const Students = {
                 ()=>this.search(search.value)
 
             );
-const addBtn=document.getElementById("addStudentBtn");
-
 if(addBtn){
 
     addBtn.addEventListener(
@@ -85,9 +83,13 @@ if(addBtn){
 
     );
 
+   const addBtn=document.getElementById("addStudentBtn");
+   
 }
 
-           if(e.target.closest(".edit-btn")){
+           
+document.addEventListener("click",(e)=>{
+if(e.target.closest(".edit-btn")){
 
 const id=e.target.closest(".edit-btn").dataset.id;
 
@@ -95,9 +97,7 @@ const student=this.data.find(s=>s.id===id);
 
 this.openModal(student);
 
-           }
-document.addEventListener("click",(e)=>{
-
+}
     if(e.target.closest(".delete-btn")){
 
         const id=e.target.closest(".delete-btn").dataset.id;
@@ -105,6 +105,7 @@ document.addEventListener("click",(e)=>{
         this.deleteStudent(id);
 
     }
+   
    document
 
 .getElementById("addStudentBtn")
@@ -310,8 +311,6 @@ this.saveStudent();
 <div class="student-actions">
 
 <button
-
-<button
 class="action-btn edit-btn"
 data-id="${student.id}">
 
@@ -386,7 +385,7 @@ document
 
 }
 
-},
+   };
 
 closeModal(){
 
@@ -395,6 +394,21 @@ document
 .classList.remove("show");
 
 },
+saveStudent(){
+
+const id=document.getElementById("studentId").value;
+
+const student={
+
+id:id || Date.now().toString(),
+
+name:document.getElementById("studentName").value,
+
+class:document.getElementById("studentClass").value,
+
+status:document.getElementById("studentStatus").value
+
+};
 /* ==========================================================
    ADD STUDENT
 ========================================================== */
@@ -477,34 +491,6 @@ deleteStudent(id){
 },
 
 
-document.addEventListener(
-
-"DOMContentLoaded",
-
-()=>{
-
-Students.init();
-
-}
-
-);
-
-saveStudent(){
-
-const id=document.getElementById("studentId").value;
-
-const student={
-
-id:id || Date.now().toString(),
-
-name:document.getElementById("studentName").value,
-
-class:document.getElementById("studentClass").value,
-
-status:document.getElementById("studentStatus").value
-
-};
-
 if(id){
 
 const index=this.data.findIndex(
@@ -532,3 +518,14 @@ this.closeModal();
 UI.toast("Student Saved","success");
 
 }
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+Students.init();
+
+}
+
+);
