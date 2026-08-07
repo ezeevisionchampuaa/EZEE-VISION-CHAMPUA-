@@ -692,77 +692,70 @@ this.bindAttendanceButtons();
     /* ======================================================
        SAVE ATTENDANCE
     ====================================================== */
+saveAttendance(){
 
-    saveAttendance() {
-
-        if (!this.selectedDate) {
-
-            this.showToast(
-                "Select a date",
-                "error"
-            );
-
-            return;
-
-        }
-
-        const students =
-            this.getStudents();
-
-        if (students.length === 0) {
-
-            this.showToast(
-                "No students found",
-                "error"
-            );
-
-            return;
-
-        }
-
-        const record =
-            this.getCurrentRecord();
-
-        let marked = 0;
-
-        students.forEach(
-            (student) => {
-
-                if (
-                    record[student.id] ===
-                    "present" ||
-                    record[student.id] ===
-                    "absent"
-                ) {
-
-                    marked++;
-
-                }
-
-            }
-        );
-
-        if (marked === 0) {
-
-            this.showToast(
-                "Mark attendance first",
-                "error"
-            );
-
-            return;
-
-        }
-
-        this.saveRecords();
-
-        this.render();
+    if(!this.selectedDate){
 
         this.showToast(
-            "Attendance Saved",
-            "success"
+            "Select a date",
+            "error"
         );
 
-    },
+        return;
+    }
+
+    const students =
+        this.getStudents();
+
+    if(students.length === 0){
+
+        this.showToast(
+            "No students found",
+            "error"
+        );
+
+        return;
+    }
+
+    const record =
+        this.getCurrentRecord();
+
+    let marked = 0;
+
+    students.forEach(student => {
+
+        if(
+            record[student.id] === "present" ||
+            record[student.id] === "absent"
+        ){
+
+            marked++;
+
+        }
+
+    });
+
+    if(marked === 0){
+
+        this.showToast(
+            "Mark attendance first",
+            "error"
+        );
+
+        return;
+    }
+
+    this.saveRecords();
+
+    this.render();
+
+    this.showToast(
+        "Attendance Saved",
+        "success"
+    );
+
+},
+    
        /* ======================================================
        ATTENDANCE PERCENTAGE
     ====================================================== */
