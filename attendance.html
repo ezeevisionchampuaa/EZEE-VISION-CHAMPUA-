@@ -19,6 +19,7 @@
         Attendance • EZEE VISION CHAMPUA
     </title>
 
+    <!-- Google Fonts -->
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -35,16 +36,19 @@
         rel="stylesheet"
     >
 
+    <!-- Font Awesome -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
 
+    <!-- Global CSS -->
     <link
         rel="stylesheet"
         href="assets/css/style.css"
     >
 
+    <!-- Attendance CSS -->
     <link
         rel="stylesheet"
         href="assets/css/attendance.css"
@@ -52,13 +56,15 @@
 
 </head>
 
+
 <body>
 
 <div class="app">
 
-    <!-- ==========================
+
+    <!-- ======================================================
          HEADER
-    ========================== -->
+    ======================================================= -->
 
     <header class="topbar">
 
@@ -72,13 +78,18 @@
 
             <div>
 
-                <h1>Attendance</h1>
+                <h1>
+                    Attendance
+                </h1>
 
-                <p>EZEE VISION CHAMPUA</p>
+                <p>
+                    EZEE VISION CHAMPUA
+                </p>
 
             </div>
 
         </div>
+
 
         <div class="top-actions">
 
@@ -86,6 +97,7 @@
                 class="icon-btn"
                 id="themeBtn"
                 type="button"
+                aria-label="Toggle theme"
             >
 
                 <i class="fa-solid fa-moon"></i>
@@ -97,15 +109,17 @@
     </header>
 
 
-    <!-- ==========================
-         MAIN
-    ========================== -->
+
+    <!-- ======================================================
+         MAIN CONTENT
+    ======================================================= -->
 
     <main class="main-content">
 
-        <!-- ==========================
+
+        <!-- ==================================================
              ATTENDANCE HEADER
-        ========================== -->
+        =================================================== -->
 
         <section class="attendance-header">
 
@@ -119,9 +133,11 @@
 
                 </span>
 
+
                 <h2>
                     Mark Attendance
                 </h2>
+
 
                 <p>
                     Select the class and mark today's
@@ -133,11 +149,13 @@
         </section>
 
 
-        <!-- ==========================
-             DATE & CLASS
-        ========================== -->
+
+        <!-- ==================================================
+             DATE & CLASS CONTROLS
+        =================================================== -->
 
         <section class="glass attendance-controls">
+
 
             <div class="control-group">
 
@@ -151,6 +169,7 @@
                 >
 
             </div>
+
 
             <div class="control-group">
 
@@ -191,11 +210,13 @@
         </section>
 
 
-        <!-- ==========================
+
+        <!-- ==================================================
              ATTENDANCE SUMMARY
-        ========================== -->
+        =================================================== -->
 
         <section class="attendance-summary">
+
 
             <div class="glass attendance-stat">
 
@@ -209,6 +230,7 @@
 
             </div>
 
+
             <div class="glass attendance-stat">
 
                 <span>
@@ -220,6 +242,7 @@
                 </strong>
 
             </div>
+
 
             <div class="glass attendance-stat">
 
@@ -235,270 +258,297 @@
 
         </section>
 
-<!-- ==========================
-     MONTHLY ATTENDANCE
-========================== -->
 
-<section class="monthly-attendance-section">
 
-    <div class="section-title">
+        <!-- ==================================================
+             MONTHLY ATTENDANCE
+        =================================================== -->
 
-        <div>
+        <section class="monthly-attendance-section">
 
-            <h2>
-                Monthly Attendance
-            </h2>
+            <div class="section-title">
 
-            <p>
-                View attendance for selected month
-            </p>
+                <div>
 
-        </div>
+                    <h2>
+                        Monthly Attendance
+                    </h2>
 
-    </div>
+                    <p>
+                        View attendance for selected month
+                    </p>
 
-    <div class="glass monthly-controls">
-
-        <div class="control-group">
-
-            <label for="attendanceMonth">
-                Month
-            </label>
-
-            <input
-                type="month"
-                id="attendanceMonth"
-            >
-
-        </div>
-
-    </div>
-
-    <div
-        id="monthlyAttendanceList"
-        class="monthly-attendance-list"
-    ></div>
-
-</section>
-
-<!-- ==========================
-     SAVED ATTENDANCE RECORDS
-========================== -->
-
-<section class="attendance-records-section">
-
-    <div class="section-title">
-
-        <div>
-
-            <h2>
-                Attendance Records
-            </h2>
-
-            <p>
-                Saved attendance history
-            </p>
-
-        </div>
-
-    </div>
-
-    <div
-        id="attendanceRecordsList"
-        class="attendance-records-list"
-    ></div>
-
-</section>
-<!-- ==========================
-     ATTENDANCE ANALYTICS
-========================== -->
-
-<section class="attendance-analytics-section">
-
-    <div class="section-title">
-
-        <div>
-
-            <h2>
-                Attendance Analytics
-            </h2>
-
-            <p>
-                Overall attendance performance
-            </p>
-
-        </div>
-
-    </div>
-
-    <!-- ANALYTICS STATS -->
-
-    <div class="analytics-stats">
-
-        <div class="glass analytics-card">
-
-            <div class="analytics-icon">
-
-                <i class="fa-solid fa-users"></i>
+                </div>
 
             </div>
 
-            <span>
-                Students
-            </span>
 
-            <strong id="analyticsStudents">
-                0
-            </strong>
+            <div class="glass monthly-controls">
 
-        </div>
+                <div class="control-group">
 
+                    <label for="attendanceMonth">
+                        Month
+                    </label>
 
-        <div class="glass analytics-card">
+                    <input
+                        type="month"
+                        id="attendanceMonth"
+                    >
 
-            <div class="analytics-icon">
-
-                <i class="fa-solid fa-check"></i>
-
-            </div>
-
-            <span>
-                Present
-            </span>
-
-            <strong id="analyticsPresent">
-                0
-            </strong>
-
-        </div>
-
-
-        <div class="glass analytics-card">
-
-            <div class="analytics-icon">
-
-                <i class="fa-solid fa-xmark"></i>
+                </div>
 
             </div>
 
-            <span>
-                Absent
-            </span>
 
-            <strong id="analyticsAbsent">
-                0
-            </strong>
+            <div
+                id="monthlyAttendanceList"
+                class="monthly-attendance-list"
+            ></div>
 
-        </div>
+        </section>
 
 
-        <div class="glass analytics-card">
 
-            <div class="analytics-icon">
+        <!-- ==================================================
+             SAVED ATTENDANCE RECORDS
+        =================================================== -->
 
-                <i class="fa-solid fa-chart-line"></i>
+        <section class="attendance-records-section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        Attendance Records
+                    </h2>
+
+                    <p>
+                        Saved attendance history
+                    </p>
+
+                </div>
 
             </div>
 
-            <span>
-                Average
-            </span>
 
-            <strong id="analyticsAverage">
-                0%
-            </strong>
+            <div
+                id="attendanceRecordsList"
+                class="attendance-records-list"
+            ></div>
 
-        </div>
-
-    </div>
+        </section>
 
 
-    <!-- CLASS ANALYTICS -->
 
-    <div class="class-analytics-wrapper">
+        <!-- ==================================================
+             ATTENDANCE ANALYTICS
+        =================================================== -->
 
-        <h3>
-            Class-wise Attendance
-        </h3>
+        <section class="attendance-analytics-section">
 
-        <div
-            id="classAnalyticsList"
-            class="class-analytics-list"
-        ></div>
+            <div class="section-title">
 
-    </div>
+                <div>
 
-</section>
-<!-- ==========================
-     ATTENDANCE EXPORT
-========================== -->
+                    <h2>
+                        Attendance Analytics
+                    </h2>
 
-<section class="attendance-export-section">
+                    <p>
+                        Overall attendance performance
+                    </p>
 
-    <div class="section-title">
+                </div>
 
-        <div>
+            </div>
 
-            <h2>
-                Export Attendance
-            </h2>
 
-            <p>
-                Download attendance records
-            </p>
+            <!-- ANALYTICS STATS -->
 
-        </div>
+            <div class="analytics-stats">
 
-    </div>
 
-    <div class="glass export-card">
+                <div class="glass analytics-card">
 
-        <div class="export-icon">
+                    <div class="analytics-icon">
 
-            <i class="fa-solid fa-file-csv"></i>
+                        <i class="fa-solid fa-users"></i>
 
-        </div>
+                    </div>
 
-        <div class="export-info">
+                    <span>
+                        Students
+                    </span>
 
-            <h3>
-                Attendance CSV
-            </h3>
+                    <strong id="analyticsStudents">
+                        0
+                    </strong>
 
-            <p>
-                Export all saved attendance records
-                in Excel-friendly CSV format.
-            </p>
+                </div>
 
-        </div>
 
-        <button
-            type="button"
-            id="exportAttendanceBtn"
-            class="export-btn"
-        >
+                <div class="glass analytics-card">
 
-            <i class="fa-solid fa-download"></i>
+                    <div class="analytics-icon">
 
-            Export CSV
+                        <i class="fa-solid fa-check"></i>
 
-        </button>
-        <button
-    type="button"
-    id="printAttendanceBtn"
-    class="export-btn"
->
-    <i class="fa-solid fa-print"></i>
-    Print
-        </button>
+                    </div>
 
-    </div>
+                    <span>
+                        Present
+                    </span>
 
-</section>
+                    <strong id="analyticsPresent">
+                        0
+                    </strong>
 
-        <!-- ==========================
+                </div>
+
+
+                <div class="glass analytics-card">
+
+                    <div class="analytics-icon">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </div>
+
+                    <span>
+                        Absent
+                    </span>
+
+                    <strong id="analyticsAbsent">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="glass analytics-card">
+
+                    <div class="analytics-icon">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+                    <span>
+                        Average
+                    </span>
+
+                    <strong id="analyticsAverage">
+                        0%
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CLASS ANALYTICS -->
+
+            <div class="class-analytics-wrapper">
+
+                <h3>
+                    Class-wise Attendance
+                </h3>
+
+                <div
+                    id="classAnalyticsList"
+                    class="class-analytics-list"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             ATTENDANCE EXPORT
+        =================================================== -->
+
+        <section class="attendance-export-section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        Export Attendance
+                    </h2>
+
+                    <p>
+                        Download attendance records
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="glass export-card">
+
+
+                <div class="export-icon">
+
+                    <i class="fa-solid fa-file-csv"></i>
+
+                </div>
+
+
+                <div class="export-info">
+
+                    <h3>
+                        Attendance CSV
+                    </h3>
+
+                    <p>
+                        Export all saved attendance records
+                        in Excel-friendly CSV format.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="exportAttendanceBtn"
+                    class="export-btn"
+                >
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Export CSV
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="printAttendanceBtn"
+                    class="export-btn"
+                >
+
+                    <i class="fa-solid fa-print"></i>
+
+                    Print
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================================
              STUDENT ATTENDANCE LIST
-        ========================== -->
+        =================================================== -->
 
         <section>
 
@@ -517,6 +567,7 @@
                 </div>
 
             </div>
+
 
             <div
                 id="attendanceList"
@@ -542,37 +593,43 @@
 
         </section>
 
-<!-- ==========================
-     ATTENDANCE PERCENTAGE
-========================== -->
 
-<section class="attendance-percentage-section">
 
-    <div class="section-title">
+        <!-- ==================================================
+             ATTENDANCE PERCENTAGE
+        =================================================== -->
 
-        <div>
+        <section class="attendance-percentage-section">
 
-            <h2>
-                Attendance Summary
-            </h2>
+            <div class="section-title">
 
-            <p>
-                Student-wise attendance
-            </p>
+                <div>
 
-        </div>
+                    <h2>
+                        Attendance Summary
+                    </h2>
 
-    </div>
+                    <p>
+                        Student-wise attendance
+                    </p>
 
-    <div
-        id="attendancePercentageList"
-        class="attendance-percentage-list"
-    ></div>
+                </div>
 
-</section>
-        <!-- ==========================
-             SAVE BUTTON
-        ========================== -->
+            </div>
+
+
+            <div
+                id="attendancePercentageList"
+                class="attendance-percentage-list"
+            ></div>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             SAVE ATTENDANCE
+        =================================================== -->
 
         <button
             class="primary-btn attendance-save"
@@ -585,122 +642,18 @@
             Save Attendance
 
         </button>
-<!-- ==========================
-     PRINT ATTENDANCE REPORT
-========================== -->
 
-<div id="attendancePrintArea" class="attendance-print-area">
 
-    <div class="print-header">
-
-        <h1>
-            EZEE VISION CHAMPUA
-        </h1>
-
-        <h2>
-            ATTENDANCE REPORT
-        </h2>
-
-        <div class="print-meta">
-
-            <span>
-                Date:
-                <strong id="printAttendanceDate">
-                    —
-                </strong>
-            </span>
-
-            <span>
-                Class:
-                <strong id="printAttendanceClass">
-                    All Classes
-                </strong>
-            </span>
-
-        </div>
-
-    </div>
-
-    <table class="print-attendance-table">
-
-        <thead>
-
-            <tr>
-
-                <th>
-                    S.No.
-                </th>
-
-                <th>
-                    Student Name
-                </th>
-
-                <th>
-                    Class
-                </th>
-
-                <th>
-                    Status
-                </th>
-
-            </tr>
-
-        </thead>
-
-        <tbody id="printAttendanceBody">
-
-        </tbody>
-
-    </table>
-
-    <div class="print-summary">
-
-        <span>
-            Total:
-            <strong id="printTotal">
-                0
-            </strong>
-        </span>
-
-        <span>
-            Present:
-            <strong id="printPresent">
-                0
-            </strong>
-        </span>
-
-        <span>
-            Absent:
-            <strong id="printAbsent">
-                0
-            </strong>
-        </span>
-
-    </div>
-
-    <div class="print-signatures">
-
-        <div>
-            <span></span>
-            <p>Class Teacher</p>
-        </div>
-
-        <div>
-            <span></span>
-            <p>Principal / Head</p>
-        </div>
-
-    </div>
-
-</div>
     </main>
 
 
-    <!-- ==========================
+
+    <!-- ======================================================
          BOTTOM NAVIGATION
-    ========================== -->
+    ======================================================= -->
 
     <nav class="bottom-nav">
+
 
         <a
             href="index.html"
@@ -715,6 +668,7 @@
 
         </a>
 
+
         <a
             href="students.html"
             class="nav-item"
@@ -727,6 +681,7 @@
             </span>
 
         </a>
+
 
         <a
             href="attendance.html"
@@ -741,6 +696,7 @@
 
         </a>
 
+
         <a
             href="fees.html"
             class="nav-item"
@@ -753,6 +709,7 @@
             </span>
 
         </a>
+
 
         <a
             href="reports.html"
@@ -769,18 +726,21 @@
 
     </nav>
 
+
 </div>
 
 
-<!-- ==========================
+
+<!-- ==========================================================
      JAVASCRIPT
-========================== -->
+=========================================================== -->
 
 <script src="assets/js/app.js"></script>
 
 <script src="assets/js/ui.js"></script>
 
 <script src="assets/js/attendance.js"></script>
+
 
 </body>
 
