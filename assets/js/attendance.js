@@ -912,171 +912,151 @@ saveAttendance(){
        MONTHLY ATTENDANCE
     ====================================================== */
 
-    renderMonthly() {
+    renderMonthly(){
 
-        const container =
-            document.getElementById(
-                "monthlyAttendanceList"
-            );
+    const container =
+        document.getElementById(
+            "monthlyAttendanceList"
+        );
 
-        if (!container) return;
+    if(!container) return;
 
-        const students =
-            this.getStudents();
+    const students =
+        this.getStudents();
 
-        if (students.length === 0) {
+    if(students.length === 0){
 
-            container.innerHTML = `
+        container.innerHTML = `
+            <div class="glass monthly-empty">
+                No students available.
+            </div>
+        `;
 
-                <div class="glass monthly-empty">
+        return;
+    }
 
-                    No students available.
+    const monthInput =
+        document.getElementById(
+            "attendanceMonth"
+        );
+
+    const selectedMonth =
+        monthInput
+            ? monthInput.value
+            : "";
+
+    if(!selectedMonth){
+
+        container.innerHTML = `
+            <div class="glass monthly-empty">
+                Select a month.
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML =
+        students.map(student => {
+
+            let present = 0;
+            let absent = 0;
+
+            Object.keys(this.records).forEach(date => {
+
+                if(!date.startsWith(selectedMonth)){
+                    return;
+                }
+
+                const record =
+                    this.records[date];
+
+                if(!record) return;
+
+                if(
+                    record[student.id] === "present"
+                ){
+
+                    present++;
+
+                }
+
+                if(
+                    record[student.id] === "absent"
+                ){
+
+                    absent++;
+
+                }
+
+            });
+
+            const total =
+                present + absent;
+
+            const percentage =
+                total === 0
+                    ? 0
+                    : Math.round(
+                        (present / total) * 100
+                    );
+
+            return `
+
+                <div class="glass monthly-card">
+
+                    <div class="monthly-student">
+
+                        <div class="attendance-avatar">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                ${this.escape(
+                                    student.name
+                                )}
+                            </h3>
+
+                            <p>
+                                ${this.escape(
+                                    student.class
+                                )}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="monthly-stats">
+
+                        <span>
+                            Present: ${present}
+                        </span>
+
+                        <span>
+                            Absent: ${absent}
+                        </span>
+
+                        <span>
+                            ${percentage}%
+                        </span>
+
+                    </div>
 
                 </div>
 
             `;
 
-            return;
+        }).join("");
 
-        }
+},
+        
 
-        const monthInput =
-            document.getElementById(
-                "attendanceMonth"
-            );
 
-        if (!monthInput || !monthInput.value) {
-
-            container.innerHTML = "";
-
-            return;
-
-        }
-
-        const selectedMonth =
-            monthInput.value;
-
-        container.innerHTML =
-            students.map(
-                (student) => {
-
-                    let present = 0;
-
-                    let absent = 0;
-
-                    Object.keys(
-                        this.records
-                    ).forEach(
-                        (date) => {
-
-                            if (
-                                !date.startsWith(
-                                    selectedMonth
-                                )
-                            ) {
-
-                                return;
-
-                            }
-
-                            const status =
-                                this.records[date] &&
-                                this.records[date][
-                                    student.id
-                                ];
-
-                            if (
-                                status === "present"
-                            ) {
-
-                                present++;
-
-                            }
-
-                            if (
-                                status === "absent"
-                            ) {
-
-                                absent++;
-
-                            }
-
-                        }
-                    );
-
-                    const total =
-                        present + absent;
-
-                    const percentage =
-                        total === 0
-                            ? 0
-                            : Math.round(
-                                (
-                                    present /
-                                    total
-                                ) * 100
-                            );
-
-                    return `
-
-                        <div class="glass monthly-card">
-
-                            <div class="monthly-student">
-
-                                <div class="attendance-avatar">
-
-                                    <i class="fa-solid fa-user"></i>
-
-                                </div>
-
-                                <div>
-
-                                    <h3>
-                                        ${this.escape(
-                                            student.name
-                                        )}
-                                    </h3>
-
-                                    <p>
-                                        ${this.escape(
-                                            student.class
-                                        )}
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <div class="monthly-stats">
-
-                                <span>
-                                    Present:
-                                    <strong>
-                                        ${present}
-                                    </strong>
-                                </span>
-
-                                <span>
-                                    Absent:
-                                    <strong>
-                                        ${absent}
-                                    </strong>
-                                </span>
-
-                                <span>
-                                    ${percentage}%
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    `;
-
-                }
-            ).join("");
-
-    },
        /* ======================================================
        ATTENDANCE RECORDS
     ====================================================== */
