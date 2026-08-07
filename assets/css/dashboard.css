@@ -1,0 +1,322 @@
+/* ==========================================================
+   EZEE VISION CHAMPUA
+   Dashboard CSS
+   Version : 1.0.0
+========================================================== */
+
+/* ==========================
+   BACKGROUND
+========================== */
+
+body{
+
+    background:
+    radial-gradient(circle at top left,#1B3A6F 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#13294B 0%,transparent 30%),
+    var(--bg);
+
+}
+
+/* ==========================
+   APP ANIMATION
+========================== */
+
+.app{
+
+    animation:fadeUp .6s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================
+   GLASS ENHANCEMENT
+========================== */
+
+.glass{
+
+    transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    border-color .3s ease;
+
+}
+
+.glass:hover{
+
+    transform:translateY(-3px);
+
+    border-color:
+    rgba(79,140,255,.35);
+
+    box-shadow:
+    0 16px 40px
+    rgba(0,0,0,.35);
+
+}
+
+/* ==========================
+   PREMIUM SCROLLBAR
+========================== */
+
+::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:rgba(255,255,255,.18);
+
+    border-radius:50px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--primary);
+
+}
+/* ==========================================================
+   PREMIUM BACKGROUND GLOW
+========================================================== */
+
+body::before,
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:220px;
+
+    height:220px;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    opacity:.18;
+
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:floatGlow 12s ease-in-out infinite;
+
+}
+
+body::before{
+
+    top:-60px;
+
+    left:-60px;
+
+    background:#4F8CFF;
+
+}
+
+body::after{
+
+    right:-70px;
+
+    bottom:-70px;
+
+    background:#22C55E;
+
+    animation-delay:6s;
+
+}
+
+@keyframes floatGlow{
+
+    0%,100%{
+
+        transform:translate(0,0) scale(1);
+
+    }
+
+    50%{
+
+        transform:translate(25px,-20px) scale(1.12);
+
+    }
+
+}
+
+/* ==========================================================
+   CARD SHINE EFFECT
+========================================================== */
+
+.glass{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.glass::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:70%;
+
+    height:100%;
+
+    background:linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.08),
+
+        transparent
+
+    );
+
+    transition:left .8s ease;
+
+}
+
+.glass:hover::before{
+
+    left:130%;
+
+}
+
+/* ==========================================================
+   BUTTON MICRO ANIMATION
+========================================================== */
+
+.icon-btn,
+.primary-btn,
+.secondary-btn,
+.quick-card{
+
+    transition:
+
+    transform .25s ease,
+
+    box-shadow .25s ease,
+
+    background .25s ease;
+
+}
+
+.icon-btn:active,
+.primary-btn:active,
+.secondary-btn:active,
+.quick-card:active{
+
+    transform:scale(.96);
+
+}
+
+/* ==========================================================
+   STAT CARD GLOW
+========================================================== */
+
+.stat-card:hover{
+
+    box-shadow:
+
+    0 0 0 1px rgba(79,140,255,.20),
+
+    0 16px 36px rgba(79,140,255,.18);
+
+}
+
+/* ==========================================================
+   HERO TITLE GRADIENT
+========================================================== */
+
+.hero h2{
+
+    background:linear-gradient(
+
+        135deg,
+
+        #FFFFFF,
+
+        #BFD8FF
+
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    background-clip:text;
+
+}
+
+/* ==========================================================
+   CLOCK GLOW
+========================================================== */
+
+.clock-card{
+
+    border:1px solid rgba(79,140,255,.12);
+
+}
+
+.clock-card h3{
+
+    color:var(--primary);
+
+    letter-spacing:1px;
+
+}
+
+/* ==========================================================
+   MOBILE POLISH
+========================================================== */
+
+@media (max-width:430px){
+
+    .hero h2{
+
+        font-size:1.75rem;
+
+    }
+
+    .clock-card{
+
+        padding:18px;
+
+    }
+
+}
