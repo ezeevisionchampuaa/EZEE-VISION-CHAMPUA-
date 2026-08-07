@@ -200,6 +200,19 @@ if(exportButton){
             this.exportCSV();
         }
     );
+const printButton =
+    document.getElementById(
+        "printAttendanceBtn"
+    );
+
+if(printButton){
+
+    printButton.addEventListener(
+        "click",
+        ()=>{
+            this.printAttendance();
+        }
+    );
 
 }
         }
@@ -1504,6 +1517,216 @@ exportCSV(){
         );
 
     }
+
+},
+
+/* ==========================================================
+   PRINT ATTENDANCE
+========================================================== */
+
+printAttendance(){
+
+    const students =
+        this.getStudents();
+
+    if(students.length === 0){
+
+        if(window.UI){
+
+            UI.toast(
+                "No students available to print",
+                "error"
+            );
+
+        }
+
+        return;
+
+    }
+
+    if(!this.selectedDate){
+
+        if(window.UI){
+
+            UI.toast(
+                "Select an attendance date",
+                "error"
+            );
+
+        }
+
+        return;
+
+    }
+
+    const record =
+        this.records[this.selectedDate] || {};
+
+    const body =
+        document.getElementById(
+            "printAttendanceBody"
+        );
+
+    if(!body) return;
+
+    let present = 0;
+
+    let absent = 0;
+
+    let serial = 1;
+
+    const rows = [];
+
+    students.forEach(student=>{
+
+        const status =
+            record[student.id];
+
+        /*
+         * Only marked students will appear.
+         */
+
+        if(!status){
+
+            return;
+
+        }
+
+        if(status === "present"){
+
+            present++;
+
+        }
+
+        if(status === "absent"){
+
+            absent++;
+
+        }
+
+        rows.push(`
+
+            <tr>
+
+                <td>
+                    ${serial++}
+                </td>
+
+                <td>
+                    ${this.escape(
+                        student.name
+                    )}
+                </td>
+
+                <td>
+                    ${this.escape(
+                        student.class
+                    )}
+                </td>
+
+                <td>
+                    ${status === "present"
+                        ? "Present"
+                        : "Absent"}
+                </td>
+
+            </tr>
+
+        `);
+
+    });
+
+    if(rows.length === 0){
+
+        if(window.UI){
+
+            UI.toast(
+                "No attendance marked for this date",
+                "error"
+            );
+
+        }
+
+        return;
+
+    }
+
+    body.innerHTML =
+        rows.join("");
+
+    const dateEl =
+        document.getElementById(
+            "printAttendanceDate"
+        );
+
+    const classEl =
+        document.getElementById(
+            "printAttendanceClass"
+        );
+
+    const totalEl =
+        document.getElementById(
+            "printTotal"
+        );
+
+    const presentEl =
+        document.getElementById(
+            "printPresent"
+        );
+
+    const absentEl =
+        document.getElementById(
+            "printAbsent"
+        );
+
+    if(dateEl){
+
+        dateEl.textContent =
+            this.formatDate(
+                this.selectedDate
+            );
+
+    }
+
+    if(classEl){
+
+        classEl.textContent =
+            this.selectedClass ||
+            "All Classes";
+
+    }
+
+    if(totalEl){
+
+        totalEl.textContent =
+            present + absent;
+
+    }
+
+    if(presentEl){
+
+        presentEl.textContent =
+            present;
+
+    }
+
+    if(absentEl){
+
+        absentEl.textContent =
+            absent;
+
+    }
+
+    /*
+     * Small delay ensures print area is
+     * fully updated before browser print.
+     */
+
+    setTimeout(()=>{
+
+        window.print();
+
+    },150);
 
 },
    /* ==========================================================
