@@ -1,0 +1,311 @@
+/* ==========================================================
+   EZEE VISION CHAMPUA
+   Students Module
+   Version : 1.0.0
+==========================================================*/
+
+/* ==========================
+   SEARCH SECTION
+========================== */
+
+.search-section{
+
+    margin-bottom:22px;
+
+}
+
+.search-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 18px;
+
+    margin-bottom:16px;
+
+}
+
+.search-box i{
+
+    color:var(--text);
+
+    font-size:18px;
+
+}
+
+.search-box input{
+
+    background:transparent;
+
+    border:none;
+
+    padding:0;
+
+    color:var(--white);
+
+    font-size:.95rem;
+
+}
+
+.search-box input::placeholder{
+
+    color:var(--text);
+
+}
+
+/* ==========================
+   FILTERS
+========================== */
+
+.filter-row{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:14px;
+
+}
+
+.filter-row select{
+
+    background:var(--surface);
+
+    color:var(--white);
+
+    border-radius:16px;
+
+    padding:14px;
+
+}
+
+/* ==========================
+   STUDENTS GRID
+========================== */
+
+.students-grid{
+
+    display:grid;
+
+    gap:18px;
+
+    padding-bottom:110px;
+
+}
+
+/* ==========================
+   STUDENT CARD
+========================== */
+
+.student-card{
+
+    padding:18px;
+
+    display:flex;
+
+    gap:16px;
+
+    align-items:center;
+
+    transition:.3s ease;
+
+}
+
+.student-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.student-avatar{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        #2563EB
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:28px;
+
+    flex-shrink:0;
+
+}
+
+.student-info{
+
+    flex:1;
+
+}
+
+.student-info h3{
+
+    font-size:1rem;
+
+    margin-bottom:6px;
+
+}
+
+.student-info p{
+
+    color:var(--text);
+
+    font-size:.82rem;
+
+    margin-bottom:4px;
+
+}
+
+.student-actions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+/* ==========================
+   ACTION BUTTONS
+========================== */
+
+.action-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.edit-btn{
+
+    background:var(--primary);
+
+}
+
+.delete-btn{
+
+    background:var(--danger);
+
+}
+
+.action-btn:hover{
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================
+   FLOATING BUTTON
+========================== */
+
+.fab{
+
+    position:fixed;
+
+    right:22px;
+
+    bottom:95px;
+
+    width:62px;
+
+    height:62px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        #2563EB
+    );
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:22px;
+
+    box-shadow:0 16px 36px rgba(79,140,255,.35);
+
+    cursor:pointer;
+
+    transition:.3s ease;
+
+    z-index:999;
+
+}
+
+.fab:hover{
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width:380px){
+
+    .student-card{
+
+        padding:15px;
+
+    }
+
+    .student-avatar{
+
+        width:60px;
+
+        height:60px;
+
+        font-size:24px;
+
+    }
+
+    .fab{
+
+        width:56px;
+
+        height:56px;
+
+        bottom:90px;
+
+    }
+
+}
+
