@@ -303,100 +303,102 @@ const Students = {
 /* ==========================================================
    RENDER
 ========================================================== */
+render(){
 
-    render(){
+    const container =
+        document.getElementById("studentCards");
 
-        const container =
-            document.getElementById(
-                "studentCards"
-            );
+    const count =
+        document.getElementById("studentCount");
 
+    if(count){
 
-        if(!container) return;
+        count.textContent =
+            this.data.length;
 
+    }
 
-        if(this.filteredData.length === 0){
+    if(!container) return;
 
-            container.innerHTML = `
+    if(this.filteredData.length === 0){
 
-                <div class="glass student-card">
+        container.innerHTML = `
 
-                    <div class="student-info">
+        <div class="glass student-card">
 
-                        <h3>No Students Found</h3>
+            <div class="student-info">
 
-                        <p>
-                            Click + button to add students.
-                        </p>
+                <h3>No Students Found</h3>
 
-                    </div>
+                <p>
+                    Click + button to add students.
+                </p>
 
-                </div>
+            </div>
 
-            `;
+        </div>
 
-            return;
+        `;
 
-        }
+        return;
 
+    }
 
-        container.innerHTML =
-            this.filteredData.map(student=>`
+    container.innerHTML =
+        this.filteredData.map(student => `
 
-                <div class="glass student-card">
+        <div class="glass student-card">
 
-                    <div class="student-avatar">
+            <div class="student-avatar">
 
-                        <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-user"></i>
 
-                    </div>
+            </div>
 
+            <div class="student-info">
 
-                    <div class="student-info">
+                <h3>
+                    ${student.name}
+                </h3>
 
-                        <h3>
-                            ${student.name}
-                        </h3>
+                <p>
+                    ${student.class}
+                </p>
 
-                        <p>
-                            ${student.class}
-                        </p>
+                <p>
+                    ${student.status}
+                </p>
 
-                        <p>
-                            ${student.status}
-                        </p>
+            </div>
 
-                    </div>
+            <div class="student-actions">
 
+                <button
+                    class="action-btn edit-btn"
+                    data-id="${student.id}"
+                >
 
-                    <div class="student-actions">
+                    <i class="fa-solid fa-pen"></i>
 
-                        <button
-                            type="button"
-                            class="action-btn edit-btn"
-                            data-id="${student.id}">
+                </button>
 
-                            <i class="fa-solid fa-pen"></i>
+                <button
+                    class="action-btn delete-btn"
+                    data-id="${student.id}"
+                >
 
-                        </button>
+                    <i class="fa-solid fa-trash"></i>
 
+                </button>
 
-                        <button
-                            type="button"
-                            class="action-btn delete-btn"
-                            data-id="${student.id}">
+            </div>
 
-                            <i class="fa-solid fa-trash"></i>
+        </div>
 
-                        </button>
+        `).join("");
 
-                    </div>
-
-                </div>
-
-            `).join("");
-
-    },
+},
+    
 
 /* ==========================================================
    OPEN MODAL
