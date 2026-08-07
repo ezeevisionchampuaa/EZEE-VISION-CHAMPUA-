@@ -36,7 +36,15 @@ const Students = {
 
         if(saved){
 
-            this.data = JSON.parse(saved);
+            try{
+
+                this.data = JSON.parse(saved);
+
+            }catch(error){
+
+                this.data = [];
+
+            }
 
         }else{
 
@@ -70,7 +78,8 @@ const Students = {
 
     bindEvents(){
 
-        const search = document.getElementById("studentSearch");
+        const search =
+            document.getElementById("studentSearch");
 
         if(search){
 
@@ -82,7 +91,9 @@ const Students = {
 
         }
 
-        const classFilter = document.getElementById("classFilter");
+
+        const classFilter =
+            document.getElementById("classFilter");
 
         if(classFilter){
 
@@ -94,7 +105,9 @@ const Students = {
 
         }
 
-        const statusFilter = document.getElementById("statusFilter");
+
+        const statusFilter =
+            document.getElementById("statusFilter");
 
         if(statusFilter){
 
@@ -106,7 +119,9 @@ const Students = {
 
         }
 
-        const addBtn = document.getElementById("addStudentBtn");
+
+        const addBtn =
+            document.getElementById("addStudentBtn");
 
         if(addBtn){
 
@@ -118,7 +133,9 @@ const Students = {
 
         }
 
-        const closeBtn = document.getElementById("closeModal");
+
+        const closeBtn =
+            document.getElementById("closeModal");
 
         if(closeBtn){
 
@@ -130,7 +147,9 @@ const Students = {
 
         }
 
-        const form = document.getElementById("studentForm");
+
+        const form =
+            document.getElementById("studentForm");
 
         if(form){
 
@@ -144,21 +163,26 @@ const Students = {
 
         }
 
+
         document.addEventListener("click",(e)=>{
 
-            const edit = e.target.closest(".edit-btn");
+            const edit =
+                e.target.closest(".edit-btn");
 
-            const del = e.target.closest(".delete-btn");
+            const del =
+                e.target.closest(".delete-btn");
+
 
             if(edit){
 
                 const id = edit.dataset.id;
 
-                const student = this.data.find(
+                const student =
+                    this.data.find(
 
-                    s=>s.id===id
+                        s => s.id === id
 
-                );
+                    );
 
                 if(student){
 
@@ -167,6 +191,7 @@ const Students = {
                 }
 
             }
+
 
             if(del){
 
@@ -181,74 +206,100 @@ const Students = {
         });
 
     },
-   /* ==========================================================
+
+/* ==========================================================
    SEARCH
 ========================================================== */
 
     search(keyword){
 
-        keyword = keyword.trim().toLowerCase();
+        keyword =
+            keyword
+            .trim()
+            .toLowerCase();
 
-        this.filteredData = this.data.filter(student=>{
 
-            return student.name
-                .toLowerCase()
-                .includes(keyword);
+        this.filteredData =
+            this.data.filter(student=>{
 
-        });
+                return student.name
+                    .toLowerCase()
+                    .includes(keyword);
+
+            });
+
 
         this.render();
 
     },
+
 /* ==========================================================
-   APPLY FILTERS
+   FILTER
 ========================================================== */
 
-applyFilters(){
+    filter(){
 
-    const keyword=document
-    .getElementById("studentSearch")
-    .value
-    .trim()
-    .toLowerCase();
+        const classValue =
+            document.getElementById(
+                "classFilter"
+            ).value;
 
-    const classValue=document
-    .getElementById("classFilter")
-    .value;
 
-    const statusValue=document
-    .getElementById("statusFilter")
-    .value;
+        const statusValue =
+            document.getElementById(
+                "statusFilter"
+            ).value;
 
-    this.filteredData=this.data.filter(student=>{
 
-        const searchMatch=
+        const searchInput =
+            document.getElementById(
+                "studentSearch"
+            );
 
-        student.name
-        .toLowerCase()
-        .includes(keyword);
 
-        const classMatch=
+        const keyword =
+            searchInput
+            ? searchInput.value
+                .trim()
+                .toLowerCase()
+            : "";
 
-        !classValue ||
 
-        student.class===classValue;
+        this.filteredData =
+            this.data.filter(student=>{
 
-        const statusMatch=
+                const searchMatch =
+                    !keyword ||
+                    student.name
+                        .toLowerCase()
+                        .includes(keyword);
 
-        !statusValue ||
 
-        student.status===statusValue;
+                const classMatch =
+                    !classValue ||
+                    student.class === classValue;
 
-        return searchMatch &&
-               classMatch &&
-               statusMatch;
 
-    });
+                const statusMatch =
+                    !statusValue ||
+                    student.status === statusValue;
 
-    this.render();
 
-}
+                return (
+
+                    searchMatch &&
+                    classMatch &&
+                    statusMatch
+
+                );
+
+            });
+
+
+        this.render();
+
+    },
+
 /* ==========================================================
    RENDER
 ========================================================== */
@@ -256,25 +307,31 @@ applyFilters(){
     render(){
 
         const container =
-            document.getElementById("studentCards");
+            document.getElementById(
+                "studentCards"
+            );
+
 
         if(!container) return;
 
-        if(this.filteredData.length===0){
+
+        if(this.filteredData.length === 0){
 
             container.innerHTML = `
 
-            <div class="glass student-card">
+                <div class="glass student-card">
 
-                <div class="student-info">
+                    <div class="student-info">
 
-                    <h3>No Students Found</h3>
+                        <h3>No Students Found</h3>
 
-                    <p>Click + button to add students.</p>
+                        <p>
+                            Click + button to add students.
+                        </p>
+
+                    </div>
 
                 </div>
-
-            </div>
 
             `;
 
@@ -282,84 +339,132 @@ applyFilters(){
 
         }
 
-        container.innerHTML = this.filteredData.map(student=>`
 
-            <div class="glass student-card">
+        container.innerHTML =
+            this.filteredData.map(student=>`
 
-                <div class="student-avatar">
+                <div class="glass student-card">
 
-                    <i class="fa-solid fa-user"></i>
+                    <div class="student-avatar">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+
+                    <div class="student-info">
+
+                        <h3>
+                            ${student.name}
+                        </h3>
+
+                        <p>
+                            ${student.class}
+                        </p>
+
+                        <p>
+                            ${student.status}
+                        </p>
+
+                    </div>
+
+
+                    <div class="student-actions">
+
+                        <button
+                            type="button"
+                            class="action-btn edit-btn"
+                            data-id="${student.id}">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="action-btn delete-btn"
+                            data-id="${student.id}">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </button>
+
+                    </div>
 
                 </div>
 
-                <div class="student-info">
-
-                    <h3>${student.name}</h3>
-
-                    <p>${student.class}</p>
-
-                    <p>${student.status}</p>
-
-                </div>
-
-                <div class="student-actions">
-
-                    <button
-                        class="action-btn edit-btn"
-                        data-id="${student.id}">
-
-                        <i class="fa-solid fa-pen"></i>
-
-                    </button>
-
-                    <button
-                        class="action-btn delete-btn"
-                        data-id="${student.id}">
-
-                        <i class="fa-solid fa-trash"></i>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        `).join("");
+            `).join("");
 
     },
-   /* ==========================================================
+
+/* ==========================================================
    OPEN MODAL
 ========================================================== */
 
     openModal(student = null){
 
-        const modal = document.getElementById("studentModal");
+        const modal =
+            document.getElementById(
+                "studentModal"
+            );
+
 
         if(!modal) return;
 
+
         modal.classList.add("show");
 
-        const form = document.getElementById("studentForm");
+
+        const form =
+            document.getElementById(
+                "studentForm"
+            );
+
 
         if(student){
 
-            document.getElementById("modalTitle").textContent = "Edit Student";
+            document.getElementById(
+                "modalTitle"
+            ).textContent = "Edit Student";
 
-            document.getElementById("studentId").value = student.id;
 
-            document.getElementById("studentName").value = student.name;
+            document.getElementById(
+                "studentId"
+            ).value = student.id;
 
-            document.getElementById("studentClass").value = student.class;
 
-            document.getElementById("studentStatus").value = student.status;
+            document.getElementById(
+                "studentName"
+            ).value = student.name;
+
+
+            document.getElementById(
+                "studentClass"
+            ).value = student.class;
+
+
+            document.getElementById(
+                "studentStatus"
+            ).value = student.status;
 
         }else{
 
-            if(form) form.reset();
+            if(form){
 
-            document.getElementById("modalTitle").textContent = "Add Student";
+                form.reset();
 
-            document.getElementById("studentId").value = "";
+            }
+
+
+            document.getElementById(
+                "modalTitle"
+            ).textContent = "Add Student";
+
+
+            document.getElementById(
+                "studentId"
+            ).value = "";
 
         }
 
@@ -371,7 +476,11 @@ applyFilters(){
 
     closeModal(){
 
-        const modal = document.getElementById("studentModal");
+        const modal =
+            document.getElementById(
+                "studentModal"
+            );
+
 
         if(modal){
 
@@ -387,43 +496,122 @@ applyFilters(){
 
     saveStudent(){
 
-        const id = document.getElementById("studentId").value;
+        const id =
+            document.getElementById(
+                "studentId"
+            ).value;
+
+
+        const name =
+            document.getElementById(
+                "studentName"
+            ).value
+            .trim();
+
+
+        const className =
+            document.getElementById(
+                "studentClass"
+            ).value;
+
+
+        const status =
+            document.getElementById(
+                "studentStatus"
+            ).value;
+
+
+        if(name === ""){
+
+            if(window.UI){
+
+                UI.toast(
+                    "Enter student name",
+                    "error"
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        if(className === ""){
+
+            if(window.UI){
+
+                UI.toast(
+                    "Select class",
+                    "error"
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        const duplicate =
+            this.data.find(student=>{
+
+                return (
+
+                    student.id !== id &&
+
+                    student.name
+                        .trim()
+                        .toLowerCase() ===
+                    name.toLowerCase() &&
+
+                    student.class === className
+
+                );
+
+            });
+
+
+        if(duplicate){
+
+            if(window.UI){
+
+                UI.toast(
+                    "Student already exists",
+                    "error"
+                );
+
+            }
+
+            return;
+
+        }
+
 
         const student = {
 
-            id : id || Date.now().toString(),
+            id:
+                id ||
+                Date.now().toString(),
 
-            name : document.getElementById("studentName").value.trim(),
+            name:name,
 
-            class : document.getElementById("studentClass").value,
+            class:className,
 
-            status : document.getElementById("studentStatus").value
+            status:status
 
         };
 
-        if(student.name === ""){
-
-            UI.toast("Enter student name","error");
-
-            return;
-
-        }
-
-        if(student.class === ""){
-
-            UI.toast("Select class","error");
-
-            return;
-
-        }
 
         if(id){
 
-            const index = this.data.findIndex(
+            const index =
+                this.data.findIndex(
 
-                s => s.id === id
+                    s => s.id === id
 
-            );
+                );
+
 
             if(index !== -1){
 
@@ -437,19 +625,23 @@ applyFilters(){
 
         }
 
+
         this.filteredData = [...this.data];
 
         this.save();
 
-        this.render();
+        this.filter();
 
         this.closeModal();
+
 
         if(window.UI){
 
             UI.toast(
 
-                "Student Saved",
+                id
+                ? "Student Updated"
+                : "Student Added",
 
                 "success"
 
@@ -458,33 +650,46 @@ applyFilters(){
         }
 
     },
-   /* ==========================================================
+
+/* ==========================================================
    DELETE STUDENT
 ========================================================== */
 
     deleteStudent(id){
 
-        const ok = confirm(
-            "Delete this student?"
-        );
+        const ok =
+            confirm(
+                "Delete this student?"
+            );
+
 
         if(!ok) return;
 
-        this.data = this.data.filter(
-            student => student.id !== id
-        );
+
+        this.data =
+            this.data.filter(
+
+                student =>
+                    student.id !== id
+
+            );
+
 
         this.filteredData = [...this.data];
 
         this.save();
 
-        this.render();
+        this.filter();
+
 
         if(window.UI){
 
             UI.toast(
+
                 "Student Deleted",
+
                 "success"
+
             );
 
         }
@@ -498,8 +703,13 @@ applyFilters(){
 ========================================================== */
 
 document.addEventListener(
+
     "DOMContentLoaded",
+
     ()=>{
+
         Students.init();
+
     }
+
 );
