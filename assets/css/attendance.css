@@ -614,3 +614,170 @@
     font-size:.78rem;
 
 }
+/* ==========================================================
+   MONTHLY ATTENDANCE
+========================================================== */
+
+.monthly-attendance-section{
+
+    margin-top:28px;
+
+    padding-bottom:120px;
+
+}
+
+.monthly-controls{
+
+    padding:16px;
+
+    margin-bottom:14px;
+
+}
+
+.monthly-attendance-list{
+
+    display:grid;
+
+    gap:12px;
+
+}
+
+.monthly-card{
+
+    padding:16px;
+
+}
+
+.monthly-card-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+}
+
+.monthly-student-info{
+
+    min-width:0;
+
+}
+
+.monthly-student-info h3{
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+.monthly-student-info p{
+
+    margin-top:4px;
+
+    color:var(--text);
+
+    font-size:.72rem;
+
+}
+
+.monthly-percentage{
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+.monthly-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:8px;
+
+    margin-top:14px;
+
+}
+
+.monthly-stat{
+
+    padding:9px 6px;
+
+    border-radius:11px;
+
+    background:rgba(255,255,255,.04);
+
+    text-align:center;
+
+}
+
+.monthly-stat span{
+
+    display:block;
+
+    color:var(--text);
+
+    font-size:.65rem;
+
+}
+
+.monthly-stat strong{
+
+    display:block;
+
+    margin-top:3px;
+
+    font-size:.82rem;
+
+}
+
+.monthly-progress{
+
+    height:5px;
+
+    margin-top:12px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.monthly-progress-fill{
+
+    height:100%;
+
+    width:0;
+
+    background:var(--primary);
+
+    border-radius:20px;
+
+    transition:width .3s ease;
+
+}
+
+.monthly-empty{
+
+    padding:25px 18px;
+
+    text-align:center;
+
+    color:var(--text);
+
+    font-size:.78rem;
+
+}
