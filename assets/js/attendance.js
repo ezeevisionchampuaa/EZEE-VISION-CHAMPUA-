@@ -1080,6 +1080,255 @@ renderRecords(){
         }).join("");
 
 },
+/* ==========================================================
+   ATTENDANCE ANALYTICS
+========================================================== */
+
+renderAnalytics(){
+
+    const students =
+        this.getStudents();
+
+    const studentCount =
+        document.getElementById(
+            "analyticsStudents"
+        );
+
+    const presentEl =
+        document.getElementById(
+            "analyticsPresent"
+        );
+
+    const absentEl =
+        document.getElementById(
+            "analyticsAbsent"
+        );
+
+    const averageEl =
+        document.getElementById(
+            "analyticsAverage"
+        );
+
+    const classContainer =
+        document.getElementById(
+            "classAnalyticsList"
+        );
+
+    if(!studentCount &&
+       !presentEl &&
+       !absentEl &&
+       !averageEl){
+
+        return;
+
+    }
+
+    const dates =
+        Object.keys(this.records);
+
+    let totalPresent = 0;
+
+    let totalAbsent = 0;
+
+    let totalMarked = 0;
+
+    students.forEach(student=>{
+
+        dates.forEach(date=>{
+
+            const record =
+                this.records[date];
+
+            if(!record) return;
+
+            const status =
+                record[student.id];
+
+            if(status === "present"){
+
+                totalPresent++;
+
+                totalMarked++;
+
+            }
+
+            if(status === "absent"){
+
+                totalAbsent++;
+
+                totalMarked++;
+
+            }
+
+        });
+
+    });
+
+    const average =
+        totalMarked === 0
+        ? 0
+        : Math.round(
+            (totalPresent / totalMarked) * 100
+        );
+
+    if(studentCount){
+
+        studentCount.textContent =
+            students.length;
+
+    }
+
+    if(presentEl){
+
+        presentEl.textContent =
+            totalPresent;
+
+    }
+
+    if(absentEl){
+
+        absentEl.textContent =
+            totalAbsent;
+
+    }
+
+    if(averageEl){
+
+        averageEl.textContent =
+            `${average}%`;
+
+    }
+
+    if(!classContainer){
+
+        return;
+
+    }
+
+    if(students.length === 0){
+
+        classContainer.innerHTML = `
+
+            <div class="glass analytics-empty">
+
+                No students available.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    const classes = [
+        ...new Set(
+            students.map(
+                student=>student.class
+            )
+        )
+    ];
+
+    classContainer.innerHTML =
+        classes.map(className=>{
+
+            const classStudents =
+                students.filter(
+                    student=>
+                        student.class === className
+                );
+
+            let present = 0;
+
+            let absent = 0;
+
+            classStudents.forEach(student=>{
+
+                dates.forEach(date=>{
+
+                    const record =
+                        this.records[date];
+
+                    if(!record) return;
+
+                    const status =
+                        record[student.id];
+
+                    if(status === "present"){
+
+                        present++;
+
+                    }
+
+                    if(status === "absent"){
+
+                        absent++;
+
+                    }
+
+                });
+
+            });
+
+            const marked =
+                present + absent;
+
+            const percentage =
+                marked === 0
+                ? 0
+                : Math.round(
+                    (present / marked) * 100
+                );
+
+            return `
+
+                <div class="glass class-analytics-card">
+
+                    <div class="class-analytics-header">
+
+                        <h3>
+                            ${this.escape(
+                                className
+                            )}
+                        </h3>
+
+                        <strong>
+                            ${percentage}%
+                        </strong>
+
+                    </div>
+
+                    <div class="class-analytics-meta">
+
+                        <span>
+                            ${classStudents.length}
+                            Students
+                        </span>
+
+                        <span>
+                            ${present} Present
+                            •
+                            ${absent} Absent
+                        </span>
+
+                    </div>
+
+                    <div class="class-analytics-bar">
+
+                        <div
+                            class="class-analytics-fill"
+                            style="width:${percentage}%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+},
    /* ==========================================================
    FORMAT DATE
 ========================================================== */
