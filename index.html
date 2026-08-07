@@ -5,24 +5,40 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
+<meta
+name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color"
+<meta
+name="theme-color"
 content="#07111F">
-
-<title>EZEE VISION CHAMPUA</title>
 
 <meta
 name="description"
 content="EZEE VISION CHAMPUA - Coaching Management System">
 
+<meta
+name="keywords"
+content="ERP, Coaching, Students, Attendance, Fees">
+
+<meta
+name="author"
+content="Shahid Sir">
+
+<title>
+
+EZEE VISION CHAMPUA
+
+</title>
+
 <!-- Google Fonts -->
 
-<link rel="preconnect"
+<link
+rel="preconnect"
 href="https://fonts.googleapis.com">
 
-<link rel="preconnect"
+<link
+rel="preconnect"
 href="https://fonts.gstatic.com"
 crossorigin>
 
@@ -36,7 +52,7 @@ rel="stylesheet">
 rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-<!-- CSS -->
+<!-- Styles -->
 
 <link
 rel="stylesheet"
@@ -51,6 +67,10 @@ href="assets/css/dashboard.css">
 <body>
 
 <div class="app">
+
+<!-- ===========================
+     HEADER
+=========================== -->
 
 <header class="topbar">
 
@@ -76,7 +96,8 @@ href="assets/css/dashboard.css">
 
 <button
 class="icon-btn"
-id="themeBtn">
+id="themeBtn"
+aria-label="Toggle Theme">
 
 <i class="fa-solid fa-moon"></i>
 
@@ -84,7 +105,8 @@ id="themeBtn">
 
 <button
 class="icon-btn"
-id="notificationBtn">
+id="notificationBtn"
+aria-label="Notifications">
 
 <i class="fa-regular fa-bell"></i>
 
@@ -95,10 +117,14 @@ id="notificationBtn">
 </header>
 
 <!-- ===========================
-     DASHBOARD HERO
+     MAIN
 =========================== -->
 
 <main class="main-content">
+
+<!-- ===========================
+     HERO
+=========================== -->
 
 <section class="hero">
 
@@ -115,7 +141,12 @@ Coaching Management System
 <h2>
 
 Good
-<span id="greetingText">Morning</span>,
+
+<span id="greetingText">
+
+Morning
+
+</span>,
 
 <br>
 
@@ -141,7 +172,11 @@ reports and everything from one place.
 
 <div class="clock-item">
 
-<p>Current Time</p>
+<p>
+
+Current Time
+
+</p>
 
 <h3 id="liveTime">
 
@@ -155,7 +190,11 @@ reports and everything from one place.
 
 <div class="clock-item">
 
-<p>Today's Date</p>
+<p>
+
+Today's Date
+
+</p>
 
 <h4 id="liveDate">
 
@@ -170,9 +209,12 @@ Loading...
 </div>
 
 </section>
+
 <!-- ===========================
      DASHBOARD STATS
 =========================== -->
+
+<section class="stats-section">
 
 <div class="stats-grid">
 
@@ -274,64 +316,101 @@ Loading...
 
 </div>
 
+</section>
+
 <!-- ===========================
      QUICK ACTIONS
 =========================== -->
 
+<section class="quick-actions">
+
 <div class="section-title">
 
-    <h2>
+<h2>
 
-        Quick Actions
+Quick Actions
 
-    </h2>
+</h2>
+
+<p>
+
+Access the most frequently used modules.
+
+</p>
 
 </div>
 
 <div class="quick-grid">
 
-    <a href="students.html" class="glass quick-card">
+<a
+href="students.html"
+class="glass quick-card">
 
-        <i class="fa-solid fa-user-plus"></i>
+<i class="fa-solid fa-user-plus"></i>
 
-        <span>Add Student</span>
+<span>
 
-    </a>
+Students
 
-    <a href="attendance.html" class="glass quick-card">
+</span>
 
-        <i class="fa-solid fa-calendar-check"></i>
+</a>
 
-        <span>Attendance</span>
+<a
+href="attendance.html"
+class="glass quick-card">
 
-    </a>
+<i class="fa-solid fa-calendar-check"></i>
 
-    <a href="fees.html" class="glass quick-card">
+<span>
 
-        <i class="fa-solid fa-money-bill-wave"></i>
+Attendance
 
-        <span>Fees</span>
+</span>
 
-    </a>
+</a>
 
-    <a href="reports.html" class="glass quick-card">
+<a
+href="fees.html"
+class="glass quick-card">
 
-        <i class="fa-solid fa-chart-column"></i>
+<i class="fa-solid fa-money-bill-wave"></i>
 
-        <span>Reports</span>
+<span>
 
-    </a>
+Fees
+
+</span>
+
+</a>
+
+<a
+href="reports.html"
+class="glass quick-card">
+
+<i class="fa-solid fa-chart-column"></i>
+
+<span>
+
+Reports
+
+</span>
+
+</a>
 
 </div>
+
+</section>
+
 <!-- ===========================
-     RECENT ACTIVITY
+     DASHBOARD GRID
 =========================== -->
 
 <section class="dashboard-grid">
 
     <!-- Recent Activity -->
 
-    <div class="glass panel">
+    <article class="glass panel">
 
         <div class="panel-header">
 
@@ -345,7 +424,9 @@ Loading...
 
         </div>
 
-        <div id="activityList" class="activity-list">
+        <div
+        id="activityList"
+        class="activity-list">
 
             <div class="activity-item">
 
@@ -357,9 +438,17 @@ Loading...
 
                 <div>
 
-                    <h4>Welcome!</h4>
+                    <h4>
 
-                    <p>Your recent activities will appear here.</p>
+                        Welcome!
+
+                    </h4>
+
+                    <p>
+
+                        Your recent activities will appear here.
+
+                    </p>
 
                 </div>
 
@@ -367,11 +456,11 @@ Loading...
 
         </div>
 
-    </div>
+    </article>
 
     <!-- Notice Board -->
 
-    <div class="glass panel">
+    <aside class="glass panel">
 
         <div class="panel-header">
 
@@ -385,7 +474,9 @@ Loading...
 
         </div>
 
-        <div id="noticeBoard" class="notice-list">
+        <div
+        id="noticeBoard"
+        class="notice-list">
 
             <div class="notice-item">
 
@@ -421,7 +512,7 @@ Loading...
 
         </div>
 
-    </div>
+    </aside>
 
 </section>
 
@@ -498,56 +589,90 @@ Loading...
 </section>
 
 <!-- ===========================
+     END MAIN
+=========================== -->
+
+</main>
+
+</div>
+
+<!-- ===========================
      BOTTOM NAVIGATION
 =========================== -->
 
 <nav class="bottom-nav">
 
-    <a href="index.html" class="nav-item active">
+    <a
+    href="index.html"
+    class="nav-item active">
 
         <i class="fa-solid fa-house"></i>
 
-        <span>Home</span>
+        <span>
+
+            Home
+
+        </span>
 
     </a>
 
-    <a href="students.html" class="nav-item">
+    <a
+    href="students.html"
+    class="nav-item">
 
         <i class="fa-solid fa-user-graduate"></i>
 
-        <span>Students</span>
+        <span>
+
+            Students
+
+        </span>
 
     </a>
 
-    <a href="attendance.html" class="nav-item">
+    <a
+    href="attendance.html"
+    class="nav-item">
 
         <i class="fa-solid fa-calendar-check"></i>
 
-        <span>Attendance</span>
+        <span>
+
+            Attendance
+
+        </span>
 
     </a>
 
-    <a href="fees.html" class="nav-item">
+    <a
+    href="fees.html"
+    class="nav-item">
 
         <i class="fa-solid fa-wallet"></i>
 
-        <span>Fees</span>
+        <span>
+
+            Fees
+
+        </span>
 
     </a>
 
-    <a href="reports.html" class="nav-item">
+    <a
+    href="reports.html"
+    class="nav-item">
 
         <i class="fa-solid fa-chart-column"></i>
 
-        <span>Reports</span>
+        <span>
+
+            Reports
+
+        </span>
 
     </a>
 
 </nav>
-
-</section>
-
-</main>
 
 <!-- ===========================
      FOOTER
@@ -569,7 +694,7 @@ Loading...
 
     <small>
 
-        Made With ❤️ By <strong>Shahid Sir</strong>
+        Made with ❤️ by <strong>Shahid Sir</strong>
 
     </small>
 
@@ -588,4 +713,4 @@ Loading...
 </body>
 
 </html>
-    
+     
