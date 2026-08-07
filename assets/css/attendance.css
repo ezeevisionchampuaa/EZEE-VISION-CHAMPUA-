@@ -956,3 +956,194 @@
     font-size:.78rem;
 
 }
+/* ==========================================================
+   ATTENDANCE ANALYTICS
+========================================================== */
+
+.attendance-analytics-section{
+
+    margin-top:30px;
+
+    padding-bottom:150px;
+
+}
+
+.analytics-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:10px;
+
+    margin-bottom:24px;
+
+}
+
+.analytics-card{
+
+    padding:15px;
+
+    text-align:center;
+
+}
+
+.analytics-icon{
+
+    width:38px;
+
+    height:38px;
+
+    margin:0 auto 9px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:rgba(79,140,255,.10);
+
+    color:var(--primary);
+
+}
+
+.analytics-card span{
+
+    display:block;
+
+    color:var(--text);
+
+    font-size:.68rem;
+
+}
+
+.analytics-card strong{
+
+    display:block;
+
+    margin-top:5px;
+
+    font-size:1.15rem;
+
+}
+
+.class-analytics-wrapper{
+
+    margin-top:20px;
+
+}
+
+.class-analytics-wrapper > h3{
+
+    margin-bottom:12px;
+
+    font-size:.95rem;
+
+}
+
+.class-analytics-list{
+
+    display:grid;
+
+    gap:12px;
+
+}
+
+.class-analytics-card{
+
+    padding:15px;
+
+}
+
+.class-analytics-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+}
+
+.class-analytics-header h3{
+
+    font-size:.85rem;
+
+}
+
+.class-analytics-header strong{
+
+    font-size:.9rem;
+
+}
+
+.class-analytics-meta{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:8px;
+
+    color:var(--text);
+
+    font-size:.68rem;
+
+}
+
+.class-analytics-bar{
+
+    height:6px;
+
+    margin-top:10px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.class-analytics-fill{
+
+    height:100%;
+
+    border-radius:20px;
+
+    background:var(--primary);
+
+}
+
+.analytics-empty{
+
+    padding:24px;
+
+    text-align:center;
+
+    color:var(--text);
+
+    font-size:.75rem;
+
+}
+
+@media(max-width:360px){
+
+    .analytics-stats{
+
+        gap:8px;
+
+    }
+
+    .analytics-card{
+
+        padding:12px 8px;
+
+    }
+
+}
