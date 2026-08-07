@@ -257,7 +257,7 @@ const Attendance = {
     ====================================================== */
 
     bindEvents() {
-
+       
         /* DATE */
 
         const dateInput =
@@ -383,7 +383,7 @@ const Attendance = {
                 () => {
 
                     this.printAttendance();
-
+this.bindAttendanceButtons();
                 }
             );
 
