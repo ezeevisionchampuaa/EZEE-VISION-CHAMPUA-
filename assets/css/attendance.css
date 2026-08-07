@@ -501,3 +501,116 @@
     }
 
 }
+/* ==========================================================
+   ATTENDANCE PERCENTAGE
+========================================================== */
+
+.attendance-percentage-section{
+
+    margin-top:26px;
+
+    padding-bottom:120px;
+
+}
+
+.attendance-percentage-list{
+
+    display:grid;
+
+    gap:12px;
+
+}
+
+.percentage-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:15px;
+
+}
+
+.percentage-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+.percentage-info h3{
+
+    font-size:.88rem;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+.percentage-info p{
+
+    margin-top:4px;
+
+    color:var(--text);
+
+    font-size:.72rem;
+
+}
+
+.percentage-value{
+
+    min-width:58px;
+
+    text-align:right;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+.percentage-bar{
+
+    height:6px;
+
+    margin-top:9px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.percentage-fill{
+
+    height:100%;
+
+    border-radius:20px;
+
+    background:var(--primary);
+
+    transition:width .3s ease;
+
+}
+
+.percentage-empty{
+
+    padding:25px 18px;
+
+    text-align:center;
+
+    color:var(--text);
+
+    font-size:.78rem;
+
+}
