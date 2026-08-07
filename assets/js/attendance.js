@@ -759,154 +759,137 @@ saveAttendance(){
        /* ======================================================
        ATTENDANCE PERCENTAGE
     ====================================================== */
+renderPercentage(){
 
-    renderPercentage() {
+    const container =
+        document.getElementById(
+            "attendancePercentageList"
+        );
 
-        const container =
-            document.getElementById(
-                "attendancePercentageList"
-            );
+    if(!container) return;
 
-        if (!container) return;
+    const students =
+        this.getStudents();
 
-        const students =
-            this.getStudents();
+    if(students.length === 0){
 
-        if (students.length === 0) {
+        container.innerHTML = `
+            <div class="glass percentage-empty">
+                No students available.
+            </div>
+        `;
 
-            container.innerHTML = `
+        return;
+    }
 
-                <div class="glass percentage-empty">
+    const dates =
+        Object.keys(this.records);
 
-                    No students available.
+    if(dates.length === 0){
 
-                </div>
+        container.innerHTML = `
+            <div class="glass percentage-empty">
+                No attendance records available yet.
+            </div>
+        `;
 
-            `;
+        return;
+    }
 
-            return;
+    container.innerHTML =
+        students.map(student => {
 
-        }
+            let present = 0;
+            let total = 0;
 
-        const dates =
-            Object.keys(
-                this.records
-            );
+            dates.forEach(date => {
 
-        if (dates.length === 0) {
+                const record =
+                    this.records[date];
 
-            container.innerHTML = `
+                if(!record) return;
 
-                <div class="glass percentage-empty">
+                const status =
+                    record[student.id];
 
-                    No attendance records available yet.
+                if(
+                    status === "present" ||
+                    status === "absent"
+                ){
 
-                </div>
+                    total++;
 
-            `;
+                }
 
-            return;
+                if(status === "present"){
 
-        }
+                    present++;
 
-        container.innerHTML =
-            students.map(
-                (student) => {
+                }
 
-                    let present = 0;
+            });
 
-                    let total = 0;
-
-                    dates.forEach(
-                        (date) => {
-
-                            const record =
-                                this.records[date];
-
-                            if (
-                                record &&
-                                record[student.id]
-                            ) {
-
-                                total++;
-
-                                if (
-                                    record[student.id] ===
-                                    "present"
-                                ) {
-
-                                    present++;
-
-                                }
-
-                            }
-
-                        }
+            const percentage =
+                total === 0
+                    ? 0
+                    : Math.round(
+                        (present / total) * 100
                     );
 
-                    const percentage =
-                        total === 0
-                            ? 0
-                            : Math.round(
-                                (
-                                    present /
-                                    total
-                                ) * 100
-                            );
+            return `
 
-                    return `
+                <div class="glass percentage-card">
 
-                        <div class="glass percentage-card">
+                    <div class="attendance-avatar">
 
-                            <div class="attendance-avatar">
+                        <i class="fa-solid fa-user"></i>
 
-                                <i class="fa-solid fa-user"></i>
+                    </div>
 
-                            </div>
+                    <div class="percentage-info">
 
-                            <div class="percentage-info">
+                        <h3>
+                            ${this.escape(
+                                student.name
+                            )}
+                        </h3>
 
-                                <h3>
-                                    ${this.escape(
-                                        student.name
-                                    )}
-                                </h3>
+                        <p>
+                            ${this.escape(
+                                student.class
+                            )}
+                            •
+                            ${present}/${total}
+                            present
+                        </p>
 
-                                <p>
-                                    ${this.escape(
-                                        student.class
-                                    )}
-                                    •
-                                    ${present}/${total}
-                                    present
-                                </p>
+                        <div class="percentage-bar">
 
-                                <div class="percentage-bar">
-
-                                    <div
-                                        class="percentage-fill"
-                                        style="width:${percentage}%"
-                                    ></div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="percentage-value">
-
-                                ${percentage}%
-
-                            </div>
+                            <div
+                                class="percentage-fill"
+                                style="width:${percentage}%"
+                            ></div>
 
                         </div>
 
-                    `;
+                    </div>
 
-                }
-            ).join("");
+                    <div class="percentage-value">
 
-    },
+                        ${percentage}%
 
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+},
+    
+
+                                
 
     /* ======================================================
        MONTHLY ATTENDANCE
