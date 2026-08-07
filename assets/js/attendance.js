@@ -249,6 +249,24 @@ if(monthInput){
                     id,
                     status
                 );
+            document.addEventListener(
+    "click",
+    (event)=>{
+
+        const button =
+            event.target.closest(
+                ".attendance-record-edit"
+            );
+
+        if(!button) return;
+
+        const date =
+            button.dataset.date;
+
+        this.loadRecord(date);
+
+    }
+);
 
             }
         );
@@ -444,7 +462,8 @@ this.renderPercentage();
 this.renderPercentage();
 
 this.renderMonthly();
-
+       
+this.renderRecords();
     },
 /* ==========================================================
    MONTHLY ATTENDANCE
@@ -646,6 +665,51 @@ renderMonthly(){
             `;
 
         }).join("");
+
+},
+   /* ==========================================================
+   LOAD RECORD
+========================================================== */
+
+loadRecord(date){
+
+    if(!this.records[date]){
+
+        return;
+
+    }
+
+    this.selectedDate = date;
+
+    const dateInput =
+        document.getElementById(
+            "attendanceDate"
+        );
+
+    if(dateInput){
+
+        dateInput.value = date;
+
+    }
+
+    this.render();
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+    if(window.UI){
+
+        UI.toast(
+            "Attendance record loaded",
+            "success"
+        );
+
+    }
 
 },
 /* ==========================================================
@@ -854,6 +918,200 @@ renderPercentage(){
             `;
 
         }).join("");
+
+},
+   /* ==========================================================
+   SAVED RECORDS
+========================================================== */
+
+renderRecords(){
+
+    const container =
+        document.getElementById(
+            "attendanceRecordsList"
+        );
+
+    if(!container) return;
+
+    const dates =
+        Object.keys(this.records)
+        .sort()
+        .reverse();
+
+    if(dates.length === 0){
+
+        container.innerHTML = `
+
+            <div class="glass attendance-record-empty">
+
+                No saved attendance records yet.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    container.innerHTML =
+        dates.map(date=>{
+
+            const record =
+                this.records[date] || {};
+
+            let present = 0;
+
+            let absent = 0;
+
+            Object.values(record)
+                .forEach(status=>{
+
+                    if(status === "present"){
+
+                        present++;
+
+                    }
+
+                    if(status === "absent"){
+
+                        absent++;
+
+                    }
+
+                });
+
+            const total =
+                present + absent;
+
+            const formattedDate =
+                this.formatDate(date);
+
+            return `
+
+                <div class="glass attendance-record-card">
+
+                    <div class="attendance-record-header">
+
+                        <div class="attendance-record-date">
+
+                            <div class="attendance-record-icon">
+
+                                <i class="fa-solid fa-calendar-check"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    ${formattedDate}
+                                </h3>
+
+                                <p>
+                                    ${total} students marked
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="attendance-record-stats">
+
+                        <div class="attendance-record-stat">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong>
+                                ${total}
+                            </strong>
+
+                        </div>
+
+                        <div class="attendance-record-stat">
+
+                            <span>
+                                Present
+                            </span>
+
+                            <strong>
+                                ${present}
+                            </strong>
+
+                        </div>
+
+                        <div class="attendance-record-stat">
+
+                            <span>
+                                Absent
+                            </span>
+
+                            <strong>
+                                ${absent}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="attendance-record-actions">
+
+                        <button
+                            type="button"
+                            class="attendance-record-edit"
+                            data-date="${date}"
+                        >
+
+                            <i class="fa-solid fa-pen"></i>
+
+                            Edit Record
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+},
+   /* ==========================================================
+   FORMAT DATE
+========================================================== */
+
+formatDate(date){
+
+    if(!date) return "";
+
+    const parts =
+        date.split("-");
+
+    if(parts.length !== 3){
+
+        return date;
+
+    }
+
+    const formatted =
+        new Date(
+            Number(parts[0]),
+            Number(parts[1])-1,
+            Number(parts[2])
+        );
+
+    return formatted.toLocaleDateString(
+        "en-IN",
+        {
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        }
+    );
 
 },
 /* ==========================================================
