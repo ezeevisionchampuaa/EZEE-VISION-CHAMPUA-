@@ -1,0 +1,567 @@
+/* ==========================================================
+   EZEE VISION CHAMPUA
+   Attendance Module
+   Version : 1.0.0
+========================================================== */
+
+"use strict";
+
+const Attendance = {
+
+    students: [],
+
+    records: {},
+
+    selectedDate: "",
+
+    selectedClass: "",
+
+/* ==========================================================
+   INIT
+========================================================== */
+
+    init(){
+
+        this.loadStudents();
+
+        this.loadRecords();
+
+        this.setToday();
+
+        this.bindEvents();
+
+        this.render();
+
+    },
+
+/* ==========================================================
+   LOAD STUDENTS
+========================================================== */
+
+    loadStudents(){
+
+        const saved = localStorage.getItem(
+            "ezee_students"
+        );
+
+        if(saved){
+
+            try{
+
+                this.students = JSON.parse(saved);
+
+            }catch(error){
+
+                this.students = [];
+
+            }
+
+        }else{
+
+            this.students = [];
+
+        }
+
+    },
+
+/* ==========================================================
+   LOAD ATTENDANCE
+========================================================== */
+
+    loadRecords(){
+
+        const saved = localStorage.getItem(
+            "ezee_attendance"
+        );
+
+        if(saved){
+
+            try{
+
+                this.records = JSON.parse(saved);
+
+            }catch(error){
+
+                this.records = {};
+
+            }
+
+        }else{
+
+            this.records = {};
+
+        }
+
+    },
+
+/* ==========================================================
+   SAVE RECORDS
+========================================================== */
+
+    saveRecords(){
+
+        localStorage.setItem(
+
+            "ezee_attendance",
+
+            JSON.stringify(this.records)
+
+        );
+
+    },
+
+/* ==========================================================
+   TODAY
+========================================================== */
+
+    setToday(){
+
+        const dateInput =
+            document.getElementById(
+                "attendanceDate"
+            );
+
+        if(!dateInput) return;
+
+        const today = new Date();
+
+        const year =
+            today.getFullYear();
+
+        const month =
+            String(
+                today.getMonth()+1
+            ).padStart(2,"0");
+
+        const day =
+            String(
+                today.getDate()
+            ).padStart(2,"0");
+
+        this.selectedDate =
+            `${year}-${month}-${day}`;
+
+        dateInput.value =
+            this.selectedDate;
+
+    },
+
+/* ==========================================================
+   EVENTS
+========================================================== */
+
+    bindEvents(){
+
+        const dateInput =
+            document.getElementById(
+                "attendanceDate"
+            );
+
+        if(dateInput){
+
+            dateInput.addEventListener(
+                "change",
+                ()=>{
+                    this.selectedDate =
+                        dateInput.value;
+
+                    this.render();
+                }
+            );
+
+        }
+
+        const classSelect =
+            document.getElementById(
+                "attendanceClass"
+            );
+
+        if(classSelect){
+
+            classSelect.addEventListener(
+                "change",
+                ()=>{
+                    this.selectedClass =
+                        classSelect.value;
+
+                    this.render();
+                }
+            );
+
+        }
+
+        const saveButton =
+            document.getElementById(
+                "saveAttendance"
+            );
+
+        if(saveButton){
+
+            saveButton.addEventListener(
+                "click",
+                ()=>{
+                    this.saveAttendance();
+                }
+            );
+
+        }
+
+        document.addEventListener(
+            "click",
+            (event)=>{
+
+                const button =
+                    event.target.closest(
+                        ".attendance-btn"
+                    );
+
+                if(!button) return;
+
+                const id =
+                    button.dataset.id;
+
+                const status =
+                    button.dataset.status;
+
+                this.mark(
+                    id,
+                    status
+                );
+
+            }
+        );
+
+    },
+
+/* ==========================================================
+   FILTER STUDENTS
+========================================================== */
+
+    getStudents(){
+
+        return this.students.filter(
+            student=>{
+
+                if(!this.selectedClass){
+
+                    return true;
+
+                }
+
+                return student.class ===
+                    this.selectedClass;
+
+            }
+        );
+
+    },
+
+/* ==========================================================
+   GET CURRENT RECORD
+========================================================== */
+
+    getCurrentRecord(){
+
+        if(!this.records[this.selectedDate]){
+
+            this.records[this.selectedDate] = {};
+
+        }
+
+        return this.records[this.selectedDate];
+
+    },
+
+/* ==========================================================
+   MARK ATTENDANCE
+========================================================== */
+
+    mark(id,status){
+
+        if(!this.selectedDate) return;
+
+        const record =
+            this.getCurrentRecord();
+
+        record[id] = status;
+
+        this.render();
+
+    },
+
+/* ==========================================================
+   RENDER
+========================================================== */
+
+    render(){
+
+        const list =
+            document.getElementById(
+                "attendanceList"
+            );
+
+        if(!list) return;
+
+        const students =
+            this.getStudents();
+
+        const record =
+            this.getCurrentRecord();
+
+        if(students.length === 0){
+
+            list.innerHTML = `
+
+                <div class="glass attendance-empty">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <h3>
+                        No Students Found
+                    </h3>
+
+                    <p>
+                        Add students first from the
+                        Students module.
+                    </p>
+
+                </div>
+
+            `;
+
+            this.updateSummary([]);
+
+            return;
+
+        }
+
+        list.innerHTML =
+            students.map(student=>{
+
+                const status =
+                    record[student.id] || "";
+
+                return `
+
+                <div class="glass attendance-card">
+
+                    <div class="attendance-avatar">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                    <div class="attendance-student">
+
+                        <h3>
+                            ${this.escape(
+                                student.name
+                            )}
+                        </h3>
+
+                        <p>
+                            ${this.escape(
+                                student.class
+                            )}
+                        </p>
+
+                    </div>
+
+                    <div class="attendance-actions">
+
+                        <button
+                            type="button"
+                            class="attendance-btn present
+                            ${status==="present" ? "active" : ""}"
+                            data-id="${student.id}"
+                            data-status="present"
+                            aria-label="Present">
+
+                            <i class="fa-solid fa-check"></i>
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="attendance-btn absent
+                            ${status==="absent" ? "active" : ""}"
+                            data-id="${student.id}"
+                            data-status="absent"
+                            aria-label="Absent">
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }).join("");
+
+        this.updateSummary(students);
+
+    },
+
+/* ==========================================================
+   SUMMARY
+========================================================== */
+
+    updateSummary(students){
+
+        const record =
+            this.getCurrentRecord();
+
+        let present = 0;
+
+        let absent = 0;
+
+        students.forEach(student=>{
+
+            if(record[student.id] === "present"){
+
+                present++;
+
+            }
+
+            if(record[student.id] === "absent"){
+
+                absent++;
+
+            }
+
+        });
+
+        const total =
+            document.getElementById(
+                "attendanceTotal"
+            );
+
+        const presentEl =
+            document.getElementById(
+                "attendancePresent"
+            );
+
+        const absentEl =
+            document.getElementById(
+                "attendanceAbsent"
+            );
+
+        if(total){
+
+            total.textContent =
+                students.length;
+
+        }
+
+        if(presentEl){
+
+            presentEl.textContent =
+                present;
+
+        }
+
+        if(absentEl){
+
+            absentEl.textContent =
+                absent;
+
+        }
+
+    },
+
+/* ==========================================================
+   SAVE ATTENDANCE
+========================================================== */
+
+    saveAttendance(){
+
+        const students =
+            this.getStudents();
+
+        if(students.length === 0){
+
+            if(window.UI){
+
+                UI.toast(
+                    "No students found",
+                    "error"
+                );
+
+            }
+
+            return;
+
+        }
+
+        const record =
+            this.getCurrentRecord();
+
+        const unmarked =
+            students.filter(
+                student=>
+                    !record[student.id]
+            );
+
+        if(unmarked.length){
+
+            if(window.UI){
+
+                UI.toast(
+                    "Mark all students first",
+                    "error"
+                );
+
+            }
+
+            return;
+
+        }
+
+        this.saveRecords();
+
+        if(window.UI){
+
+            UI.toast(
+                "Attendance Saved",
+                "success"
+            );
+
+        }
+
+    },
+
+/* ==========================================================
+   ESCAPE HTML
+========================================================== */
+
+    escape(value){
+
+        return String(value)
+
+            .replace(/&/g,"&amp;")
+
+            .replace(/</g,"&lt;")
+
+            .replace(/>/g,"&gt;")
+
+            .replace(/"/g,"&quot;")
+
+            .replace(/'/g,"&#039;");
+
+    }
+
+};
+
+/* ==========================================================
+   START
+========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
+        Attendance.init();
+    }
+);
