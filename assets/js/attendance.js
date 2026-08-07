@@ -255,7 +255,21 @@ const Attendance = {
         );
 
     },
+/* ==========================================================
+   GET ATTENDANCE STATUS
+========================================================== */
 
+getStatus(studentId){
+
+    if(!this.records[this.selectedDate]){
+
+        return "";
+
+    }
+
+    return this.records[this.selectedDate][studentId] || "";
+
+},
 /* ==========================================================
    GET CURRENT RECORD
 ========================================================== */
